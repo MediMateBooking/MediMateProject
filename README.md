@@ -32,9 +32,3 @@ MediMate is a cutting-edge web application designed to revolutionize the way you
 3. **Book Appointments:** Browse available slots and book appointments effortlessly.
 4. **Manage Appointments:** Healthcare providers can manage their schedules efficiently, and patients can view and cancel appointments.
 5. **Stay Updated:** Receive notifications for appointment confirmations, reminders, and updates.
-
-## 📄 License
-This project is licensed under the [MIT License](LICENSE).
-
-## 📧 Contact
-For inquiries or feedback, please contact.
