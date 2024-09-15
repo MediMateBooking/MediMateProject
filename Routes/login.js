@@ -3,7 +3,7 @@ const router = express.Router();
 
 const db = require('../database/database');
 
-router.get('/medimate/login', (req, res) => {
+router.get('/login', (req, res) => {
 
     try {
 

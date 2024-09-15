@@ -31,6 +31,10 @@ app.use('/', signUpRoute);
 const loginRoute = require('./Routes/login');
 app.use('/', loginRoute);
 
+//Doctor Dashboard
+const docDashRoute = require('./Routes/doctor_dashboard');
+app.use('/', docDashRoute);
+
 
 app.use('/',function (req, res) {
 

@@ -3,11 +3,11 @@ const router = express.Router();
 
 const db = require('../database/database');
 
-router.get('/signup', (req, res) => {
+router.get('/doctor_dashboard', (req, res) => {
 
     try {
 
-        res.render('signup');
+        res.render('doctor_dashboard');
 
 
     } catch (error) {
