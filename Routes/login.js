@@ -17,7 +17,5 @@ router.get('/login', (req, res) => {
 
 });
 
-module.exports = router;
 
-// dgdgdujd
-// prabhath
+module.exports = router;
