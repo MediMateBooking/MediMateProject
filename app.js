@@ -32,8 +32,12 @@ const loginRoute = require('./Routes/login');
 app.use('/', loginRoute);
 
 //Doctor Dashboard
-const docDashRoute = require('./Routes/doctor_dashboard');
+const docDashRoute = require('./Routes/doctorDashboard');
 app.use('/', docDashRoute);
+
+// index
+const landingPage = require('./Routes/index');
+app.use('/', landingPage);
 
 
 app.use('/', function (req, res) {

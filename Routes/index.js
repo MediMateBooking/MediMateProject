@@ -3,11 +3,11 @@ const router = express.Router();
 
 const db = require('../database/database');
 
-router.get('/doctor_dashboard', (req, res) => {
+router.get('/index', (req, res) => {
 
     try {
 
-        res.render('doctor_dashboard');
+        res.render('index');
 
 
     } catch (error) {
@@ -18,5 +18,3 @@ router.get('/doctor_dashboard', (req, res) => {
 });
 
 module.exports = router;
-
-
