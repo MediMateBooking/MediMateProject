@@ -11,7 +11,7 @@ router.get('/doctor_dashboard', (req, res) => {
 
 
     } catch (error) {
-        res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`); 
+        res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
     }
 
 

@@ -36,7 +36,7 @@ const docDashRoute = require('./Routes/doctor_dashboard');
 app.use('/', docDashRoute);
 
 
-app.use('/',function (req, res) {
+app.use('/', function (req, res) {
 
     res.render('404');
 });
