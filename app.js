@@ -35,18 +35,18 @@ app.use('/', loginRoute);
 const docDashRoute = require('./Routes/doctorDashboard');
 app.use('/', docDashRoute);
 
-// index
-const landingPage = require('./Routes/index');
-app.use('/', landingPage);
+app.get('/', function (req, res) {
 
-
-app.use('/', function (req, res) {
-
-    res.render('404');
+    res.render('index');
 });
+
+app.use(function (req, res) {
+    res.status(404).render('404');
+});
+
 
 db.connectTo().then(() => {
     app.listen(port, () => {
-        console.log('server running on http://localhost:' + port)
+        console.log('server running on http://localhost:' + port + '/index')
     });
 }).catch((err) => console.log(err.message));
