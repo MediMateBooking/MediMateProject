@@ -222,7 +222,6 @@ h6 {
     display: flex;
     list-style: none;
     align-items: center;
-
   }
 
   .navmenu li {
@@ -857,4 +856,3 @@ section,
 .services .service-item.item-pink:hover .icon path {
   fill: #f3268c;
 }
-
