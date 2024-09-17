@@ -20,8 +20,12 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', async (req, res) => {
 
-    const { name, email, createPassword } = req.body;
-    console.log(name, email, createPassword);
+    const { name, email, createPassword ,confirmPassword, role} = req.body;
+    console.log(name, email, createPassword,role);
+
+    if(createPassword!==confirmPassword){
+        return res.redirect('/signup?passwordNotMatch=true');
+    }
 
 
     const newUser = {

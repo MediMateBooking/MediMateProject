@@ -24,6 +24,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <script src="/scripts/signup.js" defer></script>
 
   </head>
   
@@ -52,31 +53,51 @@
                   <div class="col-md-12 col-lg-6 login-right">
                     <div class="login-header">
                       <h3>
-                        Patient Register
-                        <a href="doctor-register.html">Are you a Doctor?</a>
+                        <span id="roleTopic"></span> Register
                       </h3>
                     </div>
 
                     <!-- Register Form -->
                     <form action="/signup" method="POST">
+
+
                       <div class="form-group form-focus">
-                        <input type="text" class="form-control floating" name="name"/>
-                        <label class="focus-label">Name</label>
-                      </div>
-                      <div class="form-group form-focus">
-                        <input type="text" class="form-control floating" name="email" />
-                        <label class="focus-label">Email</label>
-                      </div>
-                      
-                      <div class="form-group form-focus">
-                        <input type="password" class="form-control floating" name="createPassword" />
-                        <label class="focus-label">Create Password</label>
+                        <select name="role" id="role" class="form-control floating">
+                          <option value="">Select A Role</option>
+                          <option value="patient">Patient</option>
+                          <option value="doctor">Doctor</option>
+                        </select>
                       </div>
 
-                      <!-- Confirm Password Field -->
-                      <div class="form-group form-focus">
-                        <input type="password" class="form-control floating" name="confirmPassword"/>
-                        <label class="focus-label">Confirm Password</label> 
+                      <div id="mainDetails" style="display: none;">
+
+                        <div class="form-group form-focus">
+                          <input type="text" class="form-control floating" name="name" required/>
+                          <label class="focus-label">Name</label>
+                        </div>
+
+                        <div class="form-group form-focus">
+                          <input type="email" class="form-control floating" name="email" required/>
+                          <label class="focus-label">Email</label>
+                        </div>
+                        
+                        <div class="form-group form-focus">
+                          <input type="password" class="form-control floating" name="createPassword" required/>
+                          <label class="focus-label">Create Password</label>
+                        </div>
+
+                        <!-- Confirm Password Field -->
+                        <div class="form-group form-focus">
+                          <input type="password" class="form-control floating" name="confirmPassword" required/>
+                          <label class="focus-label">Confirm Password</label> 
+                        </div>
+
+                    </div>
+
+                    
+                      <div class="form-group form-focus" id="slmcregi" style="display: none;">
+                        <input type="text" class="form-control floating" name="slmcregi"/>
+                        <label class="focus-label">SLMC Registration Number</label> 
                       </div>
                 
 
@@ -88,26 +109,11 @@
                       </div>
                       <button
                         class="btn btn-primary btn-block btn-lg login-btn"
+                        id="submitBtn"
                         type="submit"
                       >
                         Signup
                       </button>
-                      <div class="login-or">
-                        <span class="or-line"></span>
-                        <span class="span-or">or</span>
-                      </div>
-                      <div class="row form-row social-login">
-                        <div class="col-6">
-                          <a href="#" class="btn btn-facebook btn-block"
-                            ><i class="fab fa-facebook-f mr-1"></i> Login</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="#" class="btn btn-google btn-block"
-                            ><i class="fab fa-google mr-1"></i> Login</a
-                          >
-                        </div>
-                      </div>
                     </form>
                     <!-- /Register Form -->
                   </div>
