@@ -35,6 +35,10 @@ app.use('/', loginRoute);
 const docDashRoute = require('./Routes/doctorDashboard');
 app.use('/', docDashRoute);
 
+//index
+const index = require('./Routes/index');
+app.use('/', index);
+
 app.get('/', function (req, res) {
 
     res.render('index');
