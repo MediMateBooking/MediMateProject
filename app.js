@@ -47,6 +47,6 @@ app.use(function (req, res) {
 
 db.connectTo().then(() => {
     app.listen(port, () => {
-        console.log('server running on http://localhost:' + port + '/index')
+        console.log('server running on http://localhost:' + port)
     });
 }).catch((err) => console.log(err.message));
