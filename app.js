@@ -35,11 +35,17 @@ app.use('/', loginRoute);
 const docDashRoute = require('./Routes/doctorDashboard');
 app.use('/', docDashRoute);
 
+//forgotPassword
+const forgotPasswordRoute = require('./Routes/forgotPassword');
+app.use('/', forgotPasswordRoute);
+
+//index
 app.get('/', function (req, res) {
 
     res.render('index');
 });
 
+//404
 app.use(function (req, res) {
     res.status(404).render('404');
 });
