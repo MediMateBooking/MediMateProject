@@ -39,6 +39,10 @@ app.use('/', docDashRoute);
 const forgotPasswordRoute = require('./Routes/forgotPassword');
 app.use('/', forgotPasswordRoute);
 
+//appointments
+const appointmentsRoute = require('./Routes/appointments');
+app.use('/', appointmentsRoute);
+
 //index
 app.get('/', function (req, res) {
 
