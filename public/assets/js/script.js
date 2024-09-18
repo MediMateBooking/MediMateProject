@@ -35,7 +35,8 @@
 				$(this).next('ul').slideUp(350);
 			}
 		});
-		//$('.main-nav li.has-submenu a.active').parents('li:last').children('a:first').addClass('active').trigger('click');
+
+		$('.main-nav li.has-submenu a.active').parents('li:last').children('a:first').addClass('active').trigger('click');
 	}
 
 	// Sidebar Initiate
