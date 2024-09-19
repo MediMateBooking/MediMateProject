@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongodb = require('mongodb');
+const bcryptjs =  require('bcryptjs');
+const uuid = require('uuid');
 
 const db = require('../database/database');
 const mailer = require('../mail/mailer');
@@ -44,6 +46,30 @@ router.post('/signup/doctors', async (req, res) => {
         return res.json({ success: false, message: email+' is already used' });
     }
 
+    const hashedpass = await bcryptjs.hash(password,12);
+
+    let userIdURL = uuid.v4();
+
+    const newUser = {
+        name: userName,
+        email: email,
+        userID : userIdURL,
+        password: hashedpass,
+        slmcregi:slmcregi,
+        role:role,
+        profileActive : false
+    };
+
+    try {
+
+        const userResult = await db.DbConn().collection('doctors').insertOne(newUser);
+        
+    } catch (error) {
+        console.error("Server Error:", error);
+        res.json({ success: false, message: 'Server Error' });
+    }
+
+
     let userURL = 'hello, this is activation message'
 
     try {
@@ -54,27 +80,6 @@ router.post('/signup/doctors', async (req, res) => {
         console.error("Error sending email:", error);
         res.json({ success: false, message: 'Check Your Email Address' });
       }
-
-    
-
-    
-
-    // const newUser = {
-    //     name: name,
-    //     email: email,
-    //     createPassword: createPassword
-    // };
-
-    // try {
-
-    //     const userResult = await db.DbConn().collection('patients').insertOne(newUser);
-    //     console.log("success");
-    //     res.redirect('/login');
-
-    // } catch (error) {
-    //     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
-    // }
-
 
 });
 
@@ -96,6 +101,34 @@ router.post('/signup/patients', async (req, res) => {
         return res.json({ success: false, message: 'Password Should Greater than 5 charactors' });
     }
 
+    const existingUserEmail =  await db.DbConn().collection('patients').findOne({email:email});
+    if(existingUserEmail){
+
+        return res.json({ success: false, message: email+' is already used' });
+    }
+
+    const hashedpass = await bcryptjs.hash(password,12);
+
+    let userIdURL = uuid.v1();
+
+    const newUser = {
+        name: userName,
+        email: email,
+        userID : userIdURL,
+        password: hashedpass,
+        role:role,
+        profileActive : false
+    };
+
+    try {
+
+        const userResult = await db.DbConn().collection('patients').insertOne(newUser);
+        
+    } catch (error) {
+        console.error("Server Error:", error);
+        res.json({ success: false, message: 'Server Error' });
+    }
+
     let userURL = 'hello, this is activation message'
 
     try {
@@ -106,26 +139,6 @@ router.post('/signup/patients', async (req, res) => {
         console.error("Error sending email:", error);
         res.json({ success: false, message: 'Check Your Email Address' });
       }
-
-    
-
-    
-
-    // const newUser = {
-    //     name: name,
-    //     email: email,
-    //     createPassword: createPassword
-    // };
-
-    // try {
-
-    //     const userResult = await db.DbConn().collection('patients').insertOne(newUser);
-    //     console.log("success");
-    //     res.redirect('/login');
-
-    // } catch (error) {
-    //     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
-    // }
 
 
 });
