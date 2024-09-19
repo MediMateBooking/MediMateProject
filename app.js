@@ -3,7 +3,6 @@ const path = require('path');
 const dotenv = require('dotenv');
 const mongodb = require('mongodb');
 
-
 const app = express();
 
 dotenv.config();

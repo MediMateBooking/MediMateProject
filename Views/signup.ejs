@@ -24,11 +24,15 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/styles/signup.css" />
+    <link rel="stylesheet" href="/styles/preloader.css" />
     <script src="/scripts/signup.js" defer></script>
 
   </head>
   
   <body class="account-page-singup">
+
+    
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
@@ -56,6 +60,10 @@
 
     </header>
     <!-- /Header -->
+
+    <div class="statusMessage" style="display: none;">
+      <p>Hello World</p>
+    </div>
       
 
       <!-- Page Content -->
@@ -81,7 +89,7 @@
                     </div>
 
                     <!-- Register Form -->
-                    <form action="/signup" method="POST">
+                    <form method="POST">
 
 
                       <div class="form-group form-focus">
@@ -95,23 +103,23 @@
                       <div id="mainDetails" style="display: none;">
 
                         <div class="form-group form-focus">
-                          <input type="text" class="form-control floating" name="name" required/>
+                          <input type="text" class="form-control floating" id="name" name="name" required/>
                           <label class="focus-label">Name</label>
                         </div>
 
                         <div class="form-group form-focus">
-                          <input type="email" class="form-control floating" name="email" required/>
+                          <input type="email" class="form-control floating" id="email" name="email" required/>
                           <label class="focus-label">Email</label>
                         </div>
                         
                         <div class="form-group form-focus">
-                          <input type="password" class="form-control floating" name="createPassword" required/>
+                          <input type="password" class="form-control floating" id="password" name="createPassword" required/>
                           <label class="focus-label">Create Password</label>
                         </div>
 
                         <!-- Confirm Password Field -->
                         <div class="form-group form-focus">
-                          <input type="password" class="form-control floating" name="confirmPassword" required/>
+                          <input type="password" class="form-control floating" id="compassword" name="confirmPassword" required/>
                           <label class="focus-label">Confirm Password</label> 
                         </div>
 
@@ -119,7 +127,7 @@
 
                     
                       <div class="form-group form-focus" id="slmcregi" style="display: none;">
-                        <input type="text" class="form-control floating" name="slmcregi"/>
+                        <input type="text" class="form-control floating" id="slmcregistration" name="slmcregi"/>
                         <label class="focus-label">SLMC Registration Number</label> 
                       </div>
                 
@@ -134,12 +142,16 @@
                         class="btn btn-primary btn-block btn-lg signUp-btn"
                         class="btn btn-primary btn-block btn-lg login-btn"
                         id="submitBtn"
-                        type="submit"
+                        type="button"
                       >
                         Signup
+
                       </button>
+
+                      
                     </form>
-                    
+
+                 
                     <!-- /Register Form -->
                   </div>
                   

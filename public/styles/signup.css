@@ -1,0 +1,28 @@
+.statusMessage p{
+    
+    text-align: center;
+    width: fit-content;
+    margin: 1em auto 0rem auto;
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    color: aliceblue;
+    font-weight: 500;
+    animation: increaseCommentSize 0.3s ease forwards;
+}
+
+.warningMessage{
+    background-color: rgb(255, 0, 102);
+}
+
+.successMessage{
+    background-color: rgb(58, 29, 246);
+}
+
+@keyframes increaseCommentSize {
+    0% {
+        transform: scale(1.10);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
