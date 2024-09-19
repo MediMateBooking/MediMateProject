@@ -3,7 +3,6 @@ const path = require('path');
 const dotenv = require('dotenv');
 const mongodb = require('mongodb');
 
-
 const app = express();
 
 dotenv.config();
@@ -47,6 +46,6 @@ app.use(function (req, res) {
 
 db.connectTo().then(() => {
     app.listen(port, () => {
-        console.log('server running on http://localhost:' + port + '/index')
+        console.log('server running on ' + port)
     });
 }).catch((err) => console.log(err.message));
