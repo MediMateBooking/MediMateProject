@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const mongodb = require('mongodb');
+const bcryptjs =  require('bcryptjs');
 
 const app = express();
 
