@@ -49,6 +49,10 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
+//adminDashboard
+const adminDashRoute = require('./Routes/adminDashboard');
+app.use('/', adminDashRoute);
+
 //404
 app.use(function (req, res) {
     res.status(404).render('404');
