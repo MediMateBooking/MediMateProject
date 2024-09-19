@@ -4,7 +4,7 @@
  * https://github.com/marcj/css-element-queries/blob/master/LICENSE.
  */
 ;
-(function() {
+(function () {
 
     /**
      * Class for dimension change detection.
@@ -14,19 +14,19 @@
      *
      * @constructor
      */
-    var ResizeSensor = function(element, callback) {
+    var ResizeSensor = function (element, callback) {
         /**
          *
          * @constructor
          */
         function EventQueue() {
             this.q = [];
-            this.add = function(ev) {
+            this.add = function (ev) {
                 this.q.push(ev);
             };
 
             var i, j;
-            this.call = function() {
+            this.call = function () {
                 for (i = 0, j = this.q.length; i < j; i++) {
                     this.q[i].call();
                 }
@@ -70,14 +70,14 @@
             element.resizeSensor.style.cssText = style;
             element.resizeSensor.innerHTML =
                 '<div class="resize-sensor-expand" style="' + style + '">' +
-                    '<div style="' + styleChild + '"></div>' +
+                '<div style="' + styleChild + '"></div>' +
                 '</div>' +
                 '<div class="resize-sensor-shrink" style="' + style + '">' +
-                    '<div style="' + styleChild + ' width: 200%; height: 200%"></div>' +
+                '<div style="' + styleChild + ' width: 200%; height: 200%"></div>' +
                 '</div>';
             element.appendChild(element.resizeSensor);
 
-            if (!{fixed: 1, absolute: 1}[getComputedStyle(element, 'position')]) {
+            if (!{ fixed: 1, absolute: 1 }[getComputedStyle(element, 'position')]) {
                 element.style.position = 'relative';
             }
 
@@ -88,7 +88,7 @@
 
             var lastWidth, lastHeight;
 
-            var reset = function() {
+            var reset = function () {
                 expandChild.style.width = expand.offsetWidth + 10 + 'px';
                 expandChild.style.height = expand.offsetHeight + 10 + 'px';
                 expand.scrollLeft = expand.scrollWidth;
@@ -101,13 +101,13 @@
 
             reset();
 
-            var changed = function() {
+            var changed = function () {
                 if (element.resizedAttached) {
                     element.resizedAttached.call();
                 }
             };
 
-            var addEvent = function(el, name, cb) {
+            var addEvent = function (el, name, cb) {
                 if (el.attachEvent) {
                     el.attachEvent('on' + name, cb);
                 } else {
@@ -115,11 +115,11 @@
                 }
             };
 
-            var onScroll = function() {
-              if (element.offsetWidth != lastWidth || element.offsetHeight != lastHeight) {
-                  changed();
-              }
-              reset();
+            var onScroll = function () {
+                if (element.offsetWidth != lastWidth || element.offsetHeight != lastHeight) {
+                    changed();
+                }
+                reset();
             };
 
             addEvent(expand, 'scroll', onScroll);
@@ -143,7 +143,7 @@
             attachResizeEvent(element, callback);
         }
 
-        this.detach = function() {
+        this.detach = function () {
             if (isCollectionTyped) {
                 var i = 0, j = element.length;
                 for (; i < j; i++) {
@@ -155,7 +155,7 @@
         };
     };
 
-    ResizeSensor.detach = function(element) {
+    ResizeSensor.detach = function (element) {
         if (element.resizeSensor) {
             element.removeChild(element.resizeSensor);
             delete element.resizeSensor;

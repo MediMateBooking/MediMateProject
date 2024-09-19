@@ -34,11 +34,25 @@ app.use('/', loginRoute);
 const docDashRoute = require('./Routes/doctorDashboard');
 app.use('/', docDashRoute);
 
+//forgotPassword
+const forgotPasswordRoute = require('./Routes/forgotPassword');
+app.use('/', forgotPasswordRoute);
+
+//appointments
+const appointmentsRoute = require('./Routes/appointments');
+app.use('/', appointmentsRoute);
+
+//index
 app.get('/', function (req, res) {
 
     res.render('index');
 });
 
+//adminDashboard
+const adminDashRoute = require('./Routes/adminDashboard');
+app.use('/', adminDashRoute);
+
+//404
 app.use(function (req, res) {
     res.status(404).render('404');
 });
@@ -46,6 +60,6 @@ app.use(function (req, res) {
 
 db.connectTo().then(() => {
     app.listen(port, () => {
-        console.log('server running on ' + port)
+        console.log('server running on http://localhost:' + port)
     });
 }).catch((err) => console.log(err.message));

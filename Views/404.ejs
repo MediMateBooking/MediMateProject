@@ -3,9 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Error</title>
+    <title>404 Error - Page Not Found</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f8f8f8;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 72px;
+        color: #ff6b6b;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 16px;
+        color: #3498db;
+        border: 2px solid #3498db;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      a:hover {
+        background-color: #3498db;
+        color: white;
+      }
+
+      .icon {
+        font-size: 120px;
+        color: #ff6b6b;
+      }
+    </style>
   </head>
   <body>
-    <h1>404 Page not found</h1>
+    <div class="container">
+      <div class="icon">🚫</div>
+      <h1>404</h1>
+      <p>Oops! The page you're looking for doesn't exist.</p>
+      <a href="/">Back to Home</a>
+    </div>
   </body>
 </html>
