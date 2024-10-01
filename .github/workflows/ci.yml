@@ -37,6 +37,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
+          file: ./coverage/lcov.info  # Specify the correct path to the coverage file
           token: ${{ secrets.CODECOV_TOKEN }}  # Use the secret token you set up in GitHub
 
       # Optional: Cache npm dependencies to speed up future workflows
