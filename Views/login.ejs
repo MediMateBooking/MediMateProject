@@ -23,6 +23,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="/styles/login.css" />
   </head>
   <body class="account-page">
     <!-- Main Wrapper -->
@@ -47,6 +48,14 @@
         </nav>
       </header>
       <!-- /Header -->
+
+        <!-- /Status Message -->
+        <% if(passwordResetLink) { %>
+    <div class="statusMessage">
+      <p><%= passwordResetLinkMsg %></p>
+    </div>
+    <% } %>
+      
 
       <!-- Page Content -->
       <div class="content">
