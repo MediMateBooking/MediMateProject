@@ -7,7 +7,14 @@ router.get('/login', (req, res) => {
 
     try {
 
-        res.render('login');
+        const { token } = req.query;
+
+        if(token && token === req.session.ivalidLinkToken){
+            req.session.ivalidLinkToken = null;
+            res.render('login', { passwordResetLink: true ,passwordResetLinkMsg : 'Invalid Active Link.'});
+        }else{
+            res.render('login', { passwordResetLink: false });
+        }
 
 
     } catch (error) {

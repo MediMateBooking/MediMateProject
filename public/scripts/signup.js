@@ -1,4 +1,5 @@
 const mainDetails = document.getElementById("mainDetails");
+const userCrendtials = document.getElementById('userCrendtials');
 const roleDropDown = document.getElementById("role");
 const slmcregi = document.getElementById("slmcregi");
 const topicHeader = document.getElementById("roleTopic");
@@ -29,6 +30,7 @@ roleDropDown.addEventListener("input", (e) => {
 
   if (option.trim() === "patient") {
     mainDetails.style.display = "block";
+    userCrendtials.style.display = 'block'
     slmcregi.style.display = "none";
     topicHeader.textContent = "Patient";
     submitBtn.disabled = false;
@@ -39,6 +41,7 @@ roleDropDown.addEventListener("input", (e) => {
     mainDetails.style.display = "block";
     slmcregi.style.display = "block";
     topicHeader.textContent = "Doctor";
+    userCrendtials.style.display = 'none'
     submitBtn.disabled = false;
     return;
   }

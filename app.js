@@ -3,12 +3,23 @@ const path = require('path');
 const dotenv = require('dotenv');
 const mongodb = require('mongodb');
 const bcryptjs =  require('bcryptjs');
+const crypto = require('crypto');
+const session = require('express-session');
 
 const app = express();
 
 dotenv.config();
 const port = process.env.PORT || 4000;
 console.log(port)
+
+const secret = crypto.randomBytes(32).toString('hex');
+
+app.use(session({
+    secret: secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+  }));
 
 const ObjectId = mongodb.ObjectId;
 
