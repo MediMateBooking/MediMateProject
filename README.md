@@ -3,7 +3,8 @@
 ## 🚀 Overview
 MediMate is a cutting-edge web application designed to revolutionize the way you schedule medical appointments. Say goodbye to long wait times and cumbersome scheduling processes. With MediMate, booking appointments with your healthcare providers is as easy as a few clicks!
 
-![Build Status](https://github.com/MediMateBooking/MediMateProject/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://codecov.io/gh/MediMateBooking/MediMateProject/branch/main/graph/badge.svg)
+
 
 
 ## ✨ Features
