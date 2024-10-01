@@ -1,13 +1,13 @@
 const nodemailer = require("nodemailer");
+const path = require('path');
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
-    
-    user: "zoomclasss63@gmail.com",
-    pass: "ytqytxzezodjsvow",
+    user: process.env.USER,
+    pass: process.env.APP_PASSWORD,
   },
 });
 
@@ -36,7 +36,10 @@ async function mainEmail(address,userIdURL) {
     `,
   });
 
-  console.log("Message sent: %s", info.messageId);
+    console.log("Message sent: %s", info.messageId);
+  } catch (error) {
+    console.log("Error sending email:", error);
+  }
 
 }
 
