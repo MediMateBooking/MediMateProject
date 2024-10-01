@@ -11,20 +11,20 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-async function mainEmail(address,userIdURL) {
-  
+async function mainEmail(address, userIdURL) {
+
 
   const receiver = address || "chamoddousl@gmail.com";
 
   const info = await transporter.sendMail({
     from: "MediMate E-Channeling Service",
-    to: receiver, 
+    to: receiver,
     subject: "Welcome to MediMate",
     text: `Please Activate your profile by visiting the following link: ${userIdURL}`,
     html: `
       <div style="max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
         <div style="margin-bottom: 20px;">
-          <img src="/assets/img/logo.png" alt="MediMate Logo" style="max-width: 150px;">
+          <img src="https://drive.google.com/uc?export=view&id=1ol0FJwDaQTWR9u8Tu3JzP4Boi5Z0Vq9o" alt="MediMate Logo" style="max-width: 150px;">
         </div>
         <h2 style="color: #4CAF50;">Activate Your Profile</h2>
         <p style="font-size: 16px; color: #333;">Thank you for signing up with MediMate. Please click the button below to activate your profile:</p>
@@ -36,15 +36,8 @@ async function mainEmail(address,userIdURL) {
     `,
   });
 
-    console.log("Message sent: %s", info.messageId);
-  } catch (error) {
-    console.log("Error sending email:", error);
-  }
-
+  console.log("Message sent: %s", info.messageId);
 }
 
 // mainEmail().catch(console.error);
-
 module.exports.mainEmail = mainEmail;
-
-
