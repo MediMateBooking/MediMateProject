@@ -21,6 +21,19 @@ router.get('/user/:id', async(req, res) => {
                 return res.redirect(`/login?token=${ivalidLinkToken}`)  
             }
 
+            if(user.profileActive){
+                
+                const alreadyActived = crypto.randomBytes(32).toString('hex');
+                req.session.alreadyActived = alreadyActived;
+                return res.redirect(`/login?token=${alreadyActived}`)
+            }
+
+            const updateActiveStatus = {
+                profileActive : true
+            }
+
+            const UpdatedUserActiveStatus =  await db.DbConn().collection('patients').updateOne({userID: userID}, {$set : updateActiveStatus});
+
         res.render('doctorDashboard');
 
 

@@ -28,6 +28,8 @@ roleDropDown.addEventListener("input", (e) => {
   compassword.value = "";
   slmcregistration.value = "";
 
+  clearBorderColor()
+
   if (option.trim() === "patient") {
     mainDetails.style.display = "block";
     userCrendtials.style.display = 'block'
@@ -55,6 +57,7 @@ roleDropDown.addEventListener("input", (e) => {
 submitBtn.addEventListener("click", async () => {
   statusMessage.textContent = "";
   statusMessageFrame.style.display = "none";
+  clearBorderColor()
 
   submitBtn.innerHTML = "";
   submitBtn.innerHTML = `<div id="preloader">
@@ -91,6 +94,27 @@ submitBtn.addEventListener("click", async () => {
         statusMessageFrame.style.display = "block";
         submitBtn.innerHTML = "";
         submitBtn.textContent = "Signup";
+
+        if(resonse.message.trim() === 'Please fill all Fields'){
+
+          clearBorderColor()
+          inputTagsColorChnage()
+          centerElement()
+
+        }else if(resonse.message.trim() === 'Check Your Email Address'){
+
+          clearBorderColor()
+          inputTagsColorChnage('Email')
+          centerElement()
+        }
+        
+        else{
+          clearBorderColor()
+          inputTagsColorChnage()
+          centerElement()
+        }
+
+
       } else {
         statusMessage.textContent = resonse.message;
         statusMessage.classList.remove("warningMessage");
@@ -98,6 +122,8 @@ submitBtn.addEventListener("click", async () => {
         statusMessageFrame.style.display = "block";
         submitBtn.innerHTML = "";
         submitBtn.textContent = "Signup";
+
+        centerElement()
 
         userName.value = "";
         email.value = "";
@@ -130,19 +156,56 @@ submitBtn.addEventListener("click", async () => {
       const resonse = await response.json();
 
       if (!resonse.success) {
+
         statusMessage.textContent = resonse.message;
         statusMessage.classList.remove("successMessage");
         statusMessage.classList.add("warningMessage");
         statusMessageFrame.style.display = "block";
         submitBtn.innerHTML = "";
         submitBtn.textContent = "Signup";
+
+          if(resonse.message.trim() === 'Please fill all Fields'){
+
+            clearBorderColor()
+            inputTagsColorChnage()
+            centerElement()
+          }
+
+          else if(resonse.message.trim() === 'Confirm Password Not Matched'){
+
+            clearBorderColor()
+            inputTagsColorChnage('Confirm Password')
+            centerElement()
+
+          } else if(resonse.message.trim() === 'Password must be at least 6 characters long'){
+
+            clearBorderColor()
+            inputTagsColorChnage('Create Password')
+            centerElement()
+            
+          } else if(resonse.message.trim() === 'Check Your Email Address'){
+
+            clearBorderColor()
+            inputTagsColorChnage('Email')
+            centerElement()
+          }
+          
+          else{
+            clearBorderColor()
+            inputTagsColorChnage()
+            centerElement()
+          }
+
       } else {
+
         statusMessage.textContent = resonse.message;
         statusMessage.classList.remove("warningMessage");
         statusMessage.classList.add("successMessage");
         statusMessageFrame.style.display = "block";
         submitBtn.innerHTML = "";
         submitBtn.textContent = "Signup";
+
+        centerElement()
 
         userName.value = "";
         email.value = "";
@@ -161,3 +224,47 @@ submitBtn.addEventListener("click", async () => {
     return;
   }
 });
+
+
+
+function inputTagsColorChnage(targetInputText){
+  
+  const allInputs = document.querySelectorAll('.form-control.floating');
+  allInputs.forEach(oneInput => {
+
+    if(targetInputText) {
+    const parentDiv = oneInput.closest('.form-group');
+
+        if (parentDiv) {
+          const label = parentDiv.querySelector('.focus-label');
+          if (label) {
+            if(label.textContent.trim() === targetInputText){
+            
+            oneInput.style.borderColor = "#ff0064"; 
+            }
+          }
+        }
+
+        return;
+      }
+
+        if(oneInput.value.trim() === ''){
+        oneInput.style.borderColor = "#ff0064"; 
+        }
+  });
+  
+  return;
+}
+
+
+function clearBorderColor(){
+  const allInputs = document.querySelectorAll('.form-control.floating');
+
+  allInputs.forEach(oneInput => {
+    
+        oneInput.style.borderColor = '#dcdcdc'; 
+  });
+
+  return
+
+}

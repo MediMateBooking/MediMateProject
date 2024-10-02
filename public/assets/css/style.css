@@ -2264,6 +2264,8 @@ html.menu-opened body {
   border: 1px solid #f0f0f0;
   border-radius: 4px;
   padding: 25px;
+  box-shadow: 2px 5px 20px 3px rgb(227, 227, 227);
+  
 }
 .login-header {
   margin-bottom: 20px;
