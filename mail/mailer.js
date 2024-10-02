@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const path = require('path');
+const path = require("path");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -12,18 +12,15 @@ const transporter = nodemailer.createTransport({
 });
 
 async function mainEmail(address, userIdURL) {
+  try {
+    const receiver = address || "chamoddousl@gmail.com";
 
-
-  try{
-  
- const receiver = address || "chamoddousl@gmail.com";
-
-  const info = await transporter.sendMail({
-    from: "MediMate E-Channeling Service",
-    to: receiver,
-    subject: "Welcome to MediMate",
-    text: `Please Activate your profile by visiting the following link: ${userIdURL}`,
-    html: `
+    const info = await transporter.sendMail({
+      from: "MediMate E-Channeling Service",
+      to: receiver,
+      subject: "Welcome to MediMate",
+      text: `Please Activate your profile by visiting the following link: ${userIdURL}`,
+      html: `
       <div style="max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
         <div style="margin-bottom: 20px;">
 
@@ -38,13 +35,12 @@ async function mainEmail(address, userIdURL) {
         <p style="font-size: 12px; color: #999; margin-top: 30px;">If the button above does not work, copy and paste the following link into your browser: <br> ${userIdURL}</p>
       </div>
     `,
-  });
+    });
     console.log("Message sent: %s", info.messageId);
-
-  }catch(e){
-    throw new Error('Error sending email');
-    }
-  
+  } catch (e) {
+    throw new Error("Error sending email");
+  }
+}
 
 // mainEmail().catch(console.error);
 module.exports.mainEmail = mainEmail;
