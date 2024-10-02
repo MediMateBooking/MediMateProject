@@ -46,6 +46,10 @@ app.use('/', loginRoute);
 const docDashRoute = require('./Routes/doctorDashboard');
 app.use('/', docDashRoute);
 
+//Patient Dashboard
+const patDashRoute = require('./Routes/patientDashboard');
+app.use('/', patDashRoute);
+
 //forgotPassword
 const forgotPasswordRoute = require('./Routes/forgotPassword');
 app.use('/', forgotPasswordRoute);
