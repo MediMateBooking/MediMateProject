@@ -24,6 +24,8 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="/styles/login.css" />
+
+    <script src="/scripts/resizePosition2.js" defer></script>
   </head>
   <body class="account-page">
     <!-- Main Wrapper -->
@@ -50,9 +52,9 @@
       <!-- /Header -->
 
         <!-- /Status Message -->
-        <% if(passwordResetLink) { %>
+        <% if(validation) { %>
     <div class="statusMessage">
-      <p><%= passwordResetLinkMsg %></p>
+      <p><%= validationMsg %></p>
     </div>
     <% } %>
       
@@ -77,14 +79,14 @@
                       <h3>Login <span>MediMate</span></h3>
                     </div>
                     <form
-                      action="https://dreamguys.co.in/demo/doccure/index.html"
+                      action="/login" method="POST"
                     >
                       <div class="form-group form-focus">
-                        <input type="email" class="form-control floating" />
+                        <input type="email" class="form-control floating" name="email" required/>
                         <label class="focus-label">Email</label>
                       </div>
                       <div class="form-group form-focus">
-                        <input type="password" class="form-control floating" />
+                        <input type="password" class="form-control floating" name="password" required/>
                         <label class="focus-label">Password</label>
                       </div>
                       <div class="text-right">
@@ -98,22 +100,6 @@
                       >
                         Login
                       </button>
-                      <div class="login-or">
-                        <span class="or-line"></span>
-                        <span class="span-or">or</span>
-                      </div>
-                      <div class="row form-row social-login">
-                        <div class="col-6">
-                          <a href="#" class="btn btn-facebook btn-block"
-                            ><i class="fab fa-facebook-f mr-1"></i> Login</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="#" class="btn btn-google btn-block"
-                            ><i class="fab fa-google mr-1"></i> Login</a
-                          >
-                        </div>
-                      </div>
                       <div class="text-center dont-have">
                         Don’t have an account?
                         <a href="/signup">Register</a>

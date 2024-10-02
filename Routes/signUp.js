@@ -28,10 +28,20 @@ router.post('/signup/doctors', async (req, res) => {
     const { userName, email, slmcregi,role} = req.body;
     console.log(userName, email,slmcregi,role);
 
-    if(userName === '' || email === '' || slmcregi === ''){
-        return res.json({ success: false, message: 'Please Fill All Fields' });
+    const missingFields = []
+
+    if (userName === '') missingFields.push('User Name');
+    if (email === '') missingFields.push('Email Address');
+    if (slmcregi === '') missingFields.push('SLMC Registration Number');
+
+    if(missingFields.length > 1){
+        return res.json({ success: false, message: 'Please fill all Fields' });
     }
-    
+
+    if(missingFields.length === 1){
+        return res.json({ success: false, message: `${missingFields[0]} is required` });
+    }
+ 
     const existingUserEmail =  await db.DbConn().collection('doctors').findOne({email:email});
     if(existingUserEmail){
 
@@ -54,7 +64,7 @@ router.post('/signup/doctors', async (req, res) => {
 
         const userResult = await db.DbConn().collection('doctors').insertOne(newUser);
         console.log('Successfully Saved');
-        res.json({ success: true, message: 'Your Account sent for Approving. We will let you know process is completed.'  })
+        res.json({ success: true, message: 'Your Account sent for Approving. We will let you know after process is completed.'  })
         
     } catch (error) {
         console.error("Server Error:", error);
@@ -70,16 +80,27 @@ router.post('/signup/patients', async (req, res) => {
     const { userName, email, password ,confirmPassword, role} = req.body;
     console.log(userName, email, password,confirmPassword,role);
 
-    if(userName === '' || email === '' || password === '' || confirmPassword === ''){
-        return res.json({ success: false, message: 'Please Fill All Fields' });
-    }
-    
-    if(password !== confirmPassword){
-        return res.json({ success: false, message: 'Confirm Password Not Matched' });
+    const missingFields = []
+
+    if (userName === '') missingFields.push('User Name');
+    if (email === '') missingFields.push('Email Address');
+    if (password === '') missingFields.push('Password');
+    if (confirmPassword === '') missingFields.push('Confirm password');
+
+    if(missingFields.length > 1){
+        return res.json({ success: false, message: 'Please fill all Fields' });
     }
 
+    if(missingFields.length === 1){
+        return res.json({ success: false, message: `${missingFields[0]} is required` });
+    }
+    
     if(password.length < 5){
-        return res.json({ success: false, message: 'Password Should Greater than 5 charactors' });
+        return res.json({ success: false, message: 'Password must be at least 6 characters long' });
+    }
+
+    if(password !== confirmPassword){
+        return res.json({ success: false, message: 'Confirm Password Not Matched' });
     }
 
     const existingUserEmail =  await db.DbConn().collection('patients').findOne({email:email});
@@ -91,7 +112,7 @@ router.post('/signup/patients', async (req, res) => {
     const hashedpass = await bcryptjs.hash(password,12);
 
     let userIdURL = uuid.v1();
-    const expires = Date.now() + 3600000;
+    const expires = Date.now() + 36000000;
 
     const newUser = {
         name: userName,
@@ -104,23 +125,25 @@ router.post('/signup/patients', async (req, res) => {
     };
 
     try {
-
-        const userResult = await db.DbConn().collection('patients').insertOne(newUser);
+        let userURL = `http://localhost:4000/user/${userIdURL}`
         
-    } catch (error) {
-        console.error("Server Error:", error);
-        res.json({ success: false, message: 'Server Error' });
-    }
-
-    let userURL = `http://localhost:4000/user/${userIdURL}`
-
-    try {
         await mailer.mainEmail(email, userURL); 
         console.log("Activation Email sent to "+email);
+
+        const userResult = await db.DbConn().collection('patients').insertOne(newUser);
         res.json({ success: true, message: 'Activation Email sent to '+email  })
+
       } catch (error) {
-        console.error("Error sending email:", error);
-        res.json({ success: false, message: 'Check Your Email Address' });
+
+        if (error.message.includes('Error sending email')) {
+            
+            console.error("Error sending email:", error);
+            res.json({ success: false, message: 'Check Your Email Address' });
+
+        }else{
+            console.error("Server Error:", error);
+            res.json({ success: false, message: 'Server Error' });
+        }
       }
 
 
