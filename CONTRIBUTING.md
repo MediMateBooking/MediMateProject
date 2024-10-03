@@ -13,8 +13,6 @@ First of all, thank you for your interest in contributing to MediMate! Here’s 
 
 ## Code of Conduct
 
-By participating in this project, you agree to abide by the [Code of Conduct](./CODE_OF_CONDUCT.md).
-
 ## How Can I Contribute?
 
 - **Bug Fixes**: Found a bug? Check out our issue tracker to see if it's been reported, and feel free to submit a fix!

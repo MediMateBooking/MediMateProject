@@ -1,26 +1,20 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const mongodb = require('mongodb');
-const bcryptjs =  require('bcryptjs');
-const uuid = require('uuid');
+const mongodb = require("mongodb");
+const bcryptjs = require("bcryptjs");
+const uuid = require("uuid");
 
-const db = require('../database/database');
-const mailer = require('../mail/mailer');
+const db = require("../database/database");
+const mailer = require("../mail/mailer");
 
-router.get('/signup', (req, res) => {
+router.get("/signup", (req, res) => {
+  try {
+    const emailstatus = req.query.passwordNotMatch;
 
-    try {
-
-        const emailstatus = req.query.passwordNotMatch;
-
-        res.render('signup',{emailstatus:emailstatus});
-
-
-    } catch (error) {
-        res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
-    }
-
-
+    res.render("signup", { emailstatus: emailstatus });
+  } catch (error) {
+    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+  }
 });
 
 router.post('/signup/doctors', async (req, res) => {
@@ -116,46 +110,7 @@ router.post('/signup/patients', async (req, res) => {
 
         return res.json({ success: false, message: email+' is already used' });
     }
-
-    const hashedpass = await bcryptjs.hash(password,12);
-
-    let userIdURL = uuid.v1();
-    const expires = Date.now() + 36000000;
-
-    const newUser = {
-        name: userName,
-        email: email,
-        userID : userIdURL,
-        password: hashedpass,
-        role:role,
-        profileActive : false,
-        linkExpire : expires
-    };
-
-    try {
-        let userURL = `http://localhost:4000/user/${userIdURL}`
-        
-        await mailer.mainEmail(email, userURL); 
-        console.log("Activation Email sent to "+email);
-
-        const userResult = await db.DbConn().collection('patients').insertOne(newUser);
-        res.json({ success: true, message: 'Activation Email sent to '+email  })
-
-      } catch (error) {
-
-        if (error.message.includes('Error sending email')) {
-            
-            console.error("Error sending email:", error);
-            res.json({ success: false, message: 'Check Your Email Address' });
-
-        }else{
-            console.error("Server Error:", error);
-            res.json({ success: false, message: 'Server Error' });
-        }
-      }
-
-
+  }
 });
 
 module.exports = router;
-

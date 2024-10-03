@@ -135,9 +135,11 @@ submitBtn.addEventListener("click", async () => {
     return;
   }
 
+  //
   if (option.trim() === "patient") {
     try {
       const response = await fetch(`/signup/patients`, {
+        //
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userDetails),
@@ -208,7 +210,10 @@ submitBtn.addEventListener("click", async () => {
   }
 });
 
-function inputTagsColorChnage(targetInputText) {
+
+
+// color change for input tags
+function inputTagsColorChange(targetInputText) {
   const allInputs = document.querySelectorAll(".form-control.floating");
   allInputs.forEach((oneInput) => {
     if (targetInputText) {
@@ -236,7 +241,6 @@ function inputTagsColorChnage(targetInputText) {
 
 function clearBorderColor() {
   const allInputs = document.querySelectorAll(".form-control.floating");
-
   allInputs.forEach((oneInput) => {
     oneInput.style.borderColor = "#dcdcdc";
   });
