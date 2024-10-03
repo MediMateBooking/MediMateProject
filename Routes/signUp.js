@@ -42,7 +42,11 @@ router.post('/signup/doctors', async (req, res) => {
         return res.json({ success: false, message: `${missingFields[0]} is required` });
     }
  
-    const existingUserEmail =  await db.DbConn().collection('doctors').findOne({email:email});
+    const existingUserEmail = await Promise.any([
+        db.DbConn().collection('patients').findOne({ email: email }),
+        db.DbConn().collection('doctors').findOne({ email: email })
+      ]);
+
     if(existingUserEmail){
 
         return res.json({ success: false, message: email+' is already used' });
@@ -95,7 +99,7 @@ router.post('/signup/patients', async (req, res) => {
         return res.json({ success: false, message: `${missingFields[0]} is required` });
     }
     
-    if(password.length < 5){
+    if(password.length < 6){
         return res.json({ success: false, message: 'Password must be at least 6 characters long' });
     }
 
@@ -103,7 +107,11 @@ router.post('/signup/patients', async (req, res) => {
         return res.json({ success: false, message: 'Confirm Password Not Matched' });
     }
 
-    const existingUserEmail =  await db.DbConn().collection('patients').findOne({email:email});
+     const existingUserEmail = await Promise.any([
+        db.DbConn().collection('patients').findOne({ email: email }),
+        db.DbConn().collection('doctors').findOne({ email: email })
+      ]);
+      
     if(existingUserEmail){
 
         return res.json({ success: false, message: email+' is already used' });

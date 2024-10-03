@@ -24,7 +24,7 @@ router.get('/login', (req, res) => {
             res.render('login', { validation: true ,validationMsg : 'Incorrect Password.'});
         }else if(token && token === req.session.profileActive){
             req.session.profileActive = null;
-            res.render('login', { validation: true ,validationMsg : 'Your Accout is not Actived.'});
+            res.render('login', { validation: true ,validationMsg : 'Your Account is not Actived.'});
         }
         else{
             res.render('login', { validation: false });
