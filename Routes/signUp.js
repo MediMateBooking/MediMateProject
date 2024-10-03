@@ -17,141 +17,98 @@ router.get("/signup", (req, res) => {
   }
 });
 
-router.post("/signup/doctors", async (req, res) => {
-  const { userName, email, slmcregi, role } = req.body;
-  console.log(userName, email, slmcregi, role);
+router.post('/signup/doctors', async (req, res) => {
 
-  const missingFields = [];
+    const { userName, email, slmcregi,role} = req.body;
+    console.log(userName, email,slmcregi,role);
 
-  if (userName === "") missingFields.push("User Name");
-  if (email === "") missingFields.push("Email Address");
-  if (slmcregi === "") missingFields.push("SLMC Registration Number");
+    const missingFields = []
 
-  if (missingFields.length > 1) {
-    return res.json({ success: false, message: "Please fill all Fields" });
-  }
+    if (userName === '') missingFields.push('User Name');
+    if (email === '') missingFields.push('Email Address');
+    if (slmcregi === '') missingFields.push('SLMC Registration Number');
 
-  if (missingFields.length === 1) {
-    return res.json({
-      success: false,
-      message: `${missingFields[0]} is required`,
-    });
-  }
+    if(missingFields.length > 1){
+        return res.json({ success: false, message: 'Please fill all Fields' });
+    }
 
-  const existingUserEmail = await db
-    .DbConn()
-    .collection("doctors")
-    .findOne({ email: email });
-  if (existingUserEmail) {
-    return res.json({ success: false, message: email + " is already used" });
-  }
+    if(missingFields.length === 1){
+        return res.json({ success: false, message: `${missingFields[0]} is required` });
+    }
+ 
+    const existingUserEmail = await Promise.any([
+        db.DbConn().collection('patients').findOne({ email: email }),
+        db.DbConn().collection('doctors').findOne({ email: email })
+      ]);
 
-  let userIdURL = uuid.v4();
+    if(existingUserEmail){
 
-  const newUser = {
-    name: userName,
-    email: email,
-    userID: userIdURL,
-    slmcregi: slmcregi,
-    role: role,
-    profileActive: false,
-    prifileApprove: false,
-  };
+        return res.json({ success: false, message: email+' is already used' });
+    }
 
-  try {
-    const userResult = await db
-      .DbConn()
-      .collection("doctors")
-      .insertOne(newUser);
-    console.log("Successfully Saved");
-    res.json({
-      success: true,
-      message:
-        "Your Account sent for Approving. We will let you know after process is completed.",
-    });
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.json({ success: false, message: "Server Error" });
-  }
+    let userIdURL = uuid.v4();
+
+    const newUser = {
+        name: userName,
+        email: email,
+        userID : userIdURL,
+        slmcregi:slmcregi,
+        role:role,
+        profileActive : false,
+        prifileApprove : false
+    };
+
+    try {
+
+        const userResult = await db.DbConn().collection('doctors').insertOne(newUser);
+        console.log('Successfully Saved');
+        res.json({ success: true, message: 'Your Account sent for Approving. We will let you know after process is completed.'  })
+        
+    } catch (error) {
+        console.error("Server Error:", error);
+        res.json({ success: false, message: 'Server Error' });
+    }
+
 });
 
-router.post("/signup/patients", async (req, res) => {
-  const { userName, email, password, confirmPassword, role } = req.body;
-  console.log(userName, email, password, confirmPassword, role);
 
-  const missingFields = [];
+router.post('/signup/patients', async (req, res) => {
 
-  if (userName === "") missingFields.push("User Name");
-  if (email === "") missingFields.push("Email Address");
-  if (password === "") missingFields.push("Password");
-  if (confirmPassword === "") missingFields.push("Confirm password");
 
-  if (missingFields.length > 1) {
-    return res.json({ success: false, message: "Please fill all Fields" });
-  }
+    const { userName, email, password ,confirmPassword, role} = req.body;
+    console.log(userName, email, password,confirmPassword,role);
 
-  if (missingFields.length === 1) {
-    return res.json({
-      success: false,
-      message: `${missingFields[0]} is required`,
-    });
-  }
+    const missingFields = []
 
-  if (password.length < 6) {
-    return res.json({
-      success: false,
-      message: "Password must be at least 6 characters long",
-    });
-  }
+    if (userName === '') missingFields.push('User Name');
+    if (email === '') missingFields.push('Email Address');
+    if (password === '') missingFields.push('Password');
+    if (confirmPassword === '') missingFields.push('Confirm password');
 
-  if (password !== confirmPassword) {
-    return res.json({
-      success: false,
-      message: "Confirm Password Not Matched",
-    });
-  }
+    if(missingFields.length > 1){
+        return res.json({ success: false, message: 'Please fill all Fields' });
+    }
 
-  const existingUserEmail = await db
-    .DbConn()
-    .collection("patients")
-    .findOne({ email: email });
-  if (existingUserEmail) {
-    return res.json({ success: false, message: email + " is already used" });
-  }
+    if(missingFields.length === 1){
+        return res.json({ success: false, message: `${missingFields[0]} is required` });
+    }
+    
+    if(password.length < 6){
+        return res.json({ success: false, message: 'Password must be at least 6 characters long' });
+    }
 
-  const hashedpass = await bcryptjs.hash(password, 12);
+    if(password !== confirmPassword){
+        return res.json({ success: false, message: 'Confirm Password Not Matched' });
+    }
 
-  let userIdURL = uuid.v1();
-  const expires = Date.now() + 36000000;
+     const existingUserEmail = await Promise.any([
+        db.DbConn().collection('patients').findOne({ email: email }),
+        db.DbConn().collection('doctors').findOne({ email: email })
+      ]);
+      
+    if(existingUserEmail){
 
-  const newUser = {
-    name: userName,
-    email: email,
-    userID: userIdURL,
-    password: hashedpass,
-    role: role,
-    profileActive: false,
-    linkExpire: expires,
-  };
-
-  try {
-    let userURL = `http://localhost:${process.env.PORT}/user/${userIdURL}`;
-
-    await mailer.mainEmail(email, userURL);
-    console.log("Activation Email sent to " + email);
-
-    const userResult = await db
-      .DbConn()
-      .collection("patients")
-      .insertOne(newUser);
-    res.json({ success: true, message: "Activation Email sent to " + email });
-  } catch (error) {
-    if (error.message.includes("Error sending email")) {
-      console.error("Error sending email:", error);
-      res.json({ success: false, message: "Check Your Email Address" });
-    } else {
-      console.error("Server Error:", error);
-      res.json({ success: false, message: "Server Error" });
+        return res.json({ success: false, message: email+' is already used' });
     }
   }
 });

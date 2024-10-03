@@ -97,15 +97,15 @@ submitBtn.addEventListener("click", async () => {
 
         if (resonse.message.trim() === "Please fill all Fields") {
           clearBorderColor();
-          inputTagsColorChange();
+          inputTagsColorChnage();
           centerElement();
         } else if (resonse.message.trim() === "Check Your Email Address") {
           clearBorderColor();
-          inputTagsColorChange("Email");
+          inputTagsColorChnage("Email");
           centerElement();
         } else {
           clearBorderColor();
-          inputTagsColorChange();
+          inputTagsColorChnage();
           centerElement();
         }
       } else {
@@ -158,28 +158,28 @@ submitBtn.addEventListener("click", async () => {
         submitBtn.innerHTML = "";
         submitBtn.textContent = "Signup";
 
-        if (resonse.message.trim() === "Please fill all Fields") { 
+        if (resonse.message.trim() === "Please fill all Fields") {
           clearBorderColor();
-          inputTagsColorChange();
+          inputTagsColorChnage();
           centerElement();
         } else if (resonse.message.trim() === "Confirm Password Not Matched") {
           clearBorderColor();
-          inputTagsColorChange("Confirm Password");
+          inputTagsColorChnage("Confirm Password");
           centerElement();
         } else if (
           resonse.message.trim() ===
           "Password must be at least 6 characters long"
         ) {
           clearBorderColor();
-          inputTagsColorChange("Create Password");
+          inputTagsColorChnage("Create Password");
           centerElement();
         } else if (resonse.message.trim() === "Check Your Email Address") {
           clearBorderColor();
-          inputTagsColorChange("Email");
+          inputTagsColorChnage("Email");
           centerElement();
         } else {
           clearBorderColor();
-          inputTagsColorChange();
+          inputTagsColorChnage();
           centerElement();
         }
       } else {
@@ -211,6 +211,7 @@ submitBtn.addEventListener("click", async () => {
 });
 
 
+
 // color change for input tags
 function inputTagsColorChange(targetInputText) {
   const allInputs = document.querySelectorAll(".form-control.floating");
@@ -238,11 +239,8 @@ function inputTagsColorChange(targetInputText) {
   return;
 }
 
-
-// function to clear the border color of input tags
-function clearBorderColor() { 
+function clearBorderColor() {
   const allInputs = document.querySelectorAll(".form-control.floating");
-
   allInputs.forEach((oneInput) => {
     oneInput.style.borderColor = "#dcdcdc";
   });
