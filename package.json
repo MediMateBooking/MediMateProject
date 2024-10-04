@@ -4,24 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "jest --coverage"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "argv": "^0.0.3",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
-    "codecov": "^3.8.2",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
-    "glob": "^11.0.0",
-    "inflight": "^1.0.6",
-    "lru-cache": "^11.0.1",
     "medimate": "file:",
     "mongodb": "^6.8.0",
     "multer": "^1.4.5-lts.1",
@@ -30,20 +24,5 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
-  },
-  
-  "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "coverage",
-    "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
-      "**/?(*.)+(spec|test).[tj]s?(x)"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "clover"
-    ]
   }
 }
