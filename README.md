@@ -2,7 +2,6 @@
 
 ## 🚀 Overview
 
-![GitHub followers](https://img.shields.io/github/followers/MediMateBooking?style=social)
 ![Contributions](https://img.shields.io/github/contributors/MediMateBooking/MediMateProject)
 ![GitHub forks](https://img.shields.io/github/forks/MediMateBooking/MediMateProject?style=social)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MediMateBooking/MediMateProject)
