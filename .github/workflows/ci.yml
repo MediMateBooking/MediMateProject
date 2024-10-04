@@ -1,11 +1,15 @@
 name: API workflow
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - main  # Adjust this to your main branch name if needed
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Test python API
+    name: Test Python API
     steps:
       - uses: actions/checkout@v4
 
@@ -21,7 +25,8 @@ jobs:
         run: pytest --cov .
 
       - name: Upload coverage reports to Codecov
+        if: success()  # Only upload if tests pass
         run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
-          ./codecov --verbose upload-process --fail-on-error -t ${{ secrets.CODECOV_TOKEN }} -n 'service'-${{ github.run_id }} -F service -f coverage-service.xml
+          ./codecov --verbose --token=${{ secrets.CODECOV_TOKEN }} --file coverage-service.xml
