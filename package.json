@@ -13,7 +13,6 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
-    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
@@ -27,5 +26,15 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "nodemon": "^3.1.4"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover"
+    ]
   }
 }
