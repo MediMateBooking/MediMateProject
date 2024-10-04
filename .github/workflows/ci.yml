@@ -27,9 +27,12 @@ jobs:
         run: npm install
 
       - name: Run tests with coverage
-        run: npm test
+        run: npm test -- --coverage
 
       - name: Upload coverage to Codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: bash <(curl -s https://codecov.io/bash)
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info  # Path to Jest coverage report
+          fail_ci_if_error: true
+          verbose: true
