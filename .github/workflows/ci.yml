@@ -1,35 +1,27 @@
-name: CI
+name: API workflow
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-
+    name: Test python API
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          fetch-depth: 0  # Fetch all history for better commit detection
+          python-version: "3.12" # Specify the Python version you are using
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'  # Specify Node.js version 20
+      - name: Install requirements
+        run: pip install -r requirements.txt
 
-      - name: Install dependencies
-        run: npm install
+      - name: Run tests and collect coverage
+        run: pytest --cov .
 
-      - name: Run tests with coverage
-        run: npm test
-
-      - name: Upload coverage to Codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: bash <(curl -s https://codecov.io/bash)
+      - name: Upload coverage reports to Codecov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov --verbose upload-process --fail-on-error -t ${{ secrets.CODECOV_TOKEN }} -n 'service'-${{ github.run_id }} -F service -f coverage-service.xml
