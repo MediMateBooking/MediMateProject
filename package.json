@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "jest --coverage"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -24,17 +23,6 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
     "nodemon": "^3.1.4"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "clover"
-    ]
   }
 }
