@@ -210,8 +210,6 @@ submitBtn.addEventListener("click", async () => {
   }
 });
 
-
-
 // color change for input tags
 function inputTagsColorChange(targetInputText) {
   const allInputs = document.querySelectorAll(".form-control.floating");
