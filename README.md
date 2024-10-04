@@ -1,6 +1,15 @@
-## 🏥 MediMate - Your Medical Appointment Solution 📅
+### MediMate - Your Medical Appointment Solution 📅
 
 ## 🚀 Overview
+
+![GitHub followers](https://img.shields.io/github/followers/MediMateBooking?style=social)
+![Contributions](https://img.shields.io/github/contributors/MediMateBooking/MediMateProject)
+![GitHub forks](https://img.shields.io/github/forks/MediMateBooking/MediMateProject?style=social)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MediMateBooking/MediMateProject)
+![GitHub last commit](https://img.shields.io/github/last-commit/MediMateBooking/MediMateProject)
+![License](https://img.shields.io/github/license/MediMateBooking/MediMateProject)
+![GitHub issues](https://img.shields.io/github/issues/MediMateBooking/MediMateProject)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/MediMateBooking/MediMateProject)
 
 MediMate is a cutting-edge web application designed to revolutionize the way you schedule medical appointments. Say goodbye to long wait times and cumbersome scheduling processes. With MediMate, booking appointments with your healthcare providers is as easy as a few clicks!
 
@@ -15,9 +24,23 @@ MediMate is a cutting-edge web application designed to revolutionize the way you
 
 ## 🛠️ Technologies Used
 
+![HTML5](https://img.shields.io/badge/HTML5-blue.svg)
+![CSS3](https://img.shields.io/badge/CSS3-blue.svg)
+![JavaScript](https://img.shields.io/badge/JavaScript-yellow.svg)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563d7c.svg)
+![Node.js](https://img.shields.io/badge/Node.js-green.svg)
+![Express](https://img.shields.io/badge/Express-000000.svg)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248.svg)
+![JWT](https://img.shields.io/badge/JSON%20Web%20Tokens-black.svg)
+![NodeMailer](https://img.shields.io/badge/NodeMailer-34495e.svg)
+![Twilio](https://img.shields.io/badge/Twilio-FFAA00.svg)
+
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap
+
 - **Backend:** Node.js, Express.js, MongoDB
+
 - **Authentication:** JSON Web Tokens (JWT)
+
 - **Notification Service:** NodeMailer 📧 (for email notifications), Twilio 📱 (for SMS notifications)
 
 ## 📦 Installation
