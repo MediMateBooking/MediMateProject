@@ -1,0 +1,9 @@
+# .codecov.yml
+
+codecov:
+  upload:
+    disable: false # Enable upload
+  coverage:
+    range: "50..100" # Set a coverage range for status checks
+    precision: 2 # Set the number of decimal places in coverage reports
+
