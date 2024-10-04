@@ -7,6 +7,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MediMateBooking/MediMateProject)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MediMateBooking/MediMateProject)
 ![License](https://img.shields.io/github/license/MediMateBooking/MediMateProject)
+![GitHub issues](https://img.shields.io/github/issues/MediMateBooking/MediMateProject)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/MediMateBooking/MediMateProject)
 
 MediMate is a cutting-edge web application designed to revolutionize the way you schedule medical appointments. Say goodbye to long wait times and cumbersome scheduling processes. With MediMate, booking appointments with your healthcare providers is as easy as a few clicks!
