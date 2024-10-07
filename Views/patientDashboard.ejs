@@ -9,26 +9,31 @@
     />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="/assets/img/favicon.png" rel="icon" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
 
     <!-- Fontawesome CSS -->
     <link
       rel="stylesheet"
-      href="assets/plugins/fontawesome/css/fontawesome.min.css"
+      href="/assets/plugins/fontawesome/css/fontawesome.min.css"
     />
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/styles/patientDashboard.css" />
   </head>
   <body>
     <!-- Main Wrapper -->
+
+    
     <div class="main-wrapper">
+      <% for(const key of currentPatient)  { %>
+
       <!-- Header -->
-      <header class="header">
+      <header class="header" id="header">
         <nav class="navbar navbar-expand-lg header-nav">
           <div class="navbar-header">
             <a id="mobile_btn" href="javascript:void(0);">
@@ -39,25 +44,19 @@
               </span>
             </a>
             <a href="index-2.html" class="navbar-brand logo">
-              <img src="assets/img/logo.png" class="img-fluid" alt="Logo" />
+              <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
             </a>
           </div>
           <div class="main-menu-wrapper">
             <div class="menu-header">
               <a href="index-2.html" class="menu-logo">
-                <img src="assets/img/logo.png" class="img-fluid" alt="Logo" />
+                <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
               </a>
               <a id="menu_close" class="menu-close" href="javascript:void(0);">
                 <i class="fas fa-times"></i>
               </a>
             </div>
             <ul class="main-nav">
-              <li>
-                <a href="index-2.html">Home</a>
-              </li>
-              <li>
-                <a href="admin/index.html" target="_blank">Admin</a>
-              </li>
               <li class="login-link">
                 <a href="login.html">Login / Signup</a>
               </li>
@@ -65,13 +64,7 @@
           </div>
           <ul class="nav header-navbar-rht">
             <li class="nav-item contact-item">
-              <div class="header-contact-img">
-                <i class="far fa-hospital"></i>
-              </div>
-              <div class="header-contact-detail">
-                <p class="contact-header">Contact</p>
-                <p class="contact-info-header">+1 315 369 5943</p>
-              </div>
+              
             </li>
 
             <!-- User Menu -->
@@ -84,9 +77,9 @@
                 <span class="user-img">
                   <img
                     class="rounded-circle"
-                    src="assets/img/patients/patient.jpg"
+                    src="<%= key.profilePicture %>"
                     width="31"
-                    alt="Ryan Taylor"
+                    alt="<%= key.name %>"
                   />
                 </span>
               </a>
@@ -94,13 +87,13 @@
                 <div class="user-header">
                   <div class="avatar avatar-sm">
                     <img
-                      src="assets/img/patients/patient.jpg"
+                      src="<%= key.profilePicture %>"
                       alt="User Image"
                       class="avatar-img rounded-circle"
                     />
                   </div>
                   <div class="user-text">
-                    <h6>Richard Wilson</h6>
+                    <h6><%= key.name %></h6>
                     <p class="text-muted mb-0">Patient</p>
                   </div>
                 </div>
@@ -115,10 +108,13 @@
             </li>
             <!-- /User Menu -->
           </ul>
+
+          <div id="progress-bar"></div>
         </nav>
       </header>
       <!-- /Header -->
 
+      
 
       <!-- Page Content -->
       <div class="content">
@@ -131,12 +127,12 @@
                   <div class="profile-info-widget">
                     <a href="#" class="booking-doc-img">
                       <img
-                        src="assets/img/patients/patient.jpg"
+                        src="<%= key.profilePicture %>"
                         alt="User Image"
                       />
                     </a>
                     <div class="profile-det-info">
-                      <h3>Richard Wilson</h3>
+                      <h3><%= key.name %></h3>
                       <div class="patient-details">
                         <h5>
                           <i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38
@@ -153,7 +149,7 @@
                   <nav class="dashboard-menu">
                     <ul>
                       <li class="active">
-                        <a href="patient-dashboard.html">
+                        <a href="/patient/<%= key.userID %>">
                           <i class="fas fa-columns"></i>
                           <span>Dashboard</span>
                         </a>
@@ -262,7 +258,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-01.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -312,7 +308,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-02.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -362,7 +358,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-03.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-03.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -438,7 +434,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-01.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -475,7 +471,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-02.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -512,7 +508,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-03.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-03.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -579,7 +575,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-01.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -620,7 +616,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-02.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-02.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -661,7 +657,7 @@
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="assets/img/doctors/doctor-thumb-03.jpg"
+                                          src="/assets/img/doctors/doctor-thumb-03.jpg"
                                           alt="User Image"
                                         />
                                       </a>
@@ -736,22 +732,24 @@
         <!-- /Footer Bottom -->
       </footer>
 
+    <% } %>
+
     </div>
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 
     <!-- Sticky Sidebar JS -->
-    <script src="assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+    <script src="/assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+    <script src="/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
     <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
+    <script src="/assets/js/script.js"></script>
   </body>
 
 </html>

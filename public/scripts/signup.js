@@ -20,7 +20,6 @@ let option;
 roleDropDown.addEventListener("input", (e) => {
   option = e.target.value;
   statusMessageFrame.style.display = "none";
-  // submitBtn.textContent = 'Signup';
 
   userName.value = "";
   email.value = "";
@@ -66,6 +65,8 @@ submitBtn.addEventListener("click", async () => {
                         </div>`;
 
   const userDetails = {
+
+    
     userName: userName.value.trim(),
     email: email.value.trim(),
     password: password.value.trim(),
@@ -103,6 +104,13 @@ submitBtn.addEventListener("click", async () => {
           clearBorderColor();
           inputTagsColorChange("Email");
           centerElement();
+        } else if (resonse.message.trim().includes(' is already used')) {
+
+          email.value = ''
+          clearBorderColor();
+          inputTagsColorChange("Email");
+          centerElement();
+
         } else {
           clearBorderColor();
           inputTagsColorChange();
@@ -177,7 +185,14 @@ submitBtn.addEventListener("click", async () => {
           clearBorderColor();
           inputTagsColorChange("Email");
           centerElement();
-        } else {
+        } else if (resonse.message.trim().includes(' is already used')) {
+
+          email.value = ''
+          clearBorderColor();
+          inputTagsColorChange("Email");
+          centerElement();
+        }
+        else {
           clearBorderColor();
           inputTagsColorChange();
           centerElement();
