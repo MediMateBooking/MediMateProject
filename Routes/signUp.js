@@ -83,6 +83,13 @@ try {
       console.error("Server Error:", error);
       res.json({ success: false, message: "Server Error" });
     }
+    if (error.message.includes("Error sending email")) {
+      console.error("Error sending email:", error);
+      res.json({ success: false, message: "Check Your Email Address" });
+    } else {
+      console.error("Server Error:", error);
+      res.json({ success: false, message: "Server Error" });
+    }
   }
 });
 
@@ -152,6 +159,7 @@ router.post("/signup/patients", async (req, res) => {
   try {
     let userURL = `http://localhost:${process.env.PORT}/checkpoint/api?token=${accountValidationToken}`;
 
+    await mailer.emailFuntion.mainEmail(email, userURL);
     await mailer.emailFuntion.mainEmail(email, userURL);
     console.log("Activation Email sent to " + email);
 
