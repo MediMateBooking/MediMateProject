@@ -1,10 +1,20 @@
-const express = require("express");
-const path = require("path");
-const dotenv = require("dotenv");
-const mongodb = require("mongodb");
-const bcryptjs = require("bcryptjs");
-const crypto = require("crypto");
-const session = require("express-session");
+const express = require('express');
+const path = require('path');
+const dotenv = require('dotenv');
+const mongodb = require('mongodb');
+const bcryptjs =  require('bcryptjs');
+const crypto = require('crypto');
+const session = require('express-session');
+const multer = require('multer');
+
+const configStatus = multer.diskStorage({
+    destination : function(req,file,cb){
+        cb(null,'images')
+    },
+    filename : function(req,file,cb){
+        cb(null,Date.now()+'-'+ file.originalname)
+    }
+})
 
 const app = express();
 
@@ -27,14 +37,19 @@ const ObjectId = mongodb.ObjectId;
 
 const db = require("./database/database");
 
-app.use(express.static("public"));
-app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
+app.use(express.static('public'))
+app.use('/patient/images',express.static('images'))
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.set("views", path.join(__dirname, "Views"));
-app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'Views'));
+app.set('view engine', 'ejs')
+
+//security Route
+const secureApi = require('./Routes/securityApi/Api');
+app.use('/', secureApi);
 
 //signup Route
 const signUpRoute = require("./Routes/signUp");

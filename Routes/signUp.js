@@ -4,6 +4,7 @@ const mongodb = require("mongodb");
 const bcryptjs = require("bcryptjs");
 const uuid = require("uuid");
 const crypto = require("crypto");
+
 const db = require("../database/database");
 const mailer = require("../mail/mailer");
 
@@ -19,7 +20,7 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup/doctors", async (req, res) => {
   const { userName, email, slmcregi, role } = req.body;
-
+  
   const missingFields = [];
 
   if (userName === "") missingFields.push("User Name");
@@ -37,32 +38,34 @@ router.post("/signup/doctors", async (req, res) => {
     });
   }
 
-  const existingUserEmail = await Promise.any([
+  const [patientEmail, doctorEmail] = await Promise.all([
     db.DbConn().collection("patients").findOne({ email: email }),
-    db.DbConn().collection("doctors").findOne({ email: email }),
+    db.DbConn().collection("doctors").findOne({ email: email })
   ]);
 
-  if (existingUserEmail) {
+  if (patientEmail || doctorEmail) {
     return res.json({ success: false, message: email + " is already used" });
   }
 
   let userIdURL = uuid.v4();
+  const expires = Date.now() + 36000000;
   const emailValidationToken = crypto.randomBytes(32).toString("hex");
 
   const newUser = {
     name: userName,
     email: email,
     userID: userIdURL,
+    password : '',
     slmcregi: slmcregi,
     role: role,
-    emailValid: false,
-    emailValidationToken: emailValidationToken,
-    profileActive: false,
-    prifileApprove: false,
+    emailValid : false,
+    emailValidationToken : emailValidationToken,
+    profileApprove: false,
+    linkExpire : expires
   };
 
-  try {
-    let userURL = `http://localhost:${process.env.PORT}/user/${userIdURL}?emailToken=${emailValidationToken}`;
+try {
+    let userURL = `http://localhost:${process.env.PORT}/checkpoint/api?token=${emailValidationToken}`;
 
     await mailer.emailFuntion.mainEmailValidation(email, userURL);
     console.log("Validation Email sent to " + email);
@@ -71,11 +74,15 @@ router.post("/signup/doctors", async (req, res) => {
       .DbConn()
       .collection("doctors")
       .insertOne(newUser);
-    res.json({
-      success: true,
-      message: "We're sent validation link to " + email,
-    });
+    res.json({ success: true, message: "We're sent validation link to " + email });
   } catch (error) {
+    if (error.message.includes("Error sending email")) {
+      console.error("Error sending email:", error);
+      res.json({ success: false, message: "Check Your Email Address" });
+    } else {
+      console.error("Server Error:", error);
+      res.json({ success: false, message: "Server Error" });
+    }
     if (error.message.includes("Error sending email")) {
       console.error("Error sending email:", error);
       res.json({ success: false, message: "Check Your Email Address" });
@@ -87,6 +94,7 @@ router.post("/signup/doctors", async (req, res) => {
 });
 
 router.post("/signup/patients", async (req, res) => {
+
   const { userName, email, password, confirmPassword, role } = req.body;
 
   const missingFields = [];
@@ -121,11 +129,12 @@ router.post("/signup/patients", async (req, res) => {
     });
   }
 
-  const existingUserEmail = await Promise.any([
+  const [patientEmail, doctorEmail] = await Promise.all([
     db.DbConn().collection("patients").findOne({ email: email }),
-    db.DbConn().collection("doctors").findOne({ email: email }),
+    db.DbConn().collection("doctors").findOne({ email: email })
   ]);
-  if (existingUserEmail) {
+
+  if (patientEmail || doctorEmail) {
     return res.json({ success: false, message: email + " is already used" });
   }
 
@@ -133,20 +142,24 @@ router.post("/signup/patients", async (req, res) => {
 
   let userIdURL = uuid.v1();
   const expires = Date.now() + 36000000;
+  const accountValidationToken = crypto.randomBytes(32).toString("hex");
 
   const newUser = {
     name: userName,
     email: email,
     userID: userIdURL,
     password: hashedpass,
+    accountValidationToken : accountValidationToken,
+    profilePicture : `images/0d64989794b1a4c9d89bff571d3d5842.jpg`,
     role: role,
     profileActive: false,
     linkExpire: expires,
   };
 
   try {
-    let userURL = `http://localhost:${process.env.PORT}/user/${userIdURL}`;
+    let userURL = `http://localhost:${process.env.PORT}/checkpoint/api?token=${accountValidationToken}`;
 
+    await mailer.emailFuntion.mainEmail(email, userURL);
     await mailer.emailFuntion.mainEmail(email, userURL);
     console.log("Activation Email sent to " + email);
 
@@ -155,7 +168,9 @@ router.post("/signup/patients", async (req, res) => {
       .collection("patients")
       .insertOne(newUser);
     res.json({ success: true, message: "Activation Email sent to " + email });
+
   } catch (error) {
+
     if (error.message.includes("Error sending email")) {
       console.error("Error sending email:", error);
       res.json({ success: false, message: "Check Your Email Address" });

@@ -10,8 +10,32 @@
     color: aliceblue;
     font-weight: 500;
     animation: increaseCommentSize 0.3s ease forwards;
-    background-color: rgb(255, 0, 102);
+    background-color: rgb(255, 54, 54);
 }
+
+.validationSucess{
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around; 
+}
+
+
+.validationSucess p{
+    
+    position: fixed;
+    top: 0.1rem;
+    text-align: center;
+    width: fit-content;
+    margin: 1em auto 0rem auto;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    color: #000000;
+    font-weight: 500;
+    animation: increaseCommentSize 0.3s ease forwards;
+    background-color: rgb(73, 207, 77)
+}
+
 
 @keyframes increaseCommentSize {
     0% {
