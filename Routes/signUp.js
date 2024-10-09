@@ -20,7 +20,7 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup/doctors", async (req, res) => {
   const { userName, email, slmcregi, role } = req.body;
-  
+
   const missingFields = [];
 
   if (userName === "") missingFields.push("User Name");
@@ -40,7 +40,7 @@ router.post("/signup/doctors", async (req, res) => {
 
   const [patientEmail, doctorEmail] = await Promise.all([
     db.DbConn().collection("patients").findOne({ email: email }),
-    db.DbConn().collection("doctors").findOne({ email: email })
+    db.DbConn().collection("doctors").findOne({ email: email }),
   ]);
 
   if (patientEmail || doctorEmail) {
@@ -55,16 +55,16 @@ router.post("/signup/doctors", async (req, res) => {
     name: userName,
     email: email,
     userID: userIdURL,
-    password : '',
+    password: "",
     slmcregi: slmcregi,
     role: role,
-    emailValid : false,
-    emailValidationToken : emailValidationToken,
+    emailValid: false,
+    emailValidationToken: emailValidationToken,
     profileApprove: false,
-    linkExpire : expires
+    linkExpire: expires,
   };
 
-try {
+  try {
     let userURL = `http://localhost:${process.env.PORT}/checkpoint/api?token=${emailValidationToken}`;
 
     await mailer.emailFuntion.mainEmailValidation(email, userURL);
@@ -74,7 +74,10 @@ try {
       .DbConn()
       .collection("doctors")
       .insertOne(newUser);
-    res.json({ success: true, message: "We're sent validation link to " + email });
+    res.json({
+      success: true,
+      message: "We're sent validation link to " + email,
+    });
   } catch (error) {
     if (error.message.includes("Error sending email")) {
       console.error("Error sending email:", error);
@@ -94,7 +97,6 @@ try {
 });
 
 router.post("/signup/patients", async (req, res) => {
-
   const { userName, email, password, confirmPassword, role } = req.body;
 
   const missingFields = [];
@@ -131,7 +133,7 @@ router.post("/signup/patients", async (req, res) => {
 
   const [patientEmail, doctorEmail] = await Promise.all([
     db.DbConn().collection("patients").findOne({ email: email }),
-    db.DbConn().collection("doctors").findOne({ email: email })
+    db.DbConn().collection("doctors").findOne({ email: email }),
   ]);
 
   if (patientEmail || doctorEmail) {
@@ -149,8 +151,8 @@ router.post("/signup/patients", async (req, res) => {
     email: email,
     userID: userIdURL,
     password: hashedpass,
-    accountValidationToken : accountValidationToken,
-    profilePicture : `images/0d64989794b1a4c9d89bff571d3d5842.jpg`,
+    accountValidationToken: accountValidationToken,
+    profilePicture: `images/0d64989794b1a4c9d89bff571d3d5842.jpg`,
     role: role,
     profileActive: false,
     linkExpire: expires,
@@ -168,9 +170,7 @@ router.post("/signup/patients", async (req, res) => {
       .collection("patients")
       .insertOne(newUser);
     res.json({ success: true, message: "Activation Email sent to " + email });
-
   } catch (error) {
-
     if (error.message.includes("Error sending email")) {
       console.error("Error sending email:", error);
       res.json({ success: false, message: "Check Your Email Address" });

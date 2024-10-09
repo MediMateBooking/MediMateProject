@@ -65,8 +65,6 @@ submitBtn.addEventListener("click", async () => {
                         </div>`;
 
   const userDetails = {
-
-    
     userName: userName.value.trim(),
     email: email.value.trim(),
     password: password.value.trim(),
@@ -104,13 +102,11 @@ submitBtn.addEventListener("click", async () => {
           clearBorderColor();
           inputTagsColorChnage("Email");
           centerElement();
-        } else if (resonse.message.trim().includes(' is already used')) {
-
-          email.value = ''
+        } else if (resonse.message.trim().includes(" is already used")) {
+          email.value = "";
           clearBorderColor();
           inputTagsColorChange("Email");
           centerElement();
-
         } else {
           clearBorderColor();
           inputTagsColorChnage();
@@ -185,14 +181,12 @@ submitBtn.addEventListener("click", async () => {
           clearBorderColor();
           inputTagsColorChnage("Email");
           centerElement();
-        } else if (resonse.message.trim().includes(' is already used')) {
-
-          email.value = ''
+        } else if (resonse.message.trim().includes(" is already used")) {
+          email.value = "";
           clearBorderColor();
           inputTagsColorChange("Email");
           centerElement();
-        }
-        else {
+        } else {
           clearBorderColor();
           inputTagsColorChnage();
           centerElement();

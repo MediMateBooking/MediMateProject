@@ -74,9 +74,6 @@ async function mainEmailValidation(address, userIdURL) {
 }
 
 module.exports.emailFuntion = {
-
-  mainEmail : mainEmail,
-  mainEmailValidation : mainEmailValidation
-
-}
-
+  mainEmail: mainEmail,
+  mainEmailValidation: mainEmailValidation,
+};
