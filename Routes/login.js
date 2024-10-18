@@ -13,55 +13,55 @@ router.get("/login", (req, res) => {
       req.session.invalidLinkToken = null;
       res.render("login", {
         validation: true,
-        successfullValidation: false,
+        successfulValidation: false,
         validationMsg: "Invalid Validation Link.",
       });
     } else if (token && token === req.session.alreadyEmailValidate) {
       req.session.alreadyEmailValidate = null;
       res.render("login", {
         validation: true,
-        successfullValidation: false,
+        successfulValidation: false,
         validationMsg: "Email Address is Already Validated",
       });
     } else if (token && token === req.session.successEmailValidation) {
       req.session.successEmailValidation = null;
       res.render("login", {
         validation: false,
-        successfullValidation: true,
+        successfulValidation: true,
         validationMsg1: "Email Successfully Validated",
         validationMsg2:
-          "Your Account is under approving process. We'll let to know after process is done",
+          "Your Account is under approving process.",
       });
     } else if (token && token === req.session.alreadyActivated) {
       req.session.alreadyActivated = null;
       res.render("login", {
         validation: true,
-        successfullValidation: false,
-        validationMsg: "Your Accout already Actived, Please Login",
+        successfulValidation: false,
+        validationMsg: "Your Account is Already Activated, Please Login",
       });
     } else if (token && token === req.session.notExitsUser) {
       req.session.notExitsUser = null;
       res.render("login", {
         validation: true,
-        successfullValidation: false,
-        validationMsg: "Cannot Find User.",
+        successfulValidation: false,
+        validationMsg: "Cannot Find User Under Entered Email Address. Check Your Email Address Again.",
       });
     } else if (token && token === req.session.incorrectPassword) {
       req.session.incorrectPassword = null;
       res.render("login", {
         validation: true,
-        successfullValidation: false,
-        validationMsg: "Incorrect Password.",
+        successfulValidation: false,
+        validationMsg: "Entered Password is Incorrect.",
       });
     } else if (token && token === req.session.profileActive) {
       req.session.profileActive = null;
       res.render("login", {
         validation: true,
-        successfullValidation: false,
-        validationMsg: "Your Accout is not Actived.",
+        successfulValidation: false,
+        validationMsg: "Your Account is still under approving process.",
       });
     } else {
-      res.render("login", { validation: false, successfullValidation: false });
+      res.render("login", { validation: false, successfulValidation: false });
     }
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
@@ -114,7 +114,7 @@ router.post("/login", async (req, res) => {
         return res.redirect(`/login?token=${incorrectPassword}`);
       }
 
-      return res.redirect(`/doctor/${doctorAccount.userID}`);
+      return res.redirect(`/doctor/${doctorAccount.userID}`); 
     }
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);

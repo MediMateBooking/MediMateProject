@@ -44,8 +44,8 @@ app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.set("views", path.join(__dirname, "Views"));
-app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "Views")); 
+app.set("view engine", "ejs"); // set the view engine to ejs for rendering the files in views folder with .ejs extension, 
 
 //security Route
 const secureApi = require("./Routes/securityApi/Api");
