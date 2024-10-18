@@ -16,7 +16,7 @@ router.get("/patient/:id", async (req, res) => {
 
     if (currentPatient.length === 0) throw new Error("cannot find User");
 
-    res.render("patientDashboard", { currentPatient: currentPatient });
+    res.render("patientDashboard", { currentPatient: currentPatient }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
