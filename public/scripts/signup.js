@@ -96,11 +96,11 @@ submitBtn.addEventListener("click", async () => {
 
         if (resonse.message.trim() === "Please fill all Fields") {
           clearBorderColor();
-          inputTagsColorChnage();
+          inputTagsColorChange();
           centerElement();
         } else if (resonse.message.trim() === "Check Your Email Address") {
           clearBorderColor();
-          inputTagsColorChnage("Email");
+          inputTagsColorChange("Email");
           centerElement();
         } else if (resonse.message.trim().includes(" is already used")) {
           email.value = "";
@@ -109,7 +109,7 @@ submitBtn.addEventListener("click", async () => {
           centerElement();
         } else {
           clearBorderColor();
-          inputTagsColorChnage();
+          inputTagsColorChange();
           centerElement();
         }
       } else {
@@ -164,22 +164,22 @@ submitBtn.addEventListener("click", async () => {
 
         if (resonse.message.trim() === "Please fill all Fields") {
           clearBorderColor();
-          inputTagsColorChnage();
+          inputTagsColorChange();
           centerElement();
         } else if (resonse.message.trim() === "Confirm Password Not Matched") {
           clearBorderColor();
-          inputTagsColorChnage("Confirm Password");
+          inputTagsColorChange("Confirm Password");
           centerElement();
         } else if (
           resonse.message.trim() ===
           "Password must be at least 6 characters long"
         ) {
           clearBorderColor();
-          inputTagsColorChnage("Create Password");
+          inputTagsColorChange("Create Password");
           centerElement();
         } else if (resonse.message.trim() === "Check Your Email Address") {
           clearBorderColor();
-          inputTagsColorChnage("Email");
+          inputTagsColorChange("Email");
           centerElement();
         } else if (resonse.message.trim().includes(" is already used")) {
           email.value = "";
@@ -188,7 +188,7 @@ submitBtn.addEventListener("click", async () => {
           centerElement();
         } else {
           clearBorderColor();
-          inputTagsColorChnage();
+          inputTagsColorChange();
           centerElement();
         }
       } else {

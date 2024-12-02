@@ -162,7 +162,6 @@ router.post("/signup/patients", async (req, res) => {
     let userURL = `http://localhost:${process.env.PORT}/checkpoint/api?token=${accountValidationToken}`;
 
     await mailer.emailFuntion.mainEmail(email, userURL);
-    await mailer.emailFuntion.mainEmail(email, userURL);
     console.log("Activation Email sent to " + email);
 
     const userResult = await db
