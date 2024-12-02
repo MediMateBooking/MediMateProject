@@ -13,6 +13,9 @@ const transporter = nodemailer.createTransport({
 
 async function mainEmail(address, userIdURL) {
   try {
+
+    console.log('first time')
+
     const receiver = address || "chamoddousl@gmail.com";
 
     const info = await transporter.sendMail({
@@ -44,6 +47,8 @@ async function mainEmail(address, userIdURL) {
 
 async function mainEmailValidation(address, userIdURL) {
   try {
+
+    console.log('second time')
     const receiver = address || "chamoddousl@gmail.com";
 
     const info = await transporter.sendMail({
