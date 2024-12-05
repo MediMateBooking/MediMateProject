@@ -8,6 +8,11 @@
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
 
+        <!-- Feathericon CSS -->
+        <link rel="stylesheet" href="assets/css/feathericon.min.css" />
+
+        <link rel="stylesheet" href="assets/plugins/morris/morris.css" />
+
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon" />
 
@@ -20,10 +25,11 @@
       href="/assets/plugins/fontawesome/css/fontawesome.min.css"
     />
     <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
-
+    
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/styles/patientDashboard.css" />
+    
   </head>
   <body>
     <!-- Main Wrapper -->
@@ -119,6 +125,7 @@
       <!-- Page Content -->
       <div class="content">
         <div class="container-fluid">
+
           <div class="row">
             <!-- Profile Sidebar -->
             <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
@@ -191,9 +198,90 @@
                 </div>
               </div>
             </div>
-            <!-- / Profile Sidebar -->
 
             <div class="col-md-7 col-lg-8 col-xl-9">
+              <div class="row">
+                <div class="col-xl-3 col-sm-6 col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="dash-widget-header">
+                        <span class="dash-widget-icon text-primary border-primary">
+                          <i class="fe fe-user-plus"></i>
+                        </span>
+                        <div class="dash-count">
+                          <h3>26</h3>
+                        </div>
+                      </div>
+                      <div class="dash-widget-info">
+                        <h6 class="text-muted">Doctors</h6>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-primary w-50"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="dash-widget-header">
+                        <span class="dash-widget-icon text-success">
+                          <i class="fe fe-user"></i>
+                        </span>
+                        <div class="dash-count">
+                          <h3>120</h3>
+                        </div>
+                      </div>
+                      <div class="dash-widget-info">
+                        <h6 class="text-muted">Patients</h6>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-success w-50"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="dash-widget-header">
+                        <span class="dash-widget-icon text-danger border-danger">
+                          <i class="fe fe-document"></i>
+                        </span>
+                        <div class="dash-count">
+                          <h3>45</h3>
+                        </div>
+                      </div>
+                      <div class="dash-widget-info">
+                        <h6 class="text-muted">Appointment</h6>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-danger w-50"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="dash-widget-header">
+                        <span class="dash-widget-icon text-warning border-warning">
+                          <i class="fe fe-star"></i>
+                        </span>
+                        <div class="dash-count">
+                          <h3>13</h3>
+                        </div>
+                      </div>
+                      <div class="dash-widget-info">
+                        <h6 class="text-muted">Reviews</h6>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-warning w-50"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="card">
                 <div class="card-body pt-0">
                   <!-- Tab Menu -->
@@ -697,8 +785,13 @@
                   <!-- Tab Content -->
                 </div>
               </div>
+
+
             </div>
           </div>
+
+
+
         </div>
       </div>
       <!-- /Page Content -->
