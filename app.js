@@ -75,6 +75,30 @@ app.use("/", forgotPasswordRoute);
 const appointmentsRoute = require("./Routes/appointments");
 app.use("/", appointmentsRoute);
 
+//doctorList
+const doctorListRoute = require("./Routes/doctorList");
+app.use("/", doctorListRoute);
+
+//profileSettings
+const profileSettingsRoute = require("./Routes/profileSettings");
+app.use("/", profileSettingsRoute);
+
+//bookingSuccess
+const bookingSuccessRoute = require("./Routes/bookingSuccess");
+app.use("/", bookingSuccessRoute);
+
+//patientList
+const patientListRoute = require("./Routes/patientList");
+app.use("/", patientListRoute);
+
+//docProfileSettings
+const docProfileSettingsRoute = require("./Routes/docProfileSettings");
+app.use("/", docProfileSettingsRoute);
+
+//docReviews
+const docReviewsRoute = require("./Routes/docReviews");
+app.use("/", docReviewsRoute);
+
 //index
 app.get("/", function (req, res) {
   res.render("index");
