@@ -60,15 +60,6 @@
           <i class="fe fe-text-align-left"></i>
         </a>
 
-        <div class="top-nav-search">
-          <form>
-            <input type="text" class="form-control" placeholder="Search here" />
-            <button class="btn" type="submit">
-              <i class="fa fa-search"></i>
-            </button>
-          </form>
-        </div>
-
         <!-- Mobile Menu Toggle -->
         <a class="mobile_btn" id="mobile_btn">
           <i class="fa fa-bars"></i>
@@ -245,25 +236,20 @@
                 >
               </li>
               <li>
-                <a href="/"
+                <a href="/doctorList"
                   ><i class="fe fe-user-plus"></i> <span>Doctors</span></a
                 >
               </li>
               <li>
-                <a href="/"><i class="fe fe-user"></i> <span>Patients</span></a>
+                <a href="/patientList"><i class="fe fe-user"></i> <span>Patients</span></a>
               </li>
               <li>
-                <a href="/"
+                <a href="/docReviews"
                   ><i class="fe fe-star-o"></i> <span>Reviews</span></a
                 >
               </li>
               <li>
-                <a href="/"
-                  ><i class="fe fe-vector"></i> <span>Settings</span></a
-                >
-              </li>
-              <li>
-                <a href="/"
+                <a href="/profileSettings"
                   ><i class="fe fe-user-plus"></i> <span>Profile</span></a
                 >
               </li>
@@ -294,13 +280,14 @@
           </div>
           <!-- /Page Header -->
 
+          <!-- status tiles -->
           <div class="row">
             <div class="col-xl-3 col-sm-6 col-12">
               <div class="card">
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-primary border-primary">
-                      <i class="fe fe-user-plus"></i>
+                      <img src="\assets\img\adminDashboard\doctor icon.png" alt="doctor icon" width="50">
                     </span>
                     <div class="dash-count">
                       <h3>26</h3>
@@ -320,7 +307,7 @@
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-success">
-                      <i class="fe fe-user"></i>
+                      <img src="\assets\img\adminDashboard\patient icon.png" alt="patient icon" width="50">
                     </span>
                     <div class="dash-count">
                       <h3>120</h3>
@@ -340,7 +327,7 @@
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-danger border-danger">
-                      <i class="fe fe-document"></i>
+                      <img src="\assets\img\adminDashboard\appointment icon.png" alt="appointment icon" width="50">
                     </span>
                     <div class="dash-count">
                       <h3>45</h3>
@@ -360,7 +347,7 @@
                 <div class="card-body">
                   <div class="dash-widget-header">
                     <span class="dash-widget-icon text-warning border-warning">
-                      <i class="fe fe-star"></i>
+                      <img src="\assets\img\adminDashboard\reviews icon.png" alt="reviews icon" width="50">
                     </span>
                     <div class="dash-count">
                       <h3>13</h3>
@@ -376,33 +363,11 @@
               </div>
             </div>
           </div>
+          <!-- /status tiles -->
+
+          
           <div class="row">
-            <div class="col-md-12 col-lg-6">
-              <!-- Sales Chart -->
-              <div class="card card-chart">
-                <div class="card-header">
-                  <h4 class="card-title">Appointments</h4>
-                </div>
-                <div class="card-body">
-                  <div id="morrisArea"></div>
-                </div>
-              </div>
-              <!-- /Sales Chart -->
-            </div>
-            <div class="col-md-12 col-lg-6">
-              <!-- Invoice Chart -->
-              <div class="card card-chart">
-                <div class="card-header">
-                  <h4 class="card-title">Status</h4>
-                </div>
-                <div class="card-body">
-                  <div id="morrisLine"></div>
-                </div>
-              </div>
-              <!-- /Invoice Chart -->
-            </div>
-          </div>
-          <div class="row">
+            <!-- Doctors List -->
             <div class="col-md-6 d-flex">
               <!-- Recent Orders -->
               <div class="card card-table flex-fill">
@@ -416,7 +381,6 @@
                         <tr>
                           <th>Doctor Name</th>
                           <th>Speciality</th>
-                          <th>Earned</th>
                           <th>Reviews</th>
                         </tr>
                       </thead>
@@ -436,7 +400,6 @@
                             </h2>
                           </td>
                           <td>Urology</td>
-                          <td>$3200.00</td>
                           <td>
                             <i class="fe fe-star text-warning"></i>
                             <i class="fe fe-star text-warning"></i>
@@ -460,13 +423,22 @@
                             </h2>
                           </td>
                           <td>Orthopaedics</td>
-                          <td>$3500.00</td>
                           <td>
                             <i class="fe fe-star text-warning"></i>
                             <i class="fe fe-star text-warning"></i>
                             <i class="fe fe-star text-warning"></i>
                             <i class="fe fe-star text-warning"></i>
                             <i class="fe fe-star-o text-secondary"></i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a href="/doctorList">
+                            <button
+                              class="btn btn-primary"
+                              data-toggle="modal"
+                              data-target="patientList">view more</button>
+                          </a>  
                           </td>
                         </tr>
                       </tbody>
@@ -476,6 +448,9 @@
               </div>
               <!-- /Recent Orders -->
             </div>
+            <!-- /Doctors List -->
+
+            <!-- Patients List -->
             <div class="col-md-6 d-flex">
               <!-- Feed Activity -->
               <div class="card card-table flex-fill">
@@ -490,7 +465,6 @@
                           <th>Patient Name</th>
                           <th>Phone</th>
                           <th>Last Visit</th>
-                          <th>Paid</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -510,7 +484,6 @@
                           </td>
                           <td>5043686874</td>
                           <td>21 Sep 2019</td>
-                          <td class="text-right">$150.00</td>
                         </tr>
                         <tr>
                           <td>
@@ -528,7 +501,16 @@
                           </td>
                           <td>9548207887</td>
                           <td>18 Sep 2019</td>
-                          <td class="text-right">$350.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a href="/patientList">
+                            <button
+                              class="btn btn-primary"
+                              data-toggle="modal"
+                              data-target="patientList">view more</button>
+                          </a>  
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -537,7 +519,10 @@
               </div>
               <!-- /Feed Activity -->
             </div>
+             <!-- /Patients List -->
           </div>
+
+          <!-- Appointment List -->
           <div class="row">
             <div class="col-md-12">
               <!-- Recent Orders -->
@@ -555,7 +540,6 @@
                           <th>Patient Name</th>
                           <th>Apointment Time</th>
                           <th>Status</th>
-                          <th class="text-right">Amount</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -605,7 +589,6 @@
                               >
                             </div>
                           </td>
-                          <td class="text-right">$150.00</td>
                         </tr>
                         <tr>
                           <td>
@@ -655,7 +638,16 @@
                               >
                             </div>
                           </td>
-                          <td class="text-right">$200.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a href="/appointments">
+                            <button
+                              class="btn btn-primary"
+                              data-toggle="modal"
+                              data-target="appointments">view more</button>
+                          </a>  
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -665,6 +657,7 @@
               <!-- /Recent Orders -->
             </div>
           </div>
+          <!-- /Appointment List -->
         </div>
       </div>
       <!-- /Page Wrapper -->
