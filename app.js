@@ -99,6 +99,10 @@ app.use("/", docProfileSettingsRoute);
 const docReviewsRoute = require("./Routes/docReviews");
 app.use("/", docReviewsRoute);
 
+//patientProfile
+const docToPatientProfileRoute = require("./Routes/docTopatientProfile");
+app.use("/", docToPatientProfileRoute);
+
 //index
 app.get("/", function (req, res) {
   res.render("index");
