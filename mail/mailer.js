@@ -14,8 +14,6 @@ const transporter = nodemailer.createTransport({
 async function mainEmail(address, userIdURL) {
   try {
 
-    console.log('first time')
-
     const receiver = address || "chamoddousl@gmail.com";
 
     const info = await transporter.sendMail({
@@ -48,7 +46,6 @@ async function mainEmail(address, userIdURL) {
 async function mainEmailValidation(address, userIdURL) {
   try {
 
-    console.log('second time')
     const receiver = address || "chamoddousl@gmail.com";
 
     const info = await transporter.sendMail({
@@ -78,7 +75,42 @@ async function mainEmailValidation(address, userIdURL) {
   }
 }
 
+
+async function doctorAccoutApprove(doctorEmail, doctorName, doctorPassword ) {
+  try {
+
+    const receiver = doctorEmail || "chamoddousl@gmail.com";
+
+    const info = await transporter.sendMail({
+      from: "MediMate E-Channeling Service",
+      to: receiver,
+      subject: "Account Approved Successfully!",
+      text: `Your Account has been Approved by Admin`,
+      html: `
+      <div style="max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; font-family: Arial, sans-serif; text-align: left;">
+        <div style="margin-bottom: 20px;">
+
+          <img src="https://i.imghippo.com/files/nsLQ8894uIY.png" alt="approveSuccessfull" style="max-width: 60px;">
+
+        </div>
+        <h2 style="color:rgb(38, 212, 228);">Congratulations Dr.${doctorName}</h2>
+        <p style="font-size: 16px; color: #333;"><b>Your Account has been Approved by MediMate Admin</b></p>
+        <p style="font-size: 15px; color: #333;">Please use below credentials for Login</p>
+        <p style="font-size: 14px; color: #333;">Username : ${doctorEmail}</p>
+        <p style="font-size: 14px; color: #333;">Password : ${doctorPassword}</p>
+        
+        <p style="font-size: 12px; color: #999; margin-top: 30px;">When your first Login Change the Login Password</p>
+      </div>
+    `,
+    });
+    console.log("Message sent: %s", info.messageId);
+  } catch (e) {
+    throw new Error("Error sending email");
+  }
+}
+
 module.exports.emailFuntion = {
   mainEmail: mainEmail,
   mainEmailValidation: mainEmailValidation,
+  doctorAccoutApprove : doctorAccoutApprove
 };
