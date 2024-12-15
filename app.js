@@ -6,6 +6,7 @@ const bcryptjs = require("bcryptjs");
 const crypto = require("crypto");
 const session = require("express-session");
 const multer = require("multer");
+const requireDirectory = require('require-directory');
 
 const configStatus = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -39,6 +40,7 @@ const db = require("./database/database");
 
 app.use(express.static("public"));
 app.use("/patient/images", express.static("images"));
+app.use("/admin/doctors/images", express.static("images"));
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 
 app.use(express.urlencoded({ extended: false }));
@@ -47,74 +49,27 @@ app.use(express.json());
 app.set("views", path.join(__dirname, "Views")); 
 app.set("view engine", "ejs"); // set the view engine to ejs for rendering the files in views folder with .ejs extension, 
 
-//security Route
-const secureApi = require("./Routes/securityApi/Api");
-app.use("/", secureApi);
+const routes = requireDirectory(module, './Routes');
+Object.keys(routes).forEach((key) => loadRoutes(routes[key]));
 
-//signup Route
-const signUpRoute = require("./Routes/signUp");
-app.use("/", signUpRoute);
+function loadRoutes(routeModule) {
+  if (typeof routeModule === 'object') {
+      
+      Object.keys(routeModule).forEach((key) => loadRoutes(routeModule[key]));
+  } else if (typeof routeModule === 'function') {
+      app.use(routeModule);
+  }
+}
 
-//login Route
-const loginRoute = require("./Routes/login");
-app.use("/", loginRoute);
-
-//Doctor Dashboard
-const docDashRoute = require("./Routes/doctorDashboard");
-app.use("/", docDashRoute);
-
-//Patient Dashboard
-const patDashRoute = require("./Routes/patientDashboard");
-app.use("/", patDashRoute);
-
-//forgotPassword
-const forgotPasswordRoute = require("./Routes/forgotPassword");
-app.use("/", forgotPasswordRoute);
-
-//appointments
-const appointmentsRoute = require("./Routes/appointments");
-app.use("/", appointmentsRoute);
-
-//doctorList
-const doctorListRoute = require("./Routes/doctorList");
-app.use("/", doctorListRoute);
-
-//profileSettings
-const profileSettingsRoute = require("./Routes/profileSettings");
-app.use("/", profileSettingsRoute);
-
-//bookingSuccess
-const bookingSuccessRoute = require("./Routes/bookingSuccess");
-app.use("/", bookingSuccessRoute);
-
-//patientList
-const patientListRoute = require("./Routes/patientList");
-app.use("/", patientListRoute);
-
-//docProfileSettings
-const docProfileSettingsRoute = require("./Routes/docProfileSettings");
-app.use("/", docProfileSettingsRoute);
-
-//docReviews
-const docReviewsRoute = require("./Routes/docReviews");
-app.use("/", docReviewsRoute);
-
-//patientProfile
-const docToPatientProfileRoute = require("./Routes/docTopatientProfile");
-app.use("/", docToPatientProfileRoute);
 
 //index
 app.get("/", function (req, res) {
-  res.render("index");
+  res.render("Common/index");
 });
-
-//adminDashboard
-const adminDashRoute = require("./Routes/adminDashboard");
-app.use("/", adminDashRoute);
 
 //404
 app.use(function (req, res) {
-  res.status(404).render("404");
+  res.status(404).render("Common/404");
 });
 
 db.connectTo()
