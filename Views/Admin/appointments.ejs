@@ -38,8 +38,7 @@
   <body>
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-
-      <% for(const key of activeAdmin)  { %>
+      <% for(const key of activeAdmin) { %>
       <!-- Header -->
       <div class="header">
         <!-- Logo -->
@@ -135,7 +134,7 @@
                           <img
                             class="avatar-img rounded-circle"
                             alt="User Image"
-                            src="assets/img/patients/patient2.jpg"
+                            src="/assets/img/patients/patient2.jpg"
                           />
                         </span>
                         <div class="media-body">
@@ -158,7 +157,7 @@
                           <img
                             class="avatar-img rounded-circle"
                             alt="User Image"
-                            src="assets/img/patients/patient3.jpg"
+                            src="/assets/img/patients/patient3.jpg"
                           />
                         </span>
                         <div class="media-body">
@@ -227,13 +226,13 @@
               <li class="menu-title">
                 <span>Main</span>
               </li>
-              <li class="active">
+              <li>
                 <a href="/admin/<%= key.dynamicRouteCode %>"
                   ><i class="fe fe-home"></i> <span>Dashboard</span></a
                 >
               </li>
-              <li>
-                <a href="/admin/appointments/<%= key.dynamicRouteCode %>"
+              <li class="active">
+                <a href="#"
                   ><i class="fe fe-layout"></i> <span>Appointments</span></a
                 >
               </li>
@@ -243,7 +242,9 @@
                 >
               </li>
               <li>
-                <a href="/admin/patientList/<%= key.dynamicRouteCode %>"><i class="fe fe-user"></i> <span>Patients</span></a>
+                <a href="/admin/patientList/<%= key.dynamicRouteCode %>"
+                  ><i class="fe fe-user"></i> <span>Patients</span></a
+                >
               </li>
               <li>
                 <a href="/docReviews"
@@ -273,278 +274,142 @@
           <div class="page-header">
             <div class="row">
               <div class="col-sm-12">
-                <h3 class="page-title">Welcome Admin!</h3>
+                <h3 class="page-title">Appointments</h3>
                 <ul class="breadcrumb">
-                  <li class="breadcrumb-item active">Dashboard</li>
+                  <li class="breadcrumb-item">
+                    <a href="/admin/<%= key.dynamicRouteCode %>">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active">Appointments</li>
                 </ul>
               </div>
             </div>
           </div>
           <!-- /Page Header -->
 
-          <!-- status tiles -->
-          <div class="row">
-            <div class="col-xl-3 col-sm-6 col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="dash-widget-header">
-                    <span class="dash-widget-icon text-primary border-primary">
-                      <img src="\assets\img\adminDashboard\doctor icon.png" alt="doctor icon" width="50">
-                    </span>
-                    <div class="dash-count">
-                      <h3>26</h3>
-                    </div>
-                  </div>
-                  <div class="dash-widget-info">
-                    <h6 class="text-muted">Doctors</h6>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-primary w-50"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="dash-widget-header">
-                    <span class="dash-widget-icon text-success">
-                      <img src="\assets\img\adminDashboard\patient icon.png" alt="patient icon" width="50">
-                    </span>
-                    <div class="dash-count">
-                      <h3>120</h3>
-                    </div>
-                  </div>
-                  <div class="dash-widget-info">
-                    <h6 class="text-muted">Patients</h6>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-success w-50"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="dash-widget-header">
-                    <span class="dash-widget-icon text-danger border-danger">
-                      <img src="\assets\img\adminDashboard\appointment icon.png" alt="appointment icon" width="50">
-                    </span>
-                    <div class="dash-count">
-                      <h3>45</h3>
-                    </div>
-                  </div>
-                  <div class="dash-widget-info">
-                    <h6 class="text-muted">Appointment</h6>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-danger w-50"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="dash-widget-header">
-                    <span class="dash-widget-icon text-warning border-warning">
-                      <img src="\assets\img\adminDashboard\reviews icon.png" alt="reviews icon" width="50">
-                    </span>
-                    <div class="dash-count">
-                      <h3>13</h3>
-                    </div>
-                  </div>
-                  <div class="dash-widget-info">
-                    <h6 class="text-muted">Reviews</h6>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-warning w-50"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /status tiles -->
-
-          
-          <div class="row">
-            <!-- Doctors List -->
-            <div class="col-md-6 d-flex">
-              <!-- Recent Orders -->
-              <div class="card card-table flex-fill">
-                <div class="card-header">
-                  <h4 class="card-title">Doctors List</h4>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-hover table-center mb-0">
-                      <thead>
-                        <tr>
-                          <th>Doctor Name</th>
-                          <th>Speciality</th>
-                          <th>Reviews</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-04.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Sofia Brient</a>
-                            </h2>
-                          </td>
-                          <td>Urology</td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-05.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Marvin Campbell</a>
-                            </h2>
-                          </td>
-                          <td>Orthopaedics</td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <a href="/doctorList">
-                            <button
-                              class="btn btn-primary"
-                              data-toggle="modal"
-                              data-target="patientList">view more</button>
-                          </a>  
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /Recent Orders -->
-            </div>
-            <!-- /Doctors List -->
-
-            <!-- Patients List -->
-            <div class="col-md-6 d-flex">
-              <!-- Feed Activity -->
-              <div class="card card-table flex-fill">
-                <div class="card-header">
-                  <h4 class="card-title">Patients List</h4>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-hover table-center mb-0">
-                      <thead>
-                        <tr>
-                          <th>Patient Name</th>
-                          <th>Phone</th>
-                          <th>Last Visit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient4.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html"> Michelle Fairfax</a>
-                            </h2>
-                          </td>
-                          <td>5043686874</td>
-                          <td>21 Sep 2019</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient5.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Gina Moore</a>
-                            </h2>
-                          </td>
-                          <td>9548207887</td>
-                          <td>18 Sep 2019</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <a href="/admin/patientList/<%= key.dynamicRouteCode %>">
-                            <button
-                              class="btn btn-primary"
-                              data-toggle="modal"
-                              data-target="patientList">view more</button>
-                          </a>  
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /Feed Activity -->
-            </div>
-             <!-- /Patients List -->
-          </div>
-
-          <!-- Appointment List -->
           <div class="row">
             <div class="col-md-12">
               <!-- Recent Orders -->
-              <div class="card card-table">
-                <div class="card-header">
-                  <h4 class="card-title">Appointment List</h4>
-                </div>
+              <div class="card">
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table table-hover table-center mb-0">
+                    <table
+                      class="datatable table table-hover table-center mb-0"
+                    >
                       <thead>
                         <tr>
                           <th>Doctor Name</th>
                           <th>Speciality</th>
                           <th>Patient Name</th>
                           <th>Apointment Time</th>
-                          <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-01.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. Ruby Perrin</a>
+                            </h2>
+                          </td>
+                          <td>Dental</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient1.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Charlene Reed </a>
+                            </h2>
+                          </td>
+                          <td>
+                            9 Nov 2019
+                            <span class="text-primary d-block"
+                              >11.00 AM - 11.15 AM</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-02.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. Darren Elder</a>
+                            </h2>
+                          </td>
+                          <td>Dental</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient2.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Travis Trimble </a>
+                            </h2>
+                          </td>
+
+                          <td>
+                            5 Nov 2019
+                            <span class="text-primary d-block"
+                              >11.00 AM - 11.35 AM</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-03.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. Deborah Angel</a>
+                            </h2>
+                          </td>
+                          <td>Cardiology</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient3.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Carl Kelly</a>
+                            </h2>
+                          </td>
+                          <td>
+                            11 Nov 2019
+                            <span class="text-primary d-block"
+                              >12.00 PM - 12.15 PM</span
+                            >
+                          </td>
+                        </tr>
                         <tr>
                           <td>
                             <h2 class="table-avatar">
@@ -574,22 +439,10 @@
                             </h2>
                           </td>
                           <td>
-                            7 Nov 2019<span class="text-primary d-block"
+                            7 Nov 2019
+                            <span class="text-primary d-block"
                               >1.00 PM - 1.20 PM</span
                             >
-                          </td>
-                          <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_4"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_4" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -627,28 +480,185 @@
                               >1.00 PM - 1.15 PM</span
                             >
                           </td>
+                        </tr>
+                        <tr>
                           <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_5"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_5" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-06.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. Katharine Berthold</a>
+                            </h2>
+                          </td>
+                          <td>Orthopaedics</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient6.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Elsie Gilley</a>
+                            </h2>
+                          </td>
+
+                          <td>
+                            16 Nov 2019
+                            <span class="text-primary d-block"
+                              >1.00 PM - 1.15 PM</span
+                            >
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <a href="/admin/appointments/<%= key.dynamicRouteCode %>">
-                            <button
-                              class="btn btn-primary"
-                              data-toggle="modal"
-                              data-target="appointments">view more</button>
-                          </a>  
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-07.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. Linda Tobin</a>
+                            </h2>
+                          </td>
+                          <td>Neurology</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient7.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Joan Gardner</a>
+                            </h2>
+                          </td>
+
+                          <td>
+                            18 Nov 2019
+                            <span class="text-primary d-block"
+                              >1.10 PM - 1.25 PM</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-08.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. Paul Richard</a>
+                            </h2>
+                          </td>
+                          <td>Dermatology</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient8.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html"> Daniel Griffing</a>
+                            </h2>
+                          </td>
+
+                          <td>
+                            18 Nov 2019
+                            <span class="text-primary d-block"
+                              >11.10 AM - 11.25 AM</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-09.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. John Gibbs</a>
+                            </h2>
+                          </td>
+                          <td>Dental</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient9.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Walter Roberson</a>
+                            </h2>
+                          </td>
+
+                          <td>
+                            21 Nov 2019
+                            <span class="text-primary d-block"
+                              >12.10 PM - 12.25 PM</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/doctors/doctor-thumb-10.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Dr. Olga Barlow</a>
+                            </h2>
+                          </td>
+                          <td>Dental</td>
+                          <td>
+                            <h2 class="table-avatar">
+                              <a
+                                href="profile.html"
+                                class="avatar avatar-sm mr-2"
+                                ><img
+                                  class="avatar-img rounded-circle"
+                                  src="/assets/img/patients/patient10.jpg"
+                                  alt="User Image"
+                              /></a>
+                              <a href="profile.html">Robert Rhodes</a>
+                            </h2>
+                          </td>
+
+                          <td>
+                            23 Nov 2019
+                            <span class="text-primary d-block"
+                              >12.10 PM - 12.25 PM</span
+                            >
                           </td>
                         </tr>
                       </tbody>
@@ -659,7 +669,6 @@
               <!-- /Recent Orders -->
             </div>
           </div>
-          <!-- /Appointment List -->
         </div>
       </div>
 
