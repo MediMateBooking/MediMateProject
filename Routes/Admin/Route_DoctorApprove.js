@@ -11,7 +11,8 @@ router.post("/admin/doctors/approve/:docID", async(req, res) => {
   try {
 
     const docID = req.params.docID;
-    const hashedpass = await bcryptjs.hash(randomPassword.generateRandomPassword(), 12);
+    const ranPassword = randomPassword.generateRandomPassword()
+    const hashedpass = await bcryptjs.hash(ranPassword, 12);
 
     const currentDoctor = await db
           .DbConn()
@@ -23,7 +24,7 @@ router.post("/admin/doctors/approve/:docID", async(req, res) => {
           .collection("doctors")
           .updateOne({ userID: docID } , {$set : {profileApprove : true , password : hashedpass}})
 
-          await mailer.emailFuntion.doctorAccoutApprove(currentDoctor.email, currentDoctor.name, randomPassword.generateRandomPassword());
+          await mailer.emailFuntion.doctorAccoutApprove(currentDoctor.email, currentDoctor.name, ranPassword);
 
 
     res.json({ message : `Dr.${currentDoctor.name} Account Approved` });

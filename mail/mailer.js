@@ -109,8 +109,43 @@ async function doctorAccoutApprove(doctorEmail, doctorName, doctorPassword ) {
   }
 }
 
+
+async function doctorAccoutReject(doctorEmail) {
+  try {
+
+    const receiver = doctorEmail || "chamoddousl@gmail.com";
+
+    const info = await transporter.sendMail({
+      from: "MediMate E-Channeling Service",
+      to: receiver,
+      subject: "Your Medimate User Account has been Rejected by Admin",
+      text: `Your Account has been Approved by Admin`,
+      html: `
+      <div style="max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; font-family: Arial, sans-serif; text-align: left;">
+        <div style="margin-bottom: 20px;">
+
+          <img src="https://i.imghippo.com/files/hai1821sgo.jpg" alt="accountRejected" style="max-width: 60px;">
+
+        </div>
+        <h2 style="color:rgb(228, 38, 54);">We all have Bad Days</h2>
+        <p style="font-size: 16px; color: #333;"><b>Your Medimate User Account has been Rejected by Admin</b></p>
+        <p style="font-size: 15px; color: #333;">This is usually happen when your information cannot verify by Admin</p>
+        <p style="font-size: 14px; color: #333;">If you have any concern about this Please contact Medimate Admin</p>
+     
+        <p style="font-size: 12px; color: #999; margin-top: 30px;">Admin@gmail.com</p>
+      </div>
+    `,
+    });
+    console.log("Message sent: %s", info.messageId);
+  } catch (e) {
+    throw new Error("Error sending email");
+  }
+}
+
 module.exports.emailFuntion = {
   mainEmail: mainEmail,
   mainEmailValidation: mainEmailValidation,
-  doctorAccoutApprove : doctorAccoutApprove
+  doctorAccoutApprove : doctorAccoutApprove,
+  doctorAccoutReject : doctorAccoutReject
+  
 };

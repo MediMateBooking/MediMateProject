@@ -39,7 +39,7 @@ function createApproveList(approveList){
                                 class="avatar-img rounded-circle"
                                 src="${oneList.profilePicture}"
                                 alt="User Image"></a>
-                        <a>${oneList.name}<span>#PT0016</span></a>
+                        <a>${oneList.name}<span>${oneList.doctorID}</span></a>
                     </h2>
                 </td>
                 <td>${oneList.applyDate}<span class="d-block text-info">${oneList.applyTime}</span></td>
@@ -69,5 +69,11 @@ function createApproveList(approveList){
     allApproveBtns.forEach(oneApproveBtn => {
 
         oneApproveBtn.addEventListener('click', approvingDoctor)
-    })   
+    }) 
+    
+    const allRejectBtns = document.querySelectorAll('.reject');
+    allRejectBtns.forEach(oneApproveBtn => {
+
+        oneApproveBtn.addEventListener('click', rejectingDoctor)
+    })
 }

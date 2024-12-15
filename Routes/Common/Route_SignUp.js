@@ -8,6 +8,7 @@ const crypto = require("crypto");
 const db = require("../../database/database");
 const mailer = require("../../mail/mailer");
 const dateFormate = require('../../Extra/Date')
+const DoctorID = require('../../Extra/DoctorID')
 
 router.get("/signup", (req, res) => {
   try {
@@ -54,6 +55,8 @@ router.post("/signup/doctors", async (req, res) => {
   const emailValidationToken = crypto.randomBytes(32).toString("hex");
 
   const newUser = {
+
+    doctorID : `D${DoctorID.generateRandomNumberString()}`,
     name: userName,
     email: email,
     userID: userIdURL,
@@ -66,6 +69,8 @@ router.post("/signup/doctors", async (req, res) => {
     applyTime : dateFormate.formatDateTime().time,
     emailValidationToken: emailValidationToken,
     profileApprove: false,
+    rejected : false,
+    mandotaryFieldFill : false,
     linkExpire: expires,
   };
 
@@ -84,13 +89,6 @@ router.post("/signup/doctors", async (req, res) => {
       message: "We're sent validation link to " + email,
     });
   } catch (error) {
-    if (error.message.includes("Error sending email")) {
-      console.error("Error sending email:", error);
-      res.json({ success: false, message: "Check Your Email Address" });
-    } else {
-      console.error("Server Error:", error);
-      res.json({ success: false, message: "Server Error" });
-    }
     if (error.message.includes("Error sending email")) {
       console.error("Error sending email:", error);
       res.json({ success: false, message: "Check Your Email Address" });

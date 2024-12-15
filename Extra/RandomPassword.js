@@ -2,7 +2,7 @@ function generateRandomPassword() {
     const lowerCase = "abcdefghijklmnopqrstuvwxyz";
     const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const numbers = "0123456789";
-    const specialChars = "!@#$%^&*()_+[]{}|;:,.<>?";
+    const specialChars = "!@#$%^&*()_+[]{}|<>?";
     
     let password = [
       lowerCase[Math.floor(Math.random() * lowerCase.length)],
