@@ -28,7 +28,7 @@ router.post("/doctors/approvelist", async(req, res) => {
     const approveDoctorList = await db
     .DbConn()
     .collection("doctors")
-    .find({ profileApprove: false })
+    .find({ profileApprove: false , rejected : false, emailValid : true})
     .toArray();
 
     res.json({approveDoctorList: approveDoctorList});
