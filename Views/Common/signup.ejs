@@ -70,107 +70,167 @@
       
 
       <!-- Page Content -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-8 offset-md-2">
-              <!-- Register Content -->
-              <div class="account-content">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-md-7 col-lg-6 login-left">
-                    <img
-                      src="/assets/img/login-banner2.png"
-                      class="img-fluid"
-                      alt="Medimate Register"
-                    />
-                  </div>
-                  <div class="col-md-12 col-lg-6 login-right">
-                    <div class="login-header">
-                      <h3>
-                        <span id="roleTopic"></span> Register
-                      </h3>
-                    </div>
-
-                    <!-- Register Form -->
-                    <form method="POST">
-
-
-                      <div class="form-group form-focus">
-                        <select name="role" id="role" class="form-control floating">
-                          <option value="">Select A Role</option>
-                          <option value="patient">Patient</option>
-                          <option value="doctor">Doctor</option>
-                        </select>
-                      </div>
-
-                      <div id="mainDetails" style="display: none;">
-
-                        <div class="form-group form-focus">
-                          <input type="text" class="form-control floating" id="name" name="name" required/>
-                          <label class="focus-label">Name</label>
-                        </div>
-
-                        <div class="form-group form-focus">
-                          <input type="email" class="form-control floating" id="email" name="email" required/>
-                          <label class="focus-label">Email</label>
-                        </div>
-                        
-
-                        <div id="userCrendtials">
-
-                        <div class="form-group form-focus">
-                          <input type="password" class="form-control floating" id="password" name="createPassword" required/>
-                          <label class="focus-label">Create Password</label>
-                        </div>
-
-                        <!-- Confirm Password Field -->
-                        <div class="form-group form-focus">
-                          <input type="password" class="form-control floating" id="compassword" name="confirmPassword" required/>
-                          <label class="focus-label">Confirm Password</label> 
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    
-                      <div class="form-group form-focus" id="slmcregi" style="display: none;">
-                        <input type="text" class="form-control floating" id="slmcregistration" name="slmcregi"/>
-                        <label class="focus-label">SLMC Registration Number</label> 
-                      </div>
-                
-
-
-                      <div class="text-right">
-                        <a class="login-link" href="./login"
-                          >Already have an account?</a
-                        >
-                      </div>
-                      <button
-                        class="btn btn-primary btn-block btn-lg signUp-btn"
-                        class="btn btn-primary btn-block btn-lg login-btn"
-                        id="submitBtn"
-                        type="button"
-                      >
-                        Signup
-
-                      </button>
-
-                      
-                    </form>
-
-                 
-                    <!-- /Register Form -->
-                  </div>
-                  
-                </div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <!-- Register Content -->
+        <div class="account-content">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 col-lg-6 login-left">
+              <img
+                src="/assets/img/login-banner2.png"
+                class="img-fluid"
+                alt="Medimate Register"
+              />
+            </div>
+            <div class="col-md-12 col-lg-6 login-right">
+              <div class="login-header text-center">
+                <h3>
+                  <span id="roleTopic"></span> Register
+                </h3>
               </div>
-              <!-- /Register Content -->
+
+              <!-- Register Form -->
+              <form method="POST">
+
+                <div class="form-group form-focus mb-3">
+                  <select name="role" id="role" class="form-control floating">
+                    <option value="">Select A Role</option>
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                  </select>
+                </div>
+
+                <div id="mainDetails" style="display: none;">
+
+                  <div class="form-group form-focus mb-3">
+                    <input type="text" class="form-control floating" id="name" name="name" required/>
+                    <label class="focus-label">Name</label>
+                  </div>
+
+                  <div class="form-group form-focus mb-3">
+                    <input type="email" class="form-control floating" id="email" name="email" required/>
+                    <label class="focus-label">Email</label>
+                  </div>
+
+                  <div id="userCrendtials">
+
+                    <div class="form-group form-focus mb-3">
+                      <input type="password" class="form-control floating" id="password" name="createPassword" required/>
+                      <label class="focus-label">Create Password</label>
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="form-group form-focus mb-3">
+                      <input type="password" class="form-control floating" id="compassword" name="confirmPassword" required/>
+                      <label class="focus-label">Confirm Password</label>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="form-group form-focus mb-3" id="slmcregi" style="display: none;">
+                  <input type="text" class="form-control floating" id="slmcregistration" name="slmcregi"/>
+                  <label class="focus-label">SLMC Registration Number</label>
+                </div>
+
+                <div class="text-right mb-3">
+                  <a class="login-link" href="./login">Already have an account?</a>
+                </div>
+                <button
+                  class="btn btn-primary btn-block btn-lg signUp-btn"
+                  id="submitBtn"
+                  type="button"
+                >
+                  Signup
+
+                </button>
+
+              </form>
+              <!-- /Register Form -->
             </div>
           </div>
         </div>
+        <!-- /Register Content -->
       </div>
-      <!-- /Page Content -->
+    </div>
+  </div>
+</div>
+
+<style>
+  .content {
+    padding: 30px 0;
+    background-color: #f9f9f9; /* Light background */
+  }
+
+  .account-content {
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .login-header h3 {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .form-focus {
+    position: relative;
+  }
+
+  .form-focus input, .form-focus select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .form-focus label {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    font-size: 12px;
+    background: #ffffff;
+    padding: 0 5px;
+    color: #555;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+
+  .login-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .login-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .account-content {
+      padding: 15px;
+    }
+
+    .login-header h3 {
+      font-size: 20px;
+    }
+  }
+</style>
+
 
      
     <!-- /Main Wrapper -->

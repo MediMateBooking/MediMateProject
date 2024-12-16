@@ -18,7 +18,7 @@ router.get("/doctor/:userID", async (req, res) => {
 
         if(!currentDoctor.mandotaryFieldFill) return res.redirect(`/doctor/profile/${userID}`);
         
-    res.render("/Doctor/doctorDashboard");
+    res.render("/Doctor/doctorDashboard", { currentDoctor: currentDoctor });
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
