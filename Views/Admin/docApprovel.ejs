@@ -106,12 +106,21 @@
                         <li>
                             <a href="/admin/appointments/<%= key.dynamicRouteCode %>"><i class="fe fe-layout"></i> <span>Appointments</span></a>
                         </li>
-                        <li class="active">
-                            <a href="/admin/doctors/<%= key.dynamicRouteCode %>"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
-                        </li>
                         <li>
-                            <a href="/admin/patientList/<%= key.dynamicRouteCode %>"><i class="fe fe-user"></i> <span>Patients</span></a>
-                        </li>
+                            <a href="/admin/doctors/<%= key.dynamicRouteCode %>"
+                              ><i class="fe fe-user-plus"></i> <span>Add Doctors</span></a
+                            >
+                          </li>
+                          <li class="active">
+                            <a href="#"
+                              ><i class="fe fe-user"></i> <span>Patients List</span></a
+                            >
+                          </li>
+                          <li>
+                            <a href="/admin/doctorList/<%= key.dynamicRouteCode %>"
+                              ><i class="fe fe-user"></i> <span>Doctors List</span></a
+                            >
+                          </li>
                         <li>
                             <a href="/admin/reviews/<%= key.dynamicRouteCode %>"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
                         </li>

@@ -117,8 +117,8 @@
                   ><i class="fe fe-home"></i> <span>Dashboard</span></a
                 >
               </li>
-              <li class="active">
-                <a href="#"
+              <li>
+                <a href="/admin/appointments/<%= key.dynamicRouteCode %>"
                   ><i class="fe fe-layout"></i> <span>Appointments</span></a
                 >
               </li>
@@ -132,8 +132,8 @@
                   ><i class="fe fe-user"></i> <span>Patients List</span></a
                 >
               </li>
-              <li>
-                <a href="/admin/doctorList/<%= key.dynamicRouteCode %>"
+              <li class="active">
+                <a href="#"
                   ><i class="fe fe-user"></i> <span>Doctors List</span></a
                 >
               </li>
@@ -165,12 +165,12 @@
           <div class="page-header">
             <div class="row">
               <div class="col-sm-12">
-                <h3 class="page-title">Appointments</h3>
+                <h3 class="page-title">List of Doctors</h3>
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item">
                     <a href="/admin/<%= key.dynamicRouteCode %>">Dashboard</a>
                   </li>
-                  <li class="breadcrumb-item active">Appointments</li>
+                  <li class="breadcrumb-item active">Doctors List</li>
                 </ul>
               </div>
             </div>
@@ -178,8 +178,7 @@
           <!-- /Page Header -->
 
           <div class="row">
-            <div class="col-md-12">
-              <!-- Recent Orders -->
+            <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
                   <div class="table-responsive">
@@ -190,8 +189,7 @@
                         <tr>
                           <th>Doctor Name</th>
                           <th>Speciality</th>
-                          <th>Patient Name</th>
-                          <th>Apointment Time</th>
+                          <th>Member Since</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -210,25 +208,8 @@
                             </h2>
                           </td>
                           <td>Dental</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient1.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Charlene Reed </a>
-                            </h2>
-                          </td>
-                          <td>
-                            9 Nov 2019
-                            <span class="text-primary d-block"
-                              >11.00 AM - 11.15 AM</span
-                            >
-                          </td>
+
+                          <td>14 Jan 2019 <br /><small>02.59 AM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -245,26 +226,8 @@
                             </h2>
                           </td>
                           <td>Dental</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient2.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Travis Trimble </a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            5 Nov 2019
-                            <span class="text-primary d-block"
-                              >11.00 AM - 11.35 AM</span
-                            >
-                          </td>
+                          <td>11 Jun 2019 <br /><small>4.50 AM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -281,25 +244,8 @@
                             </h2>
                           </td>
                           <td>Cardiology</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient3.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Carl Kelly</a>
-                            </h2>
-                          </td>
-                          <td>
-                            11 Nov 2019
-                            <span class="text-primary d-block"
-                              >12.00 PM - 12.15 PM</span
-                            >
-                          </td>
+
+                          <td>4 Jan 2018 <br /><small>9.40 AM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -316,25 +262,8 @@
                             </h2>
                           </td>
                           <td>Urology</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient4.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html"> Michelle Fairfax</a>
-                            </h2>
-                          </td>
-                          <td>
-                            7 Nov 2019
-                            <span class="text-primary d-block"
-                              >1.00 PM - 1.20 PM</span
-                            >
-                          </td>
+
+                          <td>5 Jul 2019 <br /><small>12.59 AM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -351,26 +280,8 @@
                             </h2>
                           </td>
                           <td>Orthopaedics</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient5.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Gina Moore</a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            15 Nov 2019
-                            <span class="text-primary d-block"
-                              >1.00 PM - 1.15 PM</span
-                            >
-                          </td>
+                          <td>24 Jan 2019 <br /><small>02.59 AM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -387,26 +298,8 @@
                             </h2>
                           </td>
                           <td>Orthopaedics</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient6.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Elsie Gilley</a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            16 Nov 2019
-                            <span class="text-primary d-block"
-                              >1.00 PM - 1.15 PM</span
-                            >
-                          </td>
+                          <td>23 Mar 2019 <br /><small>02.50 PM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -423,26 +316,8 @@
                             </h2>
                           </td>
                           <td>Neurology</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient7.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Joan Gardner</a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            18 Nov 2019
-                            <span class="text-primary d-block"
-                              >1.10 PM - 1.25 PM</span
-                            >
-                          </td>
+                          <td>14 Dec 2018 <br /><small>01.59 AM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -459,26 +334,8 @@
                             </h2>
                           </td>
                           <td>Dermatology</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient8.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html"> Daniel Griffing</a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            18 Nov 2019
-                            <span class="text-primary d-block"
-                              >11.10 AM - 11.25 AM</span
-                            >
-                          </td>
+                          <td>11 Jan 2019 <br /><small>02.59 AM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -495,26 +352,8 @@
                             </h2>
                           </td>
                           <td>Dental</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient9.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Walter Roberson</a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            21 Nov 2019
-                            <span class="text-primary d-block"
-                              >12.10 PM - 12.25 PM</span
-                            >
-                          </td>
+                          <td>21 Apr 2018 <br /><small>02.59 PM</small></td>
                         </tr>
                         <tr>
                           <td>
@@ -531,33 +370,14 @@
                             </h2>
                           </td>
                           <td>Dental</td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient10.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Robert Rhodes</a>
-                            </h2>
-                          </td>
 
-                          <td>
-                            23 Nov 2019
-                            <span class="text-primary d-block"
-                              >12.10 PM - 12.25 PM</span
-                            >
-                          </td>
+                          <td>15 Feb 2018 <br /><small>03.59 AM</small></td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-              <!-- /Recent Orders -->
             </div>
           </div>
         </div>

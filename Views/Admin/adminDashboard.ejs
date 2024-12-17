@@ -125,11 +125,18 @@
               </li>
               <li>
                 <a href="/admin/doctors/<%= key.dynamicRouteCode %>"
-                  ><i class="fe fe-user-plus"></i> <span>Doctors</span></a
+                  ><i class="fe fe-user-plus"></i> <span>Add Doctors</span></a
                 >
               </li>
               <li>
-                <a href="/admin/patientList/<%= key.dynamicRouteCode %>"><i class="fe fe-user"></i> <span>Patients</span></a>
+                <a href="/admin/patientList/<%= key.dynamicRouteCode %>"
+                  ><i class="fe fe-user"></i> <span>Patients List</span></a
+                >
+              </li>
+              <li>
+                <a href="/admin/doctorList/<%= key.dynamicRouteCode %>"
+                  ><i class="fe fe-user"></i> <span>Doctors List</span></a
+                >
               </li>
               <li>
                 <a href="/admin/reviews/<%= key.dynamicRouteCode %>"
@@ -321,7 +328,7 @@
                         </tr>
                         <tr>
                           <td>
-                            <a href="/doctorList">
+                            <a href="/admin/doctorList/<%= key.dynamicRouteCode %>">
                             <button
                               class="btn btn-primary"
                               data-toggle="modal"
