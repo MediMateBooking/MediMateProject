@@ -95,8 +95,7 @@
                   <p class="text-muted mb-0">Administrator</p>
                 </div>
               </div>
-              <a class="dropdown-item" href="/">My Profile</a>
-              <a class="dropdown-item" href="/">Settings</a>
+              <a class="dropdown-item" href="/admin/profile/<%= key.dynamicRouteCode %>">My Profile</a>
               <a class="dropdown-item" href="/login">Logout</a>
             </div>
           </li>
@@ -126,11 +125,18 @@
               </li>
               <li>
                 <a href="/admin/doctors/<%= key.dynamicRouteCode %>"
-                  ><i class="fe fe-user-plus"></i> <span>Doctors</span></a
+                  ><i class="fe fe-user-plus"></i> <span>Add Doctors</span></a
                 >
               </li>
               <li>
-                <a href="/admin/patientList/<%= key.dynamicRouteCode %>"><i class="fe fe-user"></i> <span>Patients</span></a>
+                <a href="/admin/patientList/<%= key.dynamicRouteCode %>"
+                  ><i class="fe fe-user"></i> <span>Patients List</span></a
+                >
+              </li>
+              <li>
+                <a href="/admin/doctorList/<%= key.dynamicRouteCode %>"
+                  ><i class="fe fe-user"></i> <span>Doctors List</span></a
+                >
               </li>
               <li>
                 <a href="/admin/reviews/<%= key.dynamicRouteCode %>"
@@ -138,7 +144,7 @@
                 >
               </li>
               <li>
-                <a href="/profileSettings"
+                <a href="/admin/profile/<%= key.dynamicRouteCode %>"
                   ><i class="fe fe-user-plus"></i> <span>Profile</span></a
                 >
               </li>
@@ -322,7 +328,7 @@
                         </tr>
                         <tr>
                           <td>
-                            <a href="/doctorList">
+                            <a href="/admin/doctorList/<%= key.dynamicRouteCode %>">
                             <button
                               class="btn btn-primary"
                               data-toggle="modal"
