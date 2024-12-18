@@ -1,29 +1,70 @@
+// const express = require("express");
+// const router = express.Router();
+// const bcryptjs = require("bcryptjs");
+
+// const db = require("../../database/database");
+// const mailer = require("../../mail/mailer");
+// const randomPassword = require('../../Extra/RandomPassword');
+
+// router.post("/admin/doctors/approve/:docID", async(req, res) => {
+//   try {
+
+//     const docID = req.params.docID;
+//     const hashedpass = await bcryptjs.hash(randomPassword.generateRandomPassword(), 12);
+
+//     const currentDoctor = await db
+//           .DbConn()
+//           .collection("doctors")
+//           .findOne({ userID: docID })
+
+//         const activeDoctor = await db
+//           .DbConn()
+//           .collection("doctors")
+//           .updateOne({ userID: docID } , {$set : {profileApprove : true , password : hashedpass}})
+
+//           await mailer.emailFuntion.doctorAccoutApprove(currentDoctor.email, currentDoctor.name, randomPassword.generateRandomPassword());
+
+//     res.json({ message : `Dr.${currentDoctor.name} Account Approved` });
+//   } catch (error) {
+//     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+//   }
+// });
+
+// module.exports = router;
+
 const express = require("express");
 const router = express.Router();
-const bcryptjs = require("bcryptjs");
-
 const db = require("../../database/database");
 const mailer = require("../../mail/mailer");
 
-router.post("/admin/doctors/reject/:docID", async(req, res) => {
+router.post("/admin/doctors/reject/:docID", async (req, res) => {
   try {
-
     const docID = req.params.docID;
 
+    // Fetch doctor details
     const currentDoctor = await db
-          .DbConn()
-          .collection("doctors")
-          .findOne({ userID: docID })
-    
-        const activeDoctor = await db
-          .DbConn()
-          .collection("doctors")
-          .updateOne({ userID: docID } , {$set : {rejected : true}})
+      .DbConn()
+      .collection("doctors")
+      .findOne({ userID: docID });
 
-          await mailer.emailFuntion.doctorAccoutReject(currentDoctor.email);
+    if (!currentDoctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
 
+    // Update doctor status
+    await db
+      .DbConn()
+      .collection("doctors")
+      .updateOne({ userID: docID }, { $set: { rejected: true } });
 
-    res.json({ message : `${currentDoctor.name} User Account Rejected` });
+    // Send rejection email
+    mailer.emailFuntion
+      .doctorAccoutReject(currentDoctor.email)
+      .then(() => console.log("Rejection email sent"))
+      .catch((err) => console.error("Error sending rejection email:", err));
+
+    // Respond to client
+    res.json({ message: `${currentDoctor.name} User Account Rejected` });
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
