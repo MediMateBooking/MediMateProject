@@ -3,9 +3,9 @@ const router = express.Router();
 
 const db = require("../../database/database");
 
-router.get("/bookingSuccess", (req, res) => {
+router.get("/patient/bookingSuccess", (req, res) => {
   try {
-    res.render("bookingSuccess");
+    res.render("Patient/bookingSuccess");
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }

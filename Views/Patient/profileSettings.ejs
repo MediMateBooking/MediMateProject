@@ -2,11 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Profile</title>
+    <title>Patient Dashboard</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
+
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="assets/css/feathericon.min.css" />
+
+    <link rel="stylesheet" href="assets/plugins/morris/morris.css" />
 
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon" />
@@ -20,17 +25,15 @@
       href="/assets/plugins/fontawesome/css/fontawesome.min.css"
     />
     <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
-    
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
-    <link rel="stylesheet" href="/styles/patientDashboard.css" />
-    
+    <link rel="stylesheet" href="/styles/Patient/patientDashboard.css" />
   </head>
   <body>
     <!-- Main Wrapper -->
-
-    
     <div class="main-wrapper">
+      <% for(const key of currentPatient) { %>
 
       <!-- Header -->
       <header class="header" id="header">
@@ -43,7 +46,7 @@
                 <span></span>
               </span>
             </a>
-            <a href="index-2.html" class="navbar-brand logo">
+            <a href="/" class="navbar-brand logo">
               <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
             </a>
           </div>
@@ -63,121 +66,132 @@
             </ul>
           </div>
           <ul class="nav header-navbar-rht">
-            <li class="nav-item contact-item">
-              
-            </li>
+            <li class="nav-item contact-item"></li>
 
             <!-- User Menu -->
             <li class="nav-item dropdown has-arrow logged-item">
-                <a
-                  href="#"
-                  class="dropdown-toggle nav-link"
-                  data-toggle="dropdown"
-                >
-                  <span class="user-img">
+              <a
+                href="#"
+                class="dropdown-toggle nav-link"
+                data-toggle="dropdown"
+              >
+                <span class="user-img">
+                  <img
+                    class="rounded-circle"
+                    src="<%= key.profilePicture %>"
+                    width="31"
+                    alt="<%= key.name %>"
+                  />
+                </span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="user-header">
+                  <div class="avatar avatar-sm">
                     <img
-                      class="rounded-circle"
-                      src="/assets/img/doctors/doctor-thumb-02.jpg"
-                      width="31"
-                      alt="Darren Elder"
+                      src="<%= key.profilePicture %>"
+                      alt="User Image"
+                      class="avatar-img rounded-circle"
                     />
-                  </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <div class="user-header">
-                    <div class="avatar avatar-sm">
-                      <img
-                        src="/assets/img/doctors/doctor-thumb-02.jpg"
-                        alt="User Image"
-                        class="avatar-img rounded-circle"
-                      />
-                    </div>
-                    <div class="user-text">
-                      <h6>Pradeep Ranga</h6>
-                      <p class="text-muted mb-0">Doctor</p>
-                    </div>
                   </div>
-                  <a class="dropdown-item" href="/doctorDashboard">Dashboard</a>
-                  <a class="dropdown-item" href="">Profile Settings</a>
-                  <a class="dropdown-item" href="/login">Logout</a>
+                  <div class="user-text">
+                    <h6><%= key.name %></h6>
+                    <p class="text-muted mb-0">Patient</p>
+                  </div>
                 </div>
-              </li>
-              <!-- /User Menu -->
+                <a class="dropdown-item" href="/patient/<%= key.userID %>">Dashboard</a>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Profile Settings</a
+                >
+                <a class="dropdown-item" href="/login">Logout</a>
+              </div>
+            </li>
+            <!-- /User Menu -->
           </ul>
 
           <div id="progress-bar"></div>
         </nav>
       </header>
       <!-- /Header -->
-
       <!-- Page Content -->
-			<div class="content">
+      <div class="content">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-							<div class="profile-sidebar">
-								<div class="widget-profile pro-widget-content">
-									<div class="profile-info-widget">
-										<a href="#" class="booking-doc-img">
-											<img src="assets/img/patients/patient.jpg" alt="User Image">
-										</a>
-										<div class="profile-det-info">
-											<h3>Richard Wilson</h3>
-											<div class="patient-details">
-												<h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="dashboard-widget">
-									<nav class="dashboard-menu">
-										<ul>
-											<li>
-												<a href="patient-dashboard.html">
-													<i class="fas fa-columns"></i>
-													<span>Dashboard</span>
-												</a>
-											</li>
-											<li class="active">
-												<a href="favourites.html">
-													<i class="fas fa-bookmark"></i>
-													<span>Favourites</span>
-												</a>
-											</li>
-											<li>
-												<a href="chat.html">
-													<i class="fas fa-comments"></i>
-													<span>Message</span>
-													<small class="unread-msg">23</small>
-												</a>
-											</li>
-											<li>
-												<a href="profile-settings.html">
-													<i class="fas fa-user-cog"></i>
-													<span>Profile Settings</span>
-												</a>
-											</li>
-											<li>
-												<a href="change-password.html">
-													<i class="fas fa-lock"></i>
-													<span>Change Password</span>
-												</a>
-											</li>
-											<li>
-												<a href="index-2.html">
-													<i class="fas fa-sign-out-alt"></i>
-													<span>Logout</span>
-												</a>
-											</li>
-										</ul>
-									</nav>
-								</div>
-
-							</div>
-						</div>
-
-                        <div class="col-md-7 col-lg-8 col-xl-9">
+					
+						<!-- Profile Sidebar -->
+            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+              <div class="profile-sidebar">
+                <div class="widget-profile pro-widget-content">
+                  <div class="profile-info-widget">
+                    <a href="#" class="booking-doc-img">
+                      <img id="patientAvatar"
+                        src="<%= key.profilePicture %>"
+                        alt="User Image"
+                      />
+                    </a>
+                    <div class="profile-det-info">
+                      <h3><%= key.name %></h3>
+                      <h6><%= key.email %></h6>
+                      <div class="patient-details">
+                        <h5>
+                          <i class="fas fa-birthday-cake"></i> B day, age
+                          
+                        </h5>
+                        <h5 class="mb-0"> 
+                          <i class="fas fa-map-marker-alt"></i> address 
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-widget">
+                  <nav class="dashboard-menu">
+                    <ul>
+                      <li>
+                        <a href="/patient/<%= key.userID %>">
+                          <i class="fas fa-columns"></i>
+                          <span>Dashboard</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/patient/favorites/<%= key.userID %>">
+                          <i class="fas fa-bookmark"></i>
+                          <span>Favorites</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/patient/feedback/<%= key.userID %>">
+                          <i class="fas fa-comments"></i>
+                          <span>Feedback</span>
+                        </a>
+                      </li>
+                      <li class="active">
+                        <a href="#">
+                          <i class="fas fa-user-cog"></i>
+                          <span>Profile Settings</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/patient/changePassword/<%= key.userID %>">
+                          <i class="fas fa-lock"></i>
+                          <span>Change Password</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/login">
+                          <i class="fas fa-sign-out-alt"></i>
+                          <span>Logout</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+						<!-- /Profile Sidebar -->
+						
+						<div class="col-md-7 col-lg-8 col-xl-9">
 							<div class="card">
 								<div class="card-body">
 									
@@ -188,7 +202,7 @@
 												<div class="form-group">
 													<div class="change-avatar">
 														<div class="profile-img">
-															<img src="assets/img/patients/patient.jpg" alt="User Image">
+															<img src="<%= key.profilePicture %>" alt="User Image">
 														</div>
 														<div class="upload-img">
 															<div class="change-photo-btn">
@@ -287,15 +301,11 @@
 								</div>
 							</div>
 						</div>
-
-
-                        
 					</div>
 				</div>
 
-			</div>		
-			<!-- /Page Content -->
-
+			</div>
+      <!-- /Page Content -->
 
       <footer class="footer">
         <!-- Footer Bottom -->
@@ -327,7 +337,7 @@
         <!-- /Footer Bottom -->
       </footer>
 
-
+      <% } %>
     </div>
     <!-- /Main Wrapper -->
 
@@ -345,6 +355,4 @@
     <!-- Custom JS -->
     <script src="/assets/js/script.js"></script>
   </body>
-
 </html>
-
