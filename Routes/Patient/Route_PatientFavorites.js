@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const crypto = require("crypto");
-
 const db = require("../../database/database");
 
 router.get("/patient/favorites/:id", async (req, res) => {
@@ -16,7 +14,9 @@ router.get("/patient/favorites/:id", async (req, res) => {
 
     if (currentPatient.length === 0) throw new Error("cannot find User");
 
-    res.render("Patient/favorites", { currentPatient: currentPatient }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
+    res.render("Patient/favorites", { currentPatient: currentPatient });
+    console.log(currentPatient);
+
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
