@@ -33,8 +33,6 @@
   </head>
   <body>
     <!-- Main Wrapper -->
-
-    
     <div class="main-wrapper">
       <% for(const key of currentPatient)  { %>
 
@@ -49,7 +47,7 @@
                 <span></span>
               </span>
             </a>
-            <a href="index-2.html" class="navbar-brand logo">
+            <a href="/" class="navbar-brand logo">
               <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
             </a>
           </div>
@@ -103,13 +101,13 @@
                     <p class="text-muted mb-0">Patient</p>
                   </div>
                 </div>
-                <a class="dropdown-item" href="patient-dashboard.html"
+                <a class="dropdown-item" href="#"
                   >Dashboard</a
                 >
-                <a class="dropdown-item" href="profile-settings.html"
+                <a class="dropdown-item" href="/patient/profile/<%= key.userID %>"
                   >Profile Settings</a
                 >
-                <a class="dropdown-item" href="login.html">Logout</a>
+                <a class="dropdown-item" href="/login">Logout</a>
               </div>
             </li>
             <!-- /User Menu -->
@@ -163,16 +161,15 @@
                         </a>
                       </li>
                       <li>
-                        <a href="favourites.html">
+                        <a href="/patient/favorites/<%= key.userID %>">
                           <i class="fas fa-bookmark"></i>
                           <span>Favorites</span>
                         </a>
                       </li>
                       <li>
-                        <a href="chat.html">
+                        <a href="/patient/feedback/<%= key.userID %>">
                           <i class="fas fa-comments"></i>
-                          <span>Message</span>
-                          <small class="unread-msg">23</small>
+                          <span>Feedback</span>
                         </a>
                       </li>
                       <li>
@@ -182,13 +179,13 @@
                         </a>
                       </li>
                       <li>
-                        <a href="change-password.html">
+                        <a href="/patient/changePassword/<%= key.userID %>">
                           <i class="fas fa-lock"></i>
                           <span>Change Password</span>
                         </a>
                       </li>
                       <li>
-                        <a href="index-2.html">
+                        <a href="/login">
                           <i class="fas fa-sign-out-alt"></i>
                           <span>Logout</span>
                         </a>
@@ -198,8 +195,10 @@
                 </div>
               </div>
             </div>
+            <!-- /Profile Sidebar -->
 
             <div class="col-md-7 col-lg-8 col-xl-9">
+              <!--Tiles -->
               <div class="row">
                 <div class="col-xl-3 col-sm-6 col-12">
                   <div class="card">
@@ -282,6 +281,8 @@
                   </div>
                 </div>
               </div>
+              <!--/Tiles -->
+
               <div class="card">
                 <div class="card-body pt-0">
                   <!-- Tab Menu -->
@@ -331,8 +332,6 @@
                                   <th>Doctor</th>
                                   <th>Appt Date</th>
                                   <th>Booking Date</th>
-                                  <th>Amount</th>
-                                  <th>Follow Up</th>
                                   <th>Status</th>
                                   <th></th>
                                 </tr>
@@ -363,8 +362,6 @@
                                     >
                                   </td>
                                   <td>12 Nov 2019</td>
-                                  <td>$160</td>
-                                  <td>16 Nov 2019</td>
                                   <td>
                                     <span
                                       class="badge badge-pill bg-success-light"
@@ -373,12 +370,6 @@
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
@@ -413,8 +404,6 @@
                                     >
                                   </td>
                                   <td>12 Nov 2019</td>
-                                  <td>$250</td>
-                                  <td>14 Nov 2019</td>
                                   <td>
                                     <span
                                       class="badge badge-pill bg-success-light"
@@ -423,12 +412,6 @@
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
@@ -464,8 +447,6 @@
                                     >
                                   </td>
                                   <td>10 Nov 2019</td>
-                                  <td>$400</td>
-                                  <td>13 Nov 2019</td>
                                   <td>
                                     <span
                                       class="badge badge-pill bg-danger-light"
@@ -474,12 +455,6 @@
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
@@ -536,12 +511,6 @@
                                     <div class="table-action">
                                       <a
                                         href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
-                                      <a
-                                        href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
                                       >
                                         <i class="far fa-eye"></i> View
@@ -571,12 +540,6 @@
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
@@ -609,12 +572,6 @@
                                   </td>
                                   <td class="text-right">
                                     <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
                                       <a
                                         href="javascript:void(0);"
                                         class="btn btn-sm bg-info-light"
@@ -681,12 +638,6 @@
                                       >
                                         <i class="far fa-eye"></i> View
                                       </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
                                     </div>
                                   </td>
                                 </tr>
@@ -721,12 +672,6 @@
                                         class="btn btn-sm bg-info-light"
                                       >
                                         <i class="far fa-eye"></i> View
-                                      </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
                                       </a>
                                     </div>
                                   </td>
@@ -764,12 +709,6 @@
                                       >
                                         <i class="far fa-eye"></i> View
                                       </a>
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-primary-light"
-                                      >
-                                        <i class="fas fa-print"></i> Print
-                                      </a>
                                     </div>
                                   </td>
                                 </tr>
@@ -789,9 +728,6 @@
 
             </div>
           </div>
-
-
-
         </div>
       </div>
       <!-- /Page Content -->

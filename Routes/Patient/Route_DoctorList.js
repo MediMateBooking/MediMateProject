@@ -3,7 +3,7 @@ const router = express.Router();
 
 const db = require("../../database/database");
 
-router.get("/doctorList", (req, res) => {
+router.get("/Patient/doctorList", (req, res) => {
   try {
     res.render("Patient/doctorList");
   } catch (error) {
