@@ -51,7 +51,7 @@ app.use("/patient/changePassword/images", express.static("images"));
 // Doctor Images
 app.use("/doctor/profile/images", express.static("images")); // profile
 
-app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
+app.use("/node_modules", express.static(path.join(__dirname, "node_modules"))); 
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -89,4 +89,4 @@ db.connectTo()
     });
   })
   .catch((err) => console.log(err.message));
-
+  
