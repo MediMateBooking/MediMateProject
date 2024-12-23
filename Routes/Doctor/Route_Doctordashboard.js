@@ -16,9 +16,9 @@ router.get("/doctor/:userID", async (req, res) => {
     
         if (currentDoctor.length === 0) throw new Error("cannot find User");
 
-        if(!currentDoctor.mandotaryFieldFill) return res.redirect(`/doctor/profile/${userID}`);
+        if(!currentDoctor[0].mandotaryFieldFill) return res.redirect(`/doctor/profile/${userID}`);
         
-    res.render("/Doctor/doctorDashboard", { currentDoctor: currentDoctor });
+    res.render("Doctor/doctorDashboard", { currentDoctor: currentDoctor });
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }

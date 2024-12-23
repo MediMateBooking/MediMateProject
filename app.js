@@ -34,6 +34,8 @@ app.use(
   })
 );
 
+const upload  = multer({storage:configStatus });
+
 const ObjectId = mongodb.ObjectId;
 
 const db = require("./database/database");
@@ -42,7 +44,10 @@ app.use(express.static("public"));
 
 // Patient Images
 app.use("/patient/images", express.static("images"));
-app.use("/patient/favorites/images", express.static("images"));
+
+app.use("/doctor/images", express.static("images"));
+app.use("/doctor/profile/images", express.static("images"));
+
 app.use("/admin/doctors/images", express.static("images"));
 app.use("/patient/profile/images", express.static("images"));
 app.use("/patient/changePassword/images", express.static("images"));
