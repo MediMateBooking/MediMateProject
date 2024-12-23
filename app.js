@@ -34,12 +34,16 @@ app.use(
   })
 );
 
+const upload  = multer({storage:configStatus });
+
 const ObjectId = mongodb.ObjectId;
 
 const db = require("./database/database");
 
 app.use(express.static("public"));
 app.use("/patient/images", express.static("images"));
+app.use("/doctor/images", express.static("images"));
+app.use("/doctor/profile/images", express.static("images"));
 app.use("/admin/doctors/images", express.static("images"));
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 

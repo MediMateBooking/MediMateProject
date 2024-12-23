@@ -82,9 +82,9 @@
                 <span class="user-img">
                   <img
                     class="rounded-circle"
-                    src="/assets/img/doctors/doctor-thumb-02.jpg"
+                    src="<%= key.profilePicture %>"
                     width="31"
-                    alt="Darren Elder"
+                    alt="docPic"
                   />
                 </span>
               </a>
@@ -92,18 +92,18 @@
                 <div class="user-header">
                   <div class="avatar avatar-sm">
                     <img
-                      src="/assets/img/doctors/doctor-thumb-02.jpg"
+                      src="<%= key.profilePicture %>"
                       alt="User Image"
                       class="avatar-img rounded-circle"
                     />
                   </div>
                   <div class="user-text">
-                    <h6>Pradeep Ranga</h6>
+                    <h6><%= key.name %></h6>
                     <p class="text-muted mb-0">Doctor</p>
                   </div>
                 </div>
-                <a class="dropdown-item" href="/doctorDashboard">Dashboard</a>
-                <a class="dropdown-item" href="">Profile Settings</a>
+                <a class="dropdown-item" href="/doctor/<%= key.userID %>">Dashboard</a>
+                <a class="dropdown-item" href="/doctor/profile/<%= key.userID %>">Profile Settings</a>
                 <a class="dropdown-item" href="/login">Logout</a>
               </div>
             </li>
@@ -122,17 +122,17 @@
               <div class="profile-sidebar">
                 <div class="widget-profile pro-widget-content">
                   <div class="profile-info-widget">
-                    <a href="#" class="booking-doc-img">
+                    <a class="booking-doc-img">
                       <img
-                        src="/assets/img/doctors/doctor-thumb-02.jpg"
+                        src="<%= key.profilePicture %>"
                         alt="User Image"
                       />
                     </a>
                     <div class="profile-det-info">
-                      <h3>Dr. Pradeep Ranga</h3>
+                      <h3>Dr. <%= key.name %></h3>
 
                       <div class="patient-details">
-                        <h5 class="mb-0">Cardiology Specialist</h5>
+                        <h5 class="mb-0"><%= key.specialization.specialist %></h5>
                       </div>
                     </div>
                   </div>
@@ -141,7 +141,7 @@
                   <nav class="dashboard-menu">
                     <ul>
                       <li class="active">
-                        <a href="/doctorDashboard">
+                        <a href="/doctor/<%= key.userID %>">
                           <i class="fas fa-columns"></i>
                           <span>Dashboard</span>
                         </a>
@@ -160,7 +160,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="/docProfileSettings">
+                        <a href="/doctor/profile/<%= key.userID %>">
                           <i class="fas fa-user-cog"></i>
                           <span>Profile Settings</span>
                         </a>

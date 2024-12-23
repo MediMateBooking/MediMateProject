@@ -23,7 +23,9 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
-    <link rel="stylesheet" href="/styles/patientDashboard.css" />
+  
+    <!-- Custom JS -->
+     <script src="/scripts/Doctor/filepreview.js" defer></script>
   </head>
   <body>
     <!-- Main Wrapper -->
@@ -31,6 +33,7 @@
     <div class="main-wrapper">
       <% for(const key of currentDoctor) { %>
 
+        <form action="/doctor/profile/<%= key.userID %>" method="POST" enctype="multipart/form-data">
       <!-- Header -->
       <header class="header" id="header">
         <nav class="navbar navbar-expand-lg header-nav">
@@ -94,8 +97,8 @@
                     <p class="text-muted mb-0">Doctor</p>
                   </div>
                 </div>
-                <a class="dropdown-item" href="/doctorDashboard">Dashboard</a>
-                <a class="dropdown-item" href="">Profile Settings</a>
+                <a class="dropdown-item" href="/doctor/<%= key.userID %>">Dashboard</a>
+                <a class="dropdown-item" href="/doctor/profile/<%= key.userID %>">Profile Settings</a>
                 <a class="dropdown-item" href="/login">Logout</a>
               </div>
             </li>
@@ -116,7 +119,7 @@
               <div class="profile-sidebar">
                 <div class="widget-profile pro-widget-content">
                   <div class="profile-info-widget">
-                    <a href="#" class="booking-doc-img">
+                    <a class="booking-doc-img">
                       <img
                         src="<%= key.profilePicture %>"
                         alt="User Image"
@@ -134,8 +137,8 @@
                 <div class="dashboard-widget">
                   <nav class="dashboard-menu">
                     <ul>
-                      <li class="active">
-                        <a href="/doctorDashboard">
+                      <li>
+                        <a href="/doctor/<%= key.userID %>">
                           <i class="fas fa-columns"></i>
                           <span>Dashboard</span>
                         </a>
@@ -153,8 +156,8 @@
                           <span>Reviews</span>
                         </a>
                       </li>
-                      <li>
-                        <a href="/docProfileSettings">
+                      <li class="active">
+                        <a href="/doctor/profile/<%= key.userID %>">
                           <i class="fas fa-user-cog"></i>
                           <span>Profile Settings</span>
                         </a>
@@ -190,8 +193,9 @@
                         <div class="change-avatar">
                           <div class="profile-img">
                             <img
-                              src="assets/img/doctors/doctor-thumb-02.jpg"
+                              src="<%= key.profilePicture %>"
                               alt="User Image"
+                              id="pickedImage"
                             />
                           </div>
                           <div class="upload-img">
@@ -199,11 +203,9 @@
                               <span
                                 ><i class="fa fa-upload"></i> Upload Photo</span
                               >
-                              <input type="file" class="upload" />
+                              <input type="file" name="image" class="upload" id="picUpload"/>
                             </div>
-                            <small class="form-text text-muted"
-                              >Allowed JPG, GIF or PNG. Max size of 2MB</small
-                            >
+                            
                           </div>
                         </div>
                       </div>
@@ -211,15 +213,15 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label
-                          >Username <span class="text-danger">*</span></label
+                          >Doctor ID <span class="text-danger">*</span></label
                         >
-                        <input type="text" class="form-control" readonly />
+                        <input type="text" value="<%= key.doctorID %>" class="form-control" readonly required/>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" readonly />
+                        <input type="email" value="<%= key.email %>" class="form-control" readonly required/>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -227,7 +229,7 @@
                         <label
                           >First Name <span class="text-danger">*</span></label
                         >
-                        <input type="text" class="form-control" />
+                        <input type="text" value="<%= key.personalDetails.firstName %>" class="form-control" name="firstName" required/>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -235,29 +237,29 @@
                         <label
                           >Last Name <span class="text-danger">*</span></label
                         >
-                        <input type="text" class="form-control" />
+                        <input type="text" value="<%= key.personalDetails.lastName %>" class="form-control" name="lastName" required/>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="text" class="form-control" />
+                        <label>Phone Number<span class="text-danger">*</span></label>
+                        <input type="number" value="<%= key.personalDetails.phoneNumber %>" class="form-control" name="phoneNumber" required/>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control select">
-                          <option>Select</option>
-                          <option>Male</option>
-                          <option>Female</option>
+                        <label>Gender<span class="text-danger">*</span></label>
+                        <select class="form-control select" name="gender" required>
+                          <option value="" disabled <%= !key.personalDetails.gender ? 'selected' : '' %>>Select</option>
+                          <option value="Male" <%= key.personalDetails.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                          <option value="Female" <%= key.personalDetails.gender === 'Female' ? 'selected' : '' %>>Female</option>
                         </select>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group mb-0">
-                        <label>Date of Birth</label>
-                        <input type="text" class="form-control" />
+                        <label>Date of Birth<span class="text-danger">*</span></label>
+                        <input type="date" value="<%= key.personalDetails.DOB %>" class="form-control" name="dob" required/>
                       </div>
                     </div>
                   </div>
@@ -271,63 +273,11 @@
                   <h4 class="card-title">About Me</h4>
                   <div class="form-group mb-0">
                     <label>Biography</label>
-                    <textarea class="form-control" rows="5"></textarea>
+                    <textarea class="form-control" rows="5" name="bio"><%= key.personalDetails.bio %></textarea>
                   </div>
                 </div>
               </div>
               <!-- /About Me -->
-
-              <!-- Clinic Info -->
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Clinic Info</h4>
-                  <div class="row form-row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Clinic Name</label>
-                        <input type="text" class="form-control" />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Clinic Address</label>
-                        <input type="text" class="form-control" />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Clinic Images</label>
-                        <form action="#" class="dropzone"></form>
-                      </div>
-                      <div class="upload-wrap">
-                        <div class="upload-images">
-                          <img
-                            src="assets/img/features/feature-01.jpg"
-                            alt="Upload Image"
-                          />
-                          <a
-                            href="javascript:void(0);"
-                            class="btn btn-icon btn-danger btn-sm"
-                            ><i class="far fa-trash-alt"></i
-                          ></a>
-                        </div>
-                        <div class="upload-images">
-                          <img
-                            src="assets/img/features/feature-02.jpg"
-                            alt="Upload Image"
-                          />
-                          <a
-                            href="javascript:void(0);"
-                            class="btn btn-icon btn-danger btn-sm"
-                            ><i class="far fa-trash-alt"></i
-                          ></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /Clinic Info -->
 
               <!-- Contact Details -->
               <div class="card contact-card">
@@ -337,38 +287,38 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Address Line 1</label>
-                        <input type="text" class="form-control" />
+                        <input type="text" value="<%= key.address.adressLine1 %>" name="adressLine1" class="form-control" />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="control-label">Address Line 2</label>
-                        <input type="text" class="form-control" />
+                        <input type="text" value="<%= key.address.adressLine2 %>" name="adressLine2" class="form-control" />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="control-label">City</label>
-                        <input type="text" class="form-control" />
+                        <input type="text" value="<%= key.address.city %>" name="city" class="form-control" />
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="control-label">State / Province</label>
-                        <input type="text" class="form-control" />
+                        <input type="text" value="<%= key.address.province %>" name="province" class="form-control" />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="control-label">Country</label>
-                        <input type="text" class="form-control" />
+                        <input type="text" value="<%= key.address.country %>" name="country" class="form-control" />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="control-label">Postal Code</label>
-                        <input type="text" class="form-control" />
+                        <input type="number" value="<%= key.address.postalCode %>" name="postalCode" class="form-control" />
                       </div>
                     </div>
                   </div>
@@ -376,102 +326,24 @@
               </div>
               <!-- /Contact Details -->
 
-              <!-- Pricing -->
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Pricing</h4>
-
-                  <div class="form-group mb-0">
-                    <div id="pricing_select">
-                      <div
-                        class="custom-control custom-radio custom-control-inline"
-                      >
-                        <input
-                          type="radio"
-                          id="price_free"
-                          name="rating_option"
-                          class="custom-control-input"
-                          value="price_free"
-                          checked
-                        />
-                        <label class="custom-control-label" for="price_free"
-                          >Free</label
-                        >
-                      </div>
-                      <div
-                        class="custom-control custom-radio custom-control-inline"
-                      >
-                        <input
-                          type="radio"
-                          id="price_custom"
-                          name="rating_option"
-                          value="custom_price"
-                          class="custom-control-input"
-                        />
-                        <label class="custom-control-label" for="price_custom"
-                          >Custom Price (per hour)</label
-                        >
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    class="row custom_price_cont"
-                    id="custom_price_cont"
-                    style="display: none"
-                  >
-                    <div class="col-md-4">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="custom_rating_input"
-                        name="custom_rating_count"
-                        value=""
-                        placeholder="20"
-                      />
-                      <small class="form-text text-muted"
-                        >Custom price you can add</small
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /Pricing -->
-
               <!-- Services and Specialization -->
               <div class="card services-card">
                 <div class="card-body">
                   <h4 class="card-title">Services and Specialization</h4>
-                  <div class="form-group">
-                    <label>Services</label>
-                    <input
-                      type="text"
-                      data-role="tagsinput"
-                      class="input-tags form-control"
-                      placeholder="Enter Services"
-                      name="services"
-                      value="Tooth cleaning "
-                      id="services"
-                    />
-                    <small class="form-text text-muted"
-                      >Note : Type & Press enter to add new services</small
-                    >
-                  </div>
+            
                   <div class="form-group mb-0">
-                    <label>Specialization </label>
+                    <label>Specialization <span class="text-danger">*</span></label>
                     <input
                       class="input-tags form-control"
                       type="text"
+                      value="<%= key.specialization.specialist %>"
                       data-role="tagsinput"
                       placeholder="Enter Specialization"
                       name="specialist"
-                      value="Children Care,Dental Care"
                       id="specialist"
+                      required
                     />
-                    <small class="form-text text-muted"
-                      >Note : Type & Press enter to add new
-                      specialization</small
-                    >
+                    
                   </div>
                 </div>
               </div>
@@ -488,29 +360,24 @@
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Degree</label>
-                              <input type="text" class="form-control" />
+                              <input type="text" value="<%= key.education.degree %>" name="degree" class="form-control" />
                             </div>
                           </div>
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>College/Institute</label>
-                              <input type="text" class="form-control" />
+                              <input type="text" value="<%= key.education.institute %>" name="institute" class="form-control" />
                             </div>
                           </div>
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Year of Completion</label>
-                              <input type="text" class="form-control" />
+                              <input type="number" value="<%= key.education.completion %>" name="completion" class="form-control" />
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="add-more">
-                    <a href="javascript:void(0);" class="add-education"
-                      ><i class="fa fa-plus-circle"></i> Add More</a
-                    >
                   </div>
                 </div>
               </div>
@@ -527,91 +394,34 @@
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Hospital Name</label>
-                              <input type="text" class="form-control" />
+                              <input type="text" value="<%= key.experience.hospitalName %>" name="hospitalName" class="form-control" />
                             </div>
                           </div>
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>From</label>
-                              <input type="text" class="form-control" />
+                              <input type="date" value="<%= key.experience.from %>" name="from" class="form-control" />
                             </div>
                           </div>
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>To</label>
-                              <input type="text" class="form-control" />
+                              <input type="date" value="<%= key.experience.to %>" name="to" class="form-control" />
                             </div>
                           </div>
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Designation</label>
-                              <input type="text" class="form-control" />
+                              <input type="text" value="<%= key.experience.designation %>" name="designation" class="form-control" />
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="add-more">
-                    <a href="javascript:void(0);" class="add-experience"
-                      ><i class="fa fa-plus-circle"></i> Add More</a
-                    >
-                  </div>
                 </div>
               </div>
               <!-- /Experience -->
-
-              <!-- Awards -->
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Awards</h4>
-                  <div class="awards-info">
-                    <div class="row form-row awards-cont">
-                      <div class="col-12 col-md-5">
-                        <div class="form-group">
-                          <label>Awards</label>
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                      <div class="col-12 col-md-5">
-                        <div class="form-group">
-                          <label>Year</label>
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="add-more">
-                    <a href="javascript:void(0);" class="add-award"
-                      ><i class="fa fa-plus-circle"></i> Add More</a
-                    >
-                  </div>
-                </div>
-              </div>
-              <!-- /Awards -->
-
-              <!-- Memberships -->
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Memberships</h4>
-                  <div class="membership-info">
-                    <div class="row form-row membership-cont">
-                      <div class="col-12 col-md-10 col-lg-5">
-                        <div class="form-group">
-                          <label>Memberships</label>
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="add-more">
-                    <a href="javascript:void(0);" class="add-membership"
-                      ><i class="fa fa-plus-circle"></i> Add More</a
-                    >
-                  </div>
-                </div>
-              </div>
-              <!-- /Memberships -->
 
               <!-- Registrations -->
               <div class="card">
@@ -621,23 +431,16 @@
                     <div class="row form-row reg-cont">
                       <div class="col-12 col-md-5">
                         <div class="form-group">
-                          <label>Registrations</label>
-                          <input type="text" class="form-control" />
+                          <label>SLMC Registration Number<span class="text-danger">*</span></label>
+                          <input type="text" value="<%= key.slmcregi %>" class="form-control" readonly/>
                         </div>
                       </div>
                       <div class="col-12 col-md-5">
-                        <div class="form-group">
-                          <label>Year</label>
-                          <input type="text" class="form-control" />
-                        </div>
+                        
                       </div>
                     </div>
                   </div>
-                  <div class="add-more">
-                    <a href="javascript:void(0);" class="add-reg"
-                      ><i class="fa fa-plus-circle"></i> Add More</a
-                    >
-                  </div>
+                  
                 </div>
               </div>
               <!-- /Registrations -->
@@ -682,6 +485,9 @@
         </div>
         <!-- /Footer Bottom -->
       </footer>
+
+    </form>
+
       <% } %>
     </div>
     <!-- /Main Wrapper -->

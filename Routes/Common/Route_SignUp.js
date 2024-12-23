@@ -72,6 +72,37 @@ router.post("/signup/doctors", async (req, res) => {
     rejected : false,
     mandotaryFieldFill : false,
     linkExpire: expires,
+    personalDetails : {
+
+        firstName : '',
+        lastName : '',
+        phoneNumber : '',
+        gender : '',
+        DOB : '',
+        bio : ''
+    },
+    address : {
+        adressLine1 : '',
+        adressLine2 : '',
+        city : '',
+        province : '',
+        country: '',
+        postalCode : ''
+    },
+    specialization : {
+        specialist : ''
+    },
+    education : {
+        degree : '',
+        institute : '',
+        completion : ''
+    },
+    experience : {
+        hospitalName : '',
+        from : '',
+        to : '',
+        designation : ''
+    }
   };
 
   try {
