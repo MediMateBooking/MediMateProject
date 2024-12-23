@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Profile</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
 
-    <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon" />
+<head>
+  <meta charset="utf-8" />
+  <title>Doctor Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon" />
 
-    <!-- Fontawesome CSS -->
-    <link
-      rel="stylesheet"
-      href="/assets/plugins/fontawesome/css/fontawesome.min.css"
-    />
-    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
@@ -30,8 +22,17 @@
   <body>
     <!-- Main Wrapper -->
 
-    <div class="main-wrapper">
-      <% for(const key of currentDoctor) { %>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/styles/patientDashboard.css" />
+</head>
+
+<body>
+  <!-- Main Wrapper -->
+
+  <div class="main-wrapper">
+    <% for(const key of currentDoctor) { %>
 
         <form action="/doctor/profile/<%= key.userID %>" method="POST" enctype="multipart/form-data">
       <!-- Header -->
@@ -45,13 +46,13 @@
                 <span></span>
               </span>
             </a>
-            <a href="index-2.html" class="navbar-brand logo">
+            <a href="/" class="navbar-brand logo">
               <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
             </a>
           </div>
           <div class="main-menu-wrapper">
             <div class="menu-header">
-              <a href="index-2.html" class="menu-logo">
+              <a href="/" class="menu-logo">
                 <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
               </a>
               <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -69,31 +70,20 @@
 
             <!-- User Menu -->
             <li class="nav-item dropdown has-arrow logged-item">
-              <a
-                href="#"
-                class="dropdown-toggle nav-link"
-                data-toggle="dropdown"
-              >
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                 <span class="user-img">
-                  <img
-                    class="rounded-circle"
-                    src="<%= key.profilePicture %>"
-                    width="31"
-                    alt="side profile picture"
-                  />
+                  <img class="rounded-circle" src="<%= key.profilePicture %>" width="31" alt="side profile picture" />
                 </span>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
                 <div class="user-header">
                   <div class="avatar avatar-sm">
-                    <img
-                      src="<%= key.profilePicture %>"
-                      alt="User Image"
-                      class="avatar-img rounded-circle"
-                    />
+                    <img src="<%= key.profilePicture %>" alt="User Image" class="avatar-img rounded-circle" />
                   </div>
                   <div class="user-text">
-                    <h6><%= key.name %></h6>
+                    <h6>
+                      <%= key.name %>
+                    </h6>
                     <p class="text-muted mb-0">Doctor</p>
                   </div>
                 </div>
@@ -104,8 +94,6 @@
             </li>
             <!-- /User Menu -->
           </ul>
-
-          <div id="progress-bar"></div>
         </nav>
       </header>
       <!-- /Header -->
@@ -121,15 +109,15 @@
                   <div class="profile-info-widget">
                     <a class="booking-doc-img">
                       <img
-                        src="<%= key.profilePicture %>"
+                        src="/assets/img/doctors/doctor-thumb-02.jpg"
                         alt="User Image"
                       />
                     </a>
                     <div class="profile-det-info">
-                      <h3>Dr. <%= key.name %></h3>
+                      <h3>Dr. Pradeep Ranga</h3>
 
                       <div class="patient-details">
-                        <h5 class="mb-0"><%= key.Specialist %></h5>
+                        <h5 class="mb-0">Cardiology Specialist</h5>
                       </div>
                     </div>
                   </div>
@@ -138,13 +126,15 @@
                   <nav class="dashboard-menu">
                     <ul>
                       <li>
+
                         <a href="/doctor/<%= key.userID %>">
+
                           <i class="fas fa-columns"></i>
                           <span>Dashboard</span>
                         </a>
                       </li>
                       <li>
-                        <a href="/appointments">
+                        <a href="/doctor/appointments">
                           <i class="fas fa-calendar-check"></i>
                           <span>Appointments</span>
                         </a>
@@ -157,14 +147,16 @@
                         </a>
                       </li>
                       <li class="active">
+
                         <a href="/doctor/profile/<%= key.userID %>">
+
                           <i class="fas fa-user-cog"></i>
                           <span>Profile Settings</span>
                         </a>
                       </li>
 
                       <li>
-                        <a href="">
+                        <a href="/docChangePassword">
                           <i class="fas fa-lock"></i>
                           <span>Change Password</span>
                         </a>
@@ -192,6 +184,7 @@
                       <div class="form-group">
                         <div class="change-avatar">
                           <div class="profile-img">
+
                             <img
                               src="<%= key.profilePicture %>"
                               alt="User Image"
@@ -206,16 +199,19 @@
                               <input type="file" name="image" class="upload" id="picUpload"/>
                             </div>
                             
+
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
+
                         <label
                           >Doctor ID <span class="text-danger">*</span></label
                         >
                         <input type="text" value="<%= key.doctorID %>" class="form-control" readonly required/>
+
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -226,6 +222,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
+
                         <label
                           >First Name <span class="text-danger">*</span></label
                         >
@@ -238,14 +235,18 @@
                           >Last Name <span class="text-danger">*</span></label
                         >
                         <input type="text" value="<%= key.personalDetails.lastName %>" class="form-control" name="lastName" required/>
+
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
+
                         <label>Phone Number<span class="text-danger">*</span></label>
                         <input type="number" value="<%= key.personalDetails.phoneNumber %>" class="form-control" name="phoneNumber" required/>
+
                       </div>
                     </div>
+
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Gender<span class="text-danger">*</span></label>
@@ -256,12 +257,14 @@
                         </select>
                       </div>
                     </div>
+
                     <div class="col-md-6">
                       <div class="form-group mb-0">
                         <label>Date of Birth<span class="text-danger">*</span></label>
                         <input type="date" value="<%= key.personalDetails.DOB %>" class="form-control" name="dob" required/>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -276,6 +279,7 @@
                     <textarea class="form-control" rows="5" name="bio"><%= key.personalDetails.bio %></textarea>
                   </div>
                 </div>
+
               </div>
               <!-- /About Me -->
 
@@ -344,10 +348,10 @@
                       required
                     />
                     
+
                   </div>
                 </div>
-              </div>
-              <!-- /Services and Specialization -->
+
 
               <!-- Education -->
               <div class="card">
@@ -380,8 +384,10 @@
                     </div>
                   </div>
                 </div>
+
               </div>
-              <!-- /Education -->
+
+              <!-- /About Me -->
 
               <!-- Experience -->
               <div class="card">
@@ -423,6 +429,7 @@
               </div>
               <!-- /Experience -->
 
+
               <!-- Registrations -->
               <div class="card">
                 <div class="card-body">
@@ -444,6 +451,7 @@
                 </div>
               </div>
               <!-- /Registrations -->
+
 
               <div class="submit-section submit-btn-bottom">
                 <button type="submit" class="btn btn-primary submit-btn">
@@ -489,21 +497,22 @@
     </form>
 
       <% } %>
-    </div>
-    <!-- /Main Wrapper -->
+  </div>
+  <!-- /Main Wrapper -->
 
-    <!-- jQuery -->
-    <script src="/assets/js/jquery.min.js"></script>
+  <!-- jQuery -->
+  <script src="/assets/js/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JS -->
-    <script src="/assets/js/popper.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
+  <!-- Bootstrap Core JS -->
+  <script src="/assets/js/popper.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
 
-    <!-- Sticky Sidebar JS -->
-    <script src="/assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+  <!-- Sticky Sidebar JS -->
+  <script src="/assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+  <script src="/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
-    <!-- Custom JS -->
-    <script src="/assets/js/script.js"></script>
-  </body>
+  <!-- Custom JS -->
+  <script src="/assets/js/script.js"></script>
+</body>
+
 </html>

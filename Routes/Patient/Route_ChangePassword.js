@@ -4,7 +4,7 @@ const crypto = require("crypto");
 
 const db = require("../../database/database");
 
-router.get("/patient/profile/:id", async (req, res) => {
+router.get("/patient/changePassword/:id", async (req, res) => {
   try {
     const userID = req.params.id;
 
@@ -16,7 +16,7 @@ router.get("/patient/profile/:id", async (req, res) => {
 
     if (currentPatient.length === 0) throw new Error("cannot find User");
 
-    res.render("Patient/profileSettings", { currentPatient: currentPatient }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
+    res.render("Patient/changePassword", { currentPatient: currentPatient }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }

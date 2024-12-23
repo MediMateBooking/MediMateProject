@@ -5,7 +5,7 @@ const db = require("../../database/database");
 
 router.get("/docReviews", (req, res) => {
   try {
-    res.render("docReviews");
+    res.render("Doctor/docReviews");
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
