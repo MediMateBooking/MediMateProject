@@ -12,7 +12,7 @@ function generateRandomPassword() {
     ];
   
     const allChars = lowerCase + upperCase + numbers + specialChars;
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       password.push(allChars[Math.floor(Math.random() * allChars.length)]);
     }
   
