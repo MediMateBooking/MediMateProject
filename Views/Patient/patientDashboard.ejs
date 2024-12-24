@@ -47,7 +47,7 @@
                 <span></span>
               </span>
             </a>
-            <a href="/" class="navbar-brand logo">
+            <a href="" class="navbar-brand logo">
               <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
             </a>
           </div>
@@ -101,7 +101,7 @@
                     <p class="text-muted mb-0">Patient</p>
                   </div>
                 </div>
-                <a class="dropdown-item" href="#"
+                <a class="dropdown-item" href=""
                   >Dashboard</a
                 >
                 <a class="dropdown-item" href="/patient/profile/<%= key.userID %>"
@@ -130,7 +130,7 @@
               <div class="profile-sidebar">
                 <div class="widget-profile pro-widget-content">
                   <div class="profile-info-widget">
-                    <a href="#" class="booking-doc-img">
+                    <a href="" class="booking-doc-img">
                       <img id="patientAvatar"
                         src="<%= key.profilePicture %>"
                         alt="User Image"
@@ -140,13 +140,19 @@
                       <h3><%= key.name %></h3>
                       <h6><%= key.email %></h6>
                       <div class="patient-details">
+
+                        <% if(DOB) { %>
                         <h5>
-                          <i class="fas fa-birthday-cake"></i> B day, age
-                          
+                          <i class="fas fa-birthday-cake"></i> <%= key.personalDetails.DOB %> , <%= key.personalDetails.Age %> Yrs
                         </h5>
+                        <% } %>
+
+                        <% if(address) { %>
                         <h5 class="mb-0"> 
-                          <i class="fas fa-map-marker-alt"></i> address 
+                          <i class="fas fa-map-marker-alt"></i> <%= key.address.addressFull %>  
                         </h5>
+                        <% } %>
+
                       </div>
                     </div>
                   </div>
@@ -209,8 +215,19 @@
                           <img src="/image/PatientDashboard/healthdetails.png" class="img-fluid" alt="HDetails" id="HDetails"/>
 
                             <div class="mainHDetails">
-                            <h3>120 <span id="abbrevation">mmHg</span></h3>
-                            <h6 class="text-muted">BMI : 24.5</h6>
+
+                            <% if(bloodPressure) { %>
+                              <h3><%= key.personalDetails.bloodPressure %> <span id="abbrevation">mmHg</span></h3>
+                              <% } else { %>
+                              <h6><a href="/patient/profile/<%= key.userID %>">Add Blood Presure</a></h6>
+                            <% } %>
+
+                            <% if(bmi) { %>
+                              <h6 class="text-muted">BMI : <%= userBMI %></h6>
+                              <% } else { %>
+                                <h6 class="text-muted"><a href="/patient/profile/<%= key.userID %>">Add BMI</a></h6>
+                            <% } %>
+
                           </div>
                         </div>
                       </div>
@@ -222,7 +239,6 @@
                     <div class="card-body">
                       <div class="dash-widget-header">
                         <span class="dash-widget-icon text-success">
-                          <i class="fe fe-user"></i>
                         </span>
                         <div class="dash-count">
                           <img src="/image/PatientDashboard/doctor.png" class="img-fluid" alt="totalDoctors" id="totalDoctors"/>
@@ -243,7 +259,6 @@
                     <div class="card-body">
                       <div class="dash-widget-header">
                         <span class="dash-widget-icon text-danger border-danger">
-                          <i class="fe fe-document"></i>
                         </span>
                         <div class="dash-count">
                           <img src="/image/PatientDashboard/appointments.png" class="img-fluid" alt="totalAppointments" id="totalAppointments"/>
@@ -264,7 +279,6 @@
                     <div class="card-body">
                       <div class="dash-widget-header">
                         <span class="dash-widget-icon text-warning border-warning">
-                          <i class="fe fe-star"></i>
                         </span>
                         <div class="dash-count">
                           <img src="/image/PatientDashboard/review.png" class="img-fluid" alt="totalReview" id="totalReview"/>
@@ -761,7 +775,6 @@
         </div>
         <!-- /Footer Bottom -->
       </footer>
-
     <% } %>
 
     </div>
