@@ -34,7 +34,6 @@ router.get("/patient/:id", async (req, res) => {
     if(currentPatient[0].personalDetails.height !== '' && currentPatient[0].personalDetails.weight !== ''){
        bmi = true
        userBMI = BMI.BMICalculator(currentPatient[0].personalDetails.height,currentPatient[0].personalDetails.weight)
-       
     }else bmi = false 
 
     res.render("Patient/patientDashboard", { currentPatient: currentPatient,DOB : DOB, address:address , bloodPressure:bloodPressure, bmi:bmi, userBMI:userBMI}); //render the patientDashboard.ejs file. render keyword is used to render the ejs file

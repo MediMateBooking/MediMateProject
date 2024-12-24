@@ -107,8 +107,7 @@
                 <a class="dropdown-item" href="/patient/<%= key.userID %>">Dashboard</a>
                 <a
                   class="dropdown-item"
-                  href="/patient/profile/<%= key.userID %>"
-                  >Profile Settings</a
+                  href="/patient/profile/<%= key.userID %>">Profile Settings</a
                 >
                 <a class="dropdown-item" href="/login">Logout</a>
               </div>
@@ -130,7 +129,7 @@
               <div class="profile-sidebar">
                 <div class="widget-profile pro-widget-content">
                   <div class="profile-info-widget">
-                    <a href="#" class="booking-doc-img">
+                    <a href="" class="booking-doc-img">
                       <img id="patientAvatar"
                         src="<%= key.profilePicture %>"
                         alt="User Image"
@@ -165,6 +164,12 @@
                         <a href="/patient/<%= key.userID %>">
                           <i class="fas fa-columns"></i>
                           <span>Dashboard</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/patient/appointment/<%= key.userID %>">
+                          <i class="fas fa-columns"></i>
+                          <span>Appointment</span>
                         </a>
                       </li>
                       <li>
