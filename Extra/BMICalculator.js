@@ -4,7 +4,7 @@ function BMICalculator(height,weight){
     const weightInKg = parseInt(weight, 10);
 
     // Check if height or weight is invalid
-    if (isNaN(heightInMeters) || isNaN(weightInKg) || heightInMeters <= 0 || weightInKg <= 0) {
+    if (isNaN(heightInMeters) || isNaN(weightInKg) || heightInMeters < 0 || weightInKg < 0) {
         throw new Error("Invalid height or weight values provided.");
     }
 
