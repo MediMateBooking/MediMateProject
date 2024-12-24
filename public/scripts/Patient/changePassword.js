@@ -34,6 +34,6 @@ passwordChangeFormPatient.addEventListener("submit", async e => {
     }
 
     }catch(e){
-        alert('error update password')
+        alert('Error update password')
     }
 });
