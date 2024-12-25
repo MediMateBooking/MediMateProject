@@ -1,7 +1,3 @@
-const statusMessage = document.querySelector(".statusMessage p");
-const statusMessageFrame = document.querySelector(".statusMessage");
-
-
 // async function approvingDoctor(e){
 
 //         const status = confirm('Do you want to Approve this Account?')

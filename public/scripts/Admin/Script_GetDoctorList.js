@@ -25,6 +25,7 @@ function createApproveList(approveList){
         const tr = document.createElement('tr');
         tr.innerHTML = `<td>No Records for Approval</td>`
         approveListTable.append(tr)
+        return
     }
 
     approveList.forEach(oneList => {
