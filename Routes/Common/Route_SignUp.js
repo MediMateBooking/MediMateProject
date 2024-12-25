@@ -191,6 +191,7 @@ router.post("/signup/patients", async (req, res) => {
     role: role,
     profileActive: false,
     linkExpire: expires,
+    saved : [],
     personalDetails : {
 
       phoneNumber : '',
