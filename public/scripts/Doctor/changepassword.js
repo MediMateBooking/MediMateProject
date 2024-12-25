@@ -8,8 +8,8 @@ passwordChangeForm.addEventListener("submit", async e => {
   const confirmPassword = formData.get("confirmPassword");
 
   const updatePassword = {
-    newPassword : newPassword,
-    confirmPassword : confirmPassword
+    newPassword : newPassword.trim(),
+    confirmPassword : confirmPassword.trim()
   }
 
   

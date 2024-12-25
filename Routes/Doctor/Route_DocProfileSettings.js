@@ -54,11 +54,18 @@ router.post("/doctor/profile/:userID", upload.single('image'),async (req, res) =
         specialist,
         degree,
         institute,
-        completion,
+        startYear,
+        endYear,
         hospitalName,
         from,
         to,
-        designation} = req.body
+        designation,
+        date1,
+        time1,
+        date2,
+        time2,
+        date3,
+        time3} = req.body
       const fileUpload = req.file;
 
       const personalDetails ={
@@ -87,7 +94,8 @@ router.post("/doctor/profile/:userID", upload.single('image'),async (req, res) =
       const education = {
         degree : degree.trim(),
         institute : institute.trim(),
-        completion : completion.trim()
+        startYear : startYear.trim(),
+        endYear : endYear.trim()
       }
 
       const experience = {
@@ -96,6 +104,12 @@ router.post("/doctor/profile/:userID", upload.single('image'),async (req, res) =
         to : to.trim(),
         designation : designation.trim()
       }
+
+      const available = [
+        {id : 1, date : date1, time : time1},
+        {id : 2,date : date2, time : time2},
+        {id : 3,date : date3, time : time3}
+      ]
 
       if(fileUpload){
         await db
@@ -112,7 +126,7 @@ router.post("/doctor/profile/:userID", upload.single('image'),async (req, res) =
       .collection("doctors")
       .updateOne(
         { userID: userID },
-        { $set: {name: `${firstName.trim()} ${lastName.trim()}`, personalDetails : personalDetails,address:address,specialization:specialization,education:education,experience:experience,mandotaryFieldFill:true}}
+        { $set: {name: `${firstName.trim()} ${lastName.trim()}`, personalDetails : personalDetails,address:address,specialization:specialization,education:education,experience:experience,available:available,mandotaryFieldFill:true}}
       );
 
     res.redirect(`/doctor/${userID}`);

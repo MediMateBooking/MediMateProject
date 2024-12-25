@@ -46,6 +46,7 @@ app.use("/patient/profile/images", express.static("images"));
 app.use("/patient/changePassword/images", express.static("images"));
 app.use("/patient/appointment/images", express.static("images"));
 app.use("/patient/favorites/images", express.static("images"));
+app.use("/patient/view/images", express.static("images"));
 app.use("/doctor/images", express.static("images"));
 app.use("/doctor/profile/images", express.static("images"));
 app.use("/doctor/password/images", express.static("images"));

@@ -95,14 +95,20 @@ router.post("/signup/doctors", async (req, res) => {
     education : {
         degree : '',
         institute : '',
-        completion : ''
+        startYear : '',
+        endYear : ''
     },
     experience : {
         hospitalName : '',
         from : '',
         to : '',
         designation : ''
-    }
+    },
+    available : [
+      {id : 1, date : '', time : ''},
+      {id : 2,date : '', time : ''},
+      {id : 3,date : '', time : ''}
+    ]
   };
 
   try {
