@@ -79,16 +79,7 @@ function createSavedDocList(approveList){
         approveListDiv.append(div)
     })
 
-    if(approveList.length === 0) {
-      Swal.fire({
-          title: 'No Doctors Found!',
-          text: 'Please check your saved list and try again.',
-          icon: 'info',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK',
-      });
-      return;
-  }
+    if(approveList.length === 0) return alert('No Doctors Found!')
 
     const allSavedBtn = document.querySelectorAll('.savedBtn')
     allSavedBtn.forEach(oneSaveBtn => {
@@ -106,24 +97,11 @@ async function saveFunction(e){
       const statusMessage = await response.json();
   
       if(statusMessage.status){
-        await Swal.fire({
-          title: 'Doctor Removed',
-          text: 'The doctor has been successfully removed from your favorites.',
-          icon: 'success',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK',
-      });
-      fetchAllFavouritList();
+        alert('Doctor Removed')
+        fetchAllFavouritList()
       }
   
     }catch(e){
       console.error('Error Update Status:', e);
-      await Swal.fire({
-        title: 'Error',
-        text: 'Unable to update the status. Please try again later.',
-        icon: 'error',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-    });
     }
   }
