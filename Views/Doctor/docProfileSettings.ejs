@@ -253,6 +253,35 @@
               </div>
               <!-- /Basic Information -->
 
+              <!-- Available Time -->
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Available Times</h4>
+
+                  <% for(const keys of key.available) { %>
+                  <div class="row form-row">
+        
+                    <div class="col-md-6">
+                      <div class="form-group mb-0">
+                        <label>Date <%= keys.id %><span class="text-danger"><%= keys.id === 1 ? '*' : '' %></span></label>
+                        <input type="date" value="<%= keys.date %>" class="form-control" name="date<%= keys.id %>" <%= keys.id === 1 ? 'required' : '' %>/>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group mb-0">
+                        <label>Time <%= keys.id %><span class="text-danger"><%= keys.id === 1 ? '*' : '' %></span></label>
+                        <input type="time" value="<%= keys.time %>" class="form-control" name="time<%= keys.id %>" <%= keys.id === 1 ? 'required' : '' %>/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <% } %>
+
+                </div>
+              </div>
+              <!-- Available Time -->
+
               <!-- About Me -->
               <div class="card">
                 <div class="card-body">
@@ -355,12 +384,21 @@
                               <input type="text" value="<%= key.education.institute %>" name="institute" class="form-control" />
                             </div>
                           </div>
+
                           <div class="col-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                              <label>Year of Completion</label>
-                              <input type="number" value="<%= key.education.completion %>" name="completion" class="form-control" />
+                              <label>Start Year</label>
+                              <input type="number" value="<%= key.education.startYear %>" name="startYear" class="form-control" />
                             </div>
                           </div>
+
+                          <div class="col-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                              <label>End Year</label>
+                              <input type="number" value="<%= key.education.endYear %>" name="endYear" class="form-control" />
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                     </div>

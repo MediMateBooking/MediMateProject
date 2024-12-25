@@ -36,12 +36,12 @@ router.post("/patient/password/:userID", async (req, res) => {
 
      const userID = req.params.userID;
 
-        const currentDoctor = await db
+        const currentPatient = await db
               .DbConn()
               .collection("patients")
-              .find({ userID: userID });
+              .findOne({ userID: userID });
         
-            if (!currentDoctor) throw new Error("cannot find User");
+            if (!currentPatient) throw new Error("cannot find User");
 
             if(req.body.newPassword.trim().length < 6 || req.body.confirmPassword.trim().length < 6) return res.json({ success: false, message: "Password need at least 6 Charactors" });
             if(req.body.newPassword.trim() !== req.body.confirmPassword.trim()) return res.json({ success: false, message: "Confirm Password does not Match" });
