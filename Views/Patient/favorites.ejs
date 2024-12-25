@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Patient Dashboard</title>
+    <title>Booking Doctor</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -28,10 +28,14 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
-    <link rel="stylesheet" href="/styles/Patient/patientDashboard.css" />
+    <link rel="stylesheet" href="/styles/Patient/appointment.css" />
+
+	   <!-- JS -->
+	   <script src="/scripts/Patient/favourite.js" defer></script>
   </head>
   <body>
     <!-- Main Wrapper -->
+
     <div class="main-wrapper">
       <% for(const key of currentPatient) { %>
 
@@ -46,7 +50,7 @@
                 <span></span>
               </span>
             </a>
-            <a href="/" class="navbar-brand logo">
+            <a href="" class="navbar-brand logo">
               <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
             </a>
           </div>
@@ -98,7 +102,9 @@
                     <p class="text-muted mb-0">Patient</p>
                   </div>
                 </div>
-                <a class="dropdown-item" href="/patient/<%= key.userID %>">Dashboard</a>
+                <a class="dropdown-item" href="/patient/<%= key.userID %>"
+                  >Dashboard</a
+                >
                 <a
                   class="dropdown-item"
                   href="/patient/profile/<%= key.userID %>"
@@ -114,32 +120,39 @@
         </nav>
       </header>
       <!-- /Header -->
+
       <!-- Page Content -->
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <!-- Profile Sidebar -->
             <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
               <div class="profile-sidebar">
                 <div class="widget-profile pro-widget-content">
                   <div class="profile-info-widget">
-                    <a href="#" class="booking-doc-img">
-                      <img id="patientAvatar"
+                    <a href="" class="booking-doc-img">
+                      <img
                         src="<%= key.profilePicture %>"
                         alt="User Image"
+                        id="patientAvatar"
                       />
                     </a>
                     <div class="profile-det-info">
                       <h3><%= key.name %></h3>
                       <h6><%= key.email %></h6>
+
                       <div class="patient-details">
+                        <% if(DOB) { %>
                         <h5>
-                          <i class="fas fa-birthday-cake"></i> B day, age
-                          
+                          <i class="fas fa-birthday-cake"></i> <%=
+                          key.personalDetails.DOB %> , <%=
+                          key.personalDetails.Age %> Yrs
                         </h5>
-                        <h5 class="mb-0"> 
-                          <i class="fas fa-map-marker-alt"></i> address 
+                        <% } %> <% if(address) { %>
+                        <h5 class="mb-0">
+                          <i class="fas fa-map-marker-alt"></i><%=
+                          key.address.addressFull %>
                         </h5>
+                        <% } %>
                       </div>
                     </div>
                   </div>
@@ -151,6 +164,12 @@
                         <a href="/patient/<%= key.userID %>">
                           <i class="fas fa-columns"></i>
                           <span>Dashboard</span>
+                        </a>
+                      </li>
+                      <li >
+                        <a href="/patient/appointment/<%= key.userID %>">
+                          <i class="fas fa-columns"></i>
+                          <span>Appointment</span>
                         </a>
                       </li>
                       <li class="active">
@@ -188,339 +207,12 @@
                 </div>
               </div>
             </div>
-            <!-- /Profile Sidebar -->
 
-          <!-- doctor profile -->
             <div class="col-md-7 col-lg-8 col-xl-9">
-              <div class="row row-grid">
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="profile-widget">
-                    <div class="doc-img">
-                      <a href="doctor-profile.html">
-                        <img
-                          class="img-fluid"
-                          alt="User Image"
-                          src="/assets/img/doctors/doctor-01.jpg"
-                        />
-                      </a>
-                      <a href="javascript:void(0)" class="fav-btn">
-                        <i class="far fa-bookmark"></i>
-                      </a>
-                    </div>
-                    <div class="pro-content">
-                      <h3 class="title">
-                        <a href="doctor-profile.html">Ruby Perrin</a>
-                        <i class="fas fa-check-circle verified"></i>
-                      </h3>
-                      <p class="speciality">
-                        MDS - Periodontology and Oral Implantology, BDS
-                      </p>
-                      <div class="rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <span class="d-inline-block average-rating">(17)</span>
-                      </div>
-                      <ul class="available-info">
-                        <li>
-                          <i class="fas fa-map-marker-alt"></i> Florida, USA
-                        </li>
-                        <li>
-                          <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                        </li>
-                       
-                      </ul>
-                      <div class="row row-sm">
-                        <div class="col-6">
-                          <a href="doctor-profile.html" class="btn view-btn"
-                            >View Profile</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="booking.html" class="btn book-btn"
-                            >Book Now</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="profile-widget">
-                    <div class="doc-img">
-                      <a href="doctor-profile.html">
-                        <img
-                          class="img-fluid"
-                          alt="User Image"
-                          src="/assets/img/doctors/doctor-02.jpg"
-                        />
-                      </a>
-                      <a href="javascript:void(0)" class="fav-btn">
-                        <i class="far fa-bookmark"></i>
-                      </a>
-                    </div>
-                    <div class="pro-content">
-                      <h3 class="title">
-                        <a href="doctor-profile.html">Darren Elder</a>
-                        <i class="fas fa-check-circle verified"></i>
-                      </h3>
-                      <p class="speciality">
-                        BDS, MDS - Oral & Maxillofacial Surgery
-                      </p>
-                      <div class="rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="d-inline-block average-rating">(35)</span>
-                      </div>
-                      <ul class="available-info">
-                        <li>
-                          <i class="fas fa-map-marker-alt"></i> Newyork, USA
-                        </li>
-                        <li>
-                          <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                        </li>
-                      </ul>
-                      <div class="row row-sm">
-                        <div class="col-6">
-                          <a href="doctor-profile.html" class="btn view-btn"
-                            >View Profile</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="booking.html" class="btn book-btn"
-                            >Book Now</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="profile-widget">
-                    <div class="doc-img">
-                      <a href="doctor-profile.html">
-                        <img
-                          class="img-fluid"
-                          alt="User Image"
-                          src="/assets/img/doctors/doctor-03.jpg"
-                        />
-                      </a>
-                      <a href="javascript:void(0)" class="fav-btn">
-                        <i class="far fa-bookmark"></i>
-                      </a>
-                    </div>
-                    <div class="pro-content">
-                      <h3 class="title">
-                        <a href="doctor-profile.html">Deborah Angel</a>
-                        <i class="fas fa-check-circle verified"></i>
-                      </h3>
-                      <p class="speciality">
-                        MBBS, MD - General Medicine, DNB - Cardiology
-                      </p>
-                      <div class="rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="d-inline-block average-rating">(27)</span>
-                      </div>
-                      <ul class="available-info">
-                        <li>
-                          <i class="fas fa-map-marker-alt"></i> Georgia, USA
-                        </li>
-                        <li>
-                          <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                        </li>
-                      </ul>
-                      <div class="row row-sm">
-                        <div class="col-6">
-                          <a href="doctor-profile.html" class="btn view-btn"
-                            >View Profile</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="booking.html" class="btn book-btn"
-                            >Book Now</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="profile-widget">
-                    <div class="doc-img">
-                      <a href="doctor-profile.html">
-                        <img
-                          class="img-fluid"
-                          alt="User Image"
-                          src="/assets/img/doctors/doctor-04.jpg"
-                        />
-                      </a>
-                      <a href="javascript:void(0)" class="fav-btn">
-                        <i class="far fa-bookmark"></i>
-                      </a>
-                    </div>
-                    <div class="pro-content">
-                      <h3 class="title">
-                        <a href="doctor-profile.html">Sofia Brient</a>
-                        <i class="fas fa-check-circle verified"></i>
-                      </h3>
-                      <p class="speciality">
-                        MBBS, MS - General Surgery, MCh - Urology
-                      </p>
-                      <div class="rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="d-inline-block average-rating">(4)</span>
-                      </div>
-                      <ul class="available-info">
-                        <li>
-                          <i class="fas fa-map-marker-alt"></i> Louisiana, USA
-                        </li>
-                        <li>
-                          <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                        </li>
-                      </ul>
-                      <div class="row row-sm">
-                        <div class="col-6">
-                          <a href="doctor-profile.html" class="btn view-btn"
-                            >View Profile</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="booking.html" class="btn book-btn"
-                            >Book Now</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="profile-widget">
-                    <div class="doc-img">
-                      <a href="doctor-profile.html">
-                        <img
-                          class="img-fluid"
-                          alt="User Image"
-                          src="/assets/img/doctors/doctor-05.jpg"
-                        />
-                      </a>
-                      <a href="javascript:void(0)" class="fav-btn">
-                        <i class="far fa-bookmark"></i>
-                      </a>
-                    </div>
-                    <div class="pro-content">
-                      <h3 class="title">
-                        <a href="doctor-profile.html">Marvin Campbell</a>
-                        <i class="fas fa-check-circle verified"></i>
-                      </h3>
-                      <p class="speciality">
-                        MBBS, MD - Ophthalmology, DNB - Ophthalmology
-                      </p>
-                      <div class="rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="d-inline-block average-rating">(66)</span>
-                      </div>
-                      <ul class="available-info">
-                        <li>
-                          <i class="fas fa-map-marker-alt"></i> Michigan, USA
-                        </li>
-                        <li>
-                          <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                        </li>
-                      </ul>
-                      <div class="row row-sm">
-                        <div class="col-6">
-                          <a href="doctor-profile.html" class="btn view-btn"
-                            >View Profile</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="booking.html" class="btn book-btn"
-                            >Book Now</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                  <div class="profile-widget">
-                    <div class="doc-img">
-                      <a href="doctor-profile.html">
-                        <img
-                          class="img-fluid"
-                          alt="User Image"
-                          src="/assets/img/doctors/doctor-06.jpg"
-                        />
-                      </a>
-                      <a href="javascript:void(0)" class="fav-btn">
-                        <i class="far fa-bookmark"></i>
-                      </a>
-                    </div>
-                    <div class="pro-content">
-                      <h3 class="title">
-                        <a href="doctor-profile.html">Katharine Berthold</a>
-                        <i class="fas fa-check-circle verified"></i>
-                      </h3>
-                      <p class="speciality">
-                        MS - Orthopaedics, MBBS, M.Ch - Orthopaedics
-                      </p>
-                      <div class="rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="d-inline-block average-rating">(52)</span>
-                      </div>
-                      <ul class="available-info">
-                        <li>
-                          <i class="fas fa-map-marker-alt"></i> Texas, USA
-                        </li>
-                        <li>
-                          <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                        </li>
-                      </ul>
-                      <div class="row row-sm">
-                        <div class="col-6">
-                          <a href="doctor-profile.html" class="btn view-btn"
-                            >View Profile</a
-                          >
-                        </div>
-                        <div class="col-6">
-                          <a href="booking.html" class="btn book-btn"
-                            >Book Now</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+              <div class="row row-grid" id="approveListDiv">
+            
               </div>
             </div>
-            <!-- /doctor profile -->
           </div>
         </div>
       </div>
@@ -555,7 +247,7 @@
         </div>
         <!-- /Footer Bottom -->
       </footer>
-
+      <div id="userID" style="display: none"><%= key.userID %></div>
       <% } %>
     </div>
     <!-- /Main Wrapper -->
