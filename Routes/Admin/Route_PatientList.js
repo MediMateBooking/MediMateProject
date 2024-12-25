@@ -13,10 +13,8 @@ router.get("/admin/patientList/:id", async(req, res) => {
           .find({ dynamicRouteCode: dynamicRouteCode })
           .toArray();
 
-    if (activeAdmin.length === 0) {
-      console.error("No admin found for ID:", dynamicRouteCode);
-      throw new Error("cannot find Admin");
-    }
+    if (activeAdmin.length === 0) throw new Error("cannot find Admin");
+
     res.render("Admin/patientList",{activeAdmin : activeAdmin});
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
