@@ -191,6 +191,24 @@ router.post("/signup/patients", async (req, res) => {
     role: role,
     profileActive: false,
     linkExpire: expires,
+    personalDetails : {
+
+      phoneNumber : '',
+      gender : '',
+      DOB : '',
+      Age : 0,
+      height : '',
+      weight : '',
+      bloodPressure : '',
+      bloodGrp : '',
+  },
+  address : {
+    addressFull : '',
+    city : '',
+    state : '',
+    country: '',
+    zipcode : ''
+  }
   };
 
   try {
