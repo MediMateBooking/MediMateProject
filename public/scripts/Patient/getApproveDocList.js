@@ -1,36 +1,36 @@
 const userID = document.getElementById('userID');
 
-window.onload = function() {
-    fetchAllApproveDocList()
+window.onload = function () {
+  fetchAllApproveDocList()
 };
 
-async function fetchAllApproveDocList(){
-    try {
-        const response = await fetch(`/patient/approveDocList/${userID.textContent}`, { method: 'POST' });
-        const approveList = await response.json();
+async function fetchAllApproveDocList() {
+  try {
+    const response = await fetch(`/patient/approveDocList/${userID.textContent}`, { method: 'POST' });
+    const approveList = await response.json();
 
-            if(approveList.activeDoctorsList.length === 0) return alert('No Doctors Found!')
+    if (approveList.activeDoctorsList.length === 0) return alert('No Doctors Found!')
 
-            createApproveDocList(approveList.activeDoctorsList,approveList.savedList)
+    createApproveDocList(approveList.activeDoctorsList, approveList.savedList)
 
-        } catch (err) {
-            console.error('Error Get Approve Status:', err);
-            alert('Error Get Approve Status');
-        }
+  } catch (err) {
+    console.error('Error Get Approve Status:', err);
+    alert('Error Get Approve Status');
+  }
 }
 
-function createApproveDocList(approveList,savedList){
-    
-    const approveListDiv  = document.getElementById('approveListDiv');
-    approveListDiv.innerHTML = ''
+function createApproveDocList(approveList, savedList) {
 
-    approveList.forEach(oneList => {
+  const approveListDiv = document.getElementById('approveListDiv');
+  approveListDiv.innerHTML = ''
 
-        const div = document.createElement('div');
-        div.className = ''; 
-        div.classList.add('col-md-6', 'col-lg-4', 'col-xl-3');
+  approveList.forEach(oneList => {
 
-        div.innerHTML = `
+    const div = document.createElement('div');
+    div.className = '';
+    div.classList.add('col-md-6', 'col-lg-4', 'col-xl-3');
+
+    div.innerHTML = `
         
         <div class="profile-widget">
                       <div class="doc-img">
@@ -49,7 +49,7 @@ function createApproveDocList(approveList,savedList){
                         <h3 class="title">
                           <a href="doctor-profile.html">Dr.${oneList.name}</a>
                           <i class="fas fa-check-circle verified"></i>
-                          ${savedList.includes(oneList.userID) ? `<i class="far fa-bookmark" id="savedIcon"></i>`: ''}
+                          ${savedList.includes(oneList.userID) ? `<i class="far fa-bookmark" id="savedIcon"></i>` : ''}
                         </h3>
                         <p class="speciality">
                         ${oneList.specialization.specialist}
@@ -76,17 +76,17 @@ function createApproveDocList(approveList,savedList){
                       </div>
                     </div>
         `
-        approveListDiv.append(div)
-    })
+    approveListDiv.append(div)
+  })
 
-    const allSavedBtn = document.querySelectorAll('.savedBtn')
-    allSavedBtn.forEach(oneSaveBtn => {
-      oneSaveBtn.addEventListener('click', saveFunction);
-    })
+  const allSavedBtn = document.querySelectorAll('.savedBtn')
+  allSavedBtn.forEach(oneSaveBtn => {
+    oneSaveBtn.addEventListener('click', saveFunction);
+  })
 }
 
 
-async function saveFunction(e){
+async function saveFunction(e) {
   const button = e.target.closest('.savedBtn');
   console.log(button.dataset.saveid)
 
@@ -94,15 +94,39 @@ async function saveFunction(e){
     const response = await fetch(`/patient/add/saved/${button.dataset.saveid}/${userID.textContent}`, { method: 'POST' });
     const statusMessage = await response.json();
 
-    if(statusMessage.status){
-      alert('Doctor Saved')
-      fetchAllApproveDocList()
-    }else{
-      alert('Doctor Removed')
-      fetchAllApproveDocList()
+    if (statusMessage.status) {
+
+      // sweetheart alert message instead of traditional javascript alert
+      await Swal.fire({
+        title: 'Doctor Saved',
+        text: 'The doctor is successfully added to your favorites.',
+        icon: 'success',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      });
+      // end of sweetheart alert message
+
+      fetchAllApproveDocList();
     }
 
-  }catch(e){
+    else {
+
+      // sweetheart alert message instead of traditional javascript alert
+      await Swal.fire({
+        title: 'Doctor Removed',
+        text: 'The doctor is successfully added to your favorites.',
+        icon: 'error',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      });
+      // end of sweetheart alert message
+
+      fetchAllApproveDocList();
+    }
+
+  } catch (e) {
     console.error('Error Update Status:', e);
   }
 }
+
+
