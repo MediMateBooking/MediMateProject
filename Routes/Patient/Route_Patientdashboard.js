@@ -16,6 +16,18 @@ router.get("/patient/:id", async (req, res) => {
 
     if (currentPatient.length === 0) throw new Error("cannot find User");
 
+    const totalAppointments = await db
+      .DbConn()
+      .collection("appointments")
+      .find({ patinetID: userID })
+      .toArray();
+
+    const totalReviews = await db
+    .DbConn()
+    .collection("reviews")
+    .find({ patientID: userID })
+    .toArray();
+
     let DOB = false
     let address = false
     let bloodPressure = false
@@ -36,7 +48,7 @@ router.get("/patient/:id", async (req, res) => {
        userBMI = BMI.BMICalculator(currentPatient[0].personalDetails.height,currentPatient[0].personalDetails.weight)
     }else bmi = false 
 
-    res.render("Patient/patientDashboard", { currentPatient: currentPatient,DOB : DOB, address:address , bloodPressure:bloodPressure, bmi:bmi, userBMI:userBMI}); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
+    res.render("Patient/patientDashboard", { currentPatient: currentPatient,DOB : DOB, address:address , bloodPressure:bloodPressure, bmi:bmi, userBMI:userBMI,totalAppointments: totalAppointments.length,totalReviews:totalReviews.length}); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
