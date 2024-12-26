@@ -2,9 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-	<% for(const keys of currentDoctor)  { %>
-    <title>Dr. <%= keys.name %> Profile</title>
-	<% } %>
+    <title>System Feedbacks </title>
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -168,7 +167,7 @@
 												  <span>Dashboard</span>
 												</a>
 											  </li>
-											  <li class="active">
+											  <li>
 												<a href="/patient/appointment/<%= key.userID %>">
 												  <i class="fas fa-columns"></i>
 												  <span>Appointment</span>
@@ -180,7 +179,7 @@
 												  <span>Favorites</span>
 												</a>
 											  </li>
-											  <li>
+											  <li 	class="active">
 												<a href="/patient/systemFeedbacks/<%= key.userID %>">
 												  <i class="fas fa-comments"></i>
 												  <span>System Feedback</span>
@@ -211,48 +210,11 @@
 							</div>
 						</div>
 
-				<% for(const keys of currentDoctor)  { %>
+				<% for(const keys of currentPatient)  { %>
 
 				<div class="col-md-7 col-lg-8 col-xl-9">
 
-              					<!-- Doctor Widget -->
-					<div class="card">
-						<div class="card-body">
-							<div class="doctor-widget">
-								<div class="doc-info-left">
-									<div class="doctor-img">
-										<img src="<%= keys.profilePicture %>" class="img-fluid" alt="User Image">
-									</div>
-									<div class="doc-info-cont">
-										<h4 class="doc-name">Dr. <%= keys.name %></h4>
-										<p class="doc-speciality"><%= keys.specialization.specialist %></p>
-										<p class="doc-department"><%= keys.email %></p>
-										<p class="doc-department"><%= keys.personalDetails.phoneNumber %></p>
-									
-										<div class="clinic-details">
-											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%= keys.address.city %>, <%= keys.address.country %></p>
-
-										</div>
-							
-									</div>
-								</div>
-								<div class="doc-info-right">
-									<div class="clini-infos">
-										<ul>
-											<li><i class="far fa-comment"></i><span id="totalReviews"><%= totalReviews %></span> Reviews</li>
-											<li><i class="fas fa-map-marker-alt"></i> <%= keys.address.city %>, <%= keys.address.country %></li>
-										</ul>
-									</div>
-
-									<div class="clinic-booking">
-										<a class="apt-btn" href="#">Book Appointment</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /Doctor Widget -->
-					
+				
 					<!-- Doctor Details Tab -->
 					<div class="card">
 						<div class="card-body pt-0">
@@ -260,15 +222,11 @@
 							<!-- Tab Menu -->
 							<nav class="user-tabs mb-4">
 								<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+
 									<li class="nav-item">
-										<a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
+										<a class="nav-link active" href="#doc_reviews" data-toggle="tab">System Reviews</a>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
-									</li>
+
 								</ul>
 							</nav>
 							<!-- /Tab Menu -->
@@ -276,90 +234,11 @@
 							<!-- Tab Content -->
 							<div class="tab-content pt-0">
 							
-								<!-- Overview Content -->
-								<div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
-									<div class="row">
-										<div class="col-md-12 col-lg-9">
-										
-											<!-- About Details -->
-											<% if (keys.personalDetails.bio && keys.personalDetails.bio !== '') { %>
-												<div class="widget about-widget">
-													<h4 class="widget-title">About Me</h4>
-													<p><%= keys.personalDetails.bio %></p>
-												</div>
-											<% } %>
-											<!-- /About Details -->
-										
-											<!-- Education Details -->
-											<% if (keys.education.degree !== '' && keys.education.institute !== '' && keys.education.startYear !== '' && keys.education.endYear !== '') { %>
-											<div class="widget education-widget">
-												<h4 class="widget-title">Education</h4>
-												<div class="experience-box">
-													<ul class="experience-list">
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="" class="name"><%= keys.education.institute %></a>
-																	<div><%= keys.education.degree %></div>
-																	<span class="time"><%= keys.education.startYear %> - <%= keys.education.endYear %></span>
-																</div>
-															</div>
-														</li>
-														
-													</ul>
-												</div>
-											</div>
-										<% } %>
 
-											<!-- /Education Details -->
-									
-											<!-- Experience Details -->
-											<% if (keys.experience.hospitalName !== '' && keys.experience.from !== '' && keys.experience.to !== '' && keys.experience.designation !== '') { %>
-											<div class="widget experience-widget">
-												<h4 class="widget-title">Work & Experience</h4>
-												<div class="experience-box">
-													<ul class="experience-list">
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="" class="name"><%= keys.experience.hospitalName %></a>
-																	<span class="time"><%= keys.experience.from %> To <%= keys.experience.to %></span>
-																	<span class="time"><%= keys.experience.designation %></span>
-																</div>
-															</div>
-														</li>
-												
-													</ul>
-												</div>
-											</div>
-											<% } %>
-											<!-- /Experience Details -->
-								
-											
-											
-											<!-- Services List -->
-											<div class="service-list">
-												<h4>SLMC Registration</h4>
-												<ul class="clearfix">
-													<li><%= keys.slmcregi %></li>
-												</ul>
-											</div>
-											<!-- /Services List -->
-											
-										</div>
-									</div>
-								</div>
-								<!-- /Overview Content -->
 								
 								
 								<!-- Reviews Content -->
-								<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
+								<div role="tabpanel" id="doc_reviews" class="tab-pane fade show active">
 								
 									<!-- Review Listing -->
 									<div class="widget review-listing">
@@ -393,7 +272,7 @@
 								
 									<!-- Write Review -->
 									<div class="write-review">
-										<h4>Write a review for <strong>Dr. <%= keys.name %></strong></h4>
+										<h4>Write a review for <strong>MediMate System</strong></h4>
 										
 										<!-- Write Review Form -->
 										<form id="reviewComment">
@@ -421,44 +300,7 @@
 								</div>
 								<!-- /Reviews Content -->
 								
-								<!-- Business Hours Content -->
-								<div role="tabpanel" id="doc_business_hours" class="tab-pane fade">
-									<div class="row">
-										<div class="col-md-6 offset-md-3">
-										
-											<!-- Business Hours Widget -->
-											<div class="widget business-widget">
-												<div class="widget-content">
-													<div class="listing-hours">
-														<div class="listing-day current">
-															<div class="day">Date</div>
-															<div class="time-items">
-																<span class="time">Time</span>
-															</div>
-														</div>
 
-														<% for(const oneAvailable of keys.available)  { %>
-															<% if (oneAvailable.date !== '' && oneAvailable.time !== '') { %>
-
-														<div class="listing-day">
-															<div class="day"><%= oneAvailable.date %></div>
-															<div class="time-items">
-																<span class="time"><%= oneAvailable.time %></span>
-															</div>
-														</div>
-														<% } %>
-
-														<% } %>
-														
-													</div>
-												</div>
-											</div>
-											<!-- /Business Hours Widget -->
-									
-										</div>
-									</div>
-								</div>
-								<!-- /Business Hours Content -->
 								
 							</div>
 						</div>
