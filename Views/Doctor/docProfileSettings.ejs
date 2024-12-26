@@ -65,7 +65,7 @@
                     class="rounded-circle"
                     src="<%= key.profilePicture %>"
                     width="31"
-                    alt="side profile picture"
+                    alt="docPic"
                   />
                 </span>
               </a>
@@ -143,14 +143,14 @@
                         </a>
                       </li>
                       <li class="active">
-                        <a href="#">
+                        <a href="/doctor/profile/<%= key.userID %>">
                           <i class="fas fa-user-cog"></i>
                           <span>Profile Settings</span>
                         </a>
                       </li>
 
                       <li>
-                        <a href="/doctor/docChangePassword/<%= key.userID %>">
+                        <a href="/doctor/password/<%= key.userID %>">
                           <i class="fas fa-lock"></i>
                           <span>Change Password</span>
                         </a>
