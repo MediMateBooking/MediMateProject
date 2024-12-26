@@ -35,7 +35,7 @@ function createSavedDocList(approveList){
         
         <div class="profile-widget">
                       <div class="doc-img">
-                        <a href="/doctor-profile.html">
+                        <a href="/patient/view/${userID.textContent}?docID=${oneList.userID}">
                           <img
                             class="img-fluid"
                             alt="User Image"
@@ -63,12 +63,12 @@ function createSavedDocList(approveList){
                         </ul>
                         <div class="row row-sm">
                           <div class="col-6">
-                            <a href="doctor-profile.html" class="btn view-btn"
+                            <a href="/patient/view/${userID.textContent}?docID=${oneList.userID}" class="btn view-btn"
                               >View Profile</a
                             >
                           </div>
                           <div class="col-6">
-                            <a href="booking.html" class="btn book-btn"
+                            <a href="/patient/book/${userID.textContent}?docID=${oneList.userID}" class="btn book-btn"
                               >Book Now</a
                             >
                           </div>

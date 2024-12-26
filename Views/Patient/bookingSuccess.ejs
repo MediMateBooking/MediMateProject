@@ -24,6 +24,9 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/styles/patientDashboard.css" />
+
+    	<!-- JS -->
+	  <script src="/scripts/Patient/bookSuccess.js" defer></script>
     
   </head>
   <body>
@@ -31,6 +34,8 @@
 
     
     <div class="main-wrapper">
+
+      <% for(const key of currentAppointment)  { %>
 
       <!-- Header -->
       <header class="header" id="header">
@@ -43,13 +48,13 @@
                 <span></span>
               </span>
             </a>
-            <a href="index-2.html" class="navbar-brand logo">
+            <a href="" class="navbar-brand logo">
               <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
             </a>
           </div>
           <div class="main-menu-wrapper">
             <div class="menu-header">
-              <a href="index-2.html" class="menu-logo">
+              <a href="" class="menu-logo">
                 <img src="/assets/img/logo.png" class="img-fluid" alt="Logo" />
               </a>
               <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -77,9 +82,9 @@
                   <span class="user-img">
                     <img
                       class="rounded-circle"
-                      src="/assets/img/doctors/doctor-thumb-02.jpg"
+                      src="<%= key.patinetDP %>"
                       width="31"
-                      alt="Darren Elder"
+                      alt="<%= key.patientName %>"
                     />
                   </span>
                 </a>
@@ -87,18 +92,18 @@
                   <div class="user-header">
                     <div class="avatar avatar-sm">
                       <img
-                        src="/assets/img/doctors/doctor-thumb-02.jpg"
-                        alt="User Image"
+                        src="<%= key.patinetDP %>"
+                        alt="<%= key.patientName %>"
                         class="avatar-img rounded-circle"
                       />
                     </div>
                     <div class="user-text">
-                      <h6>Pradeep Ranga</h6>
-                      <p class="text-muted mb-0">Doctor</p>
+                      <h6><%= key.patientName %></h6>
+                      <p class="text-muted mb-0">Patient</p>
                     </div>
                   </div>
-                  <a class="dropdown-item" href="/doctorDashboard">Dashboard</a>
-                  <a class="dropdown-item" href="">Profile Settings</a>
+                  <a class="dropdown-item" href="/patient/<%= key.patinetID %>">Dashboard</a>
+                  <a class="dropdown-item" href="/patient/profile/<%= key.patinetID %>">Profile Settings</a>
                   <a class="dropdown-item" href="/login">Logout</a>
                 </div>
               </li>
@@ -119,8 +124,10 @@
 									<div class="success-cont">
 										<i class="fas fa-check"></i>
 										<h3>Appointment booked Successfully!</h3>
-										<p>Appointment booked with <strong>Dr. Darren Elder</strong><br> on <strong>12 Nov 2019 5:00PM to 6:00PM</strong></p>
-										<a href="invoice-view.html" class="btn btn-primary view-inv-btn">View Invoice</a>
+										<p>Appointment booked with <strong>Dr. <%= key.doctorName %></strong><br> on <strong><%= key.appoitmentDate %></strong> at <strong><%= key.appoitmentTime %></strong></p>
+										<a href="/patient/<%= key.patinetID %>" class="btn btn-primary view-inv-btn">Back to Dashboard</a>
+                    <p></p>
+                    <p>You will automatically redirect to Dashboard after 6 seconds</p>
 									</div>
 								</div>
 							</div>
@@ -161,7 +168,9 @@
         </div>
         <!-- /Footer Bottom -->
       </footer>
-
+      <div id="docID" style="display: none"><%= key.docID %></div>
+      <div id="userID" style="display: none"><%= key.patinetID %></div>
+      <% } %>
 
     </div>
     <!-- /Main Wrapper -->

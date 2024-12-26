@@ -2598,6 +2598,8 @@ html.menu-opened body {
   padding: 15px;
 }
 .doc-img {
+
+  height: 12.5rem;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -3638,8 +3640,15 @@ html.menu-opened body {
   position: relative;
 }
 .time-slot li .timing:hover {
+  cursor: pointer;
   background-color: #fff;
 }
+
+.time-slot li .timing:active {
+ 
+  background-color: #42c0fb;
+}
+
 .time-slot li .timing:last-child {
   margin-bottom: 0;
 }

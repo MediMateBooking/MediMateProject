@@ -68,7 +68,7 @@ function createApproveDocList(approveList,savedList){
                             >
                           </div>
                           <div class="col-6">
-                            <a href="booking.html" class="btn book-btn"
+                            <a href="/patient/book/${userID.textContent}?docID=${oneList.userID}" class="btn book-btn"
                               >Book Now</a
                             >
                           </div>
