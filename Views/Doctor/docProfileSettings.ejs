@@ -108,14 +108,14 @@
                     <a class="booking-doc-img">
                       <img
                         src="<%= key.profilePicture %>"
-                        alt="UserImage"
+                        alt="User Image"
                       />
                     </a>
                     <div class="profile-det-info">
                       <h3>Dr. <%= key.name %></h3>
 
                       <div class="patient-details">
-                        <h5 class="mb-0"><%= key.Specialist %></h5>
+                        <h5 class="mb-0"><%= key.specialization.specialist %></h5>
                       </div>
                     </div>
                   </div>
@@ -130,27 +130,27 @@
                         </a>
                       </li>
                       <li>
-                        <a href="/appointments">
+                        <a href="/doctor/docAppointments/<%= key.userID %>">
                           <i class="fas fa-calendar-check"></i>
                           <span>Appointments</span>
                         </a>
                       </li>
 
                       <li>
-                        <a href="/docReviews">
+                        <a href="/doctor/docReviews/<%= key.userID %>">
                           <i class="fas fa-star"></i>
-                          <span>Reviews</span>
+                          <span>Doctor Reviews</span>
                         </a>
                       </li>
                       <li class="active">
-                        <a href="/doctor/profile/<%= key.userID %>">
+                        <a href="#">
                           <i class="fas fa-user-cog"></i>
                           <span>Profile Settings</span>
                         </a>
                       </li>
 
                       <li>
-                        <a href="/doctor/password/<%= key.userID %>">
+                        <a href="/doctor/docChangePassword/<%= key.userID %>">
                           <i class="fas fa-lock"></i>
                           <span>Change Password</span>
                         </a>
