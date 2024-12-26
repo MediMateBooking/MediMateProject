@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Booking Doctor</title>
+    <title>System Feedbacks </title>
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -30,8 +31,8 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/styles/Patient/appointment.css" />
 
-	<!-- JS -->
-	<script src="/scripts/Patient/bookNow.js" defer></script>
+	  <!-- JS -->
+	  <script src="/scripts/Patient/reviews.js" defer></script>
     
   </head>
   <body>
@@ -123,107 +124,196 @@
       </header>
       <!-- /Header -->
 
-	  <% for(const keys of currentDoctor)  { %>
       <!-- Page Content -->
 			<div class="content">
 				<div class="container-fluid">
+
 					<div class="row">
-						<div class="col-12">
-						
-							<div class="card">
-								<div class="card-body">
-									<div class="booking-doc-info">
-										<a href="/patient/view/<%= key.userID %>?docID=<%= keys.userID %>" class="booking-doc-img">
-											<img src="<%= keys.profilePicture %>" alt="User Image">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+							<div class="profile-sidebar">
+								<div class="widget-profile pro-widget-content">
+									<div class="profile-info-widget">
+										<a href="" class="booking-doc-img">
+											<img src="<%= key.profilePicture %>" alt="User Image" id="patientAvatar">
 										</a>
-										<div class="booking-info">
-											<h4><a href="/patient/view/<%= key.userID %>?docID=<%= keys.userID %>">Dr. <%= keys.name %></a></h4>
-											<div class="rating"><a href="/patient/view/<%= key.userID %>?docID=<%= keys.userID %>">
-												<i class="fas fa-star filled"></i>
-												<span class="d-inline-block average-rating"><%= totalReviews %> Reviews</span>
-											</a>
-											</div>
-											<p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> <%= keys.address.city %>, <%= keys.address.country %></p>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<!-- Schedule Widget -->
-							<div class="card booking-schedule schedule-widget">
-							
-								<!-- Schedule Header -->
-								<div class="schedule-header">
-									<div class="row">
-										<div class="col-md-12">
-										
-											<!-- Day Slot -->
-											<div class="day-slot">
+										<div class="profile-det-info">
+											<h3><%= key.name %></h3>
+											<h6><%= key.email %></h6>
 
-												<ul>
-													<% for(const oneTimeslot of keys.available)  { %>
-														<% if (oneTimeslot.date !== '') { %>
-													<li>
-														<span class="slot-date" data-date="<%= oneTimeslot.date %>"><%= oneTimeslot.date %></span>
-													</li>
+											<div class="patient-details">
+												
+												<% if(DOB) { %>
+													<h5>
+													  <i class="fas fa-birthday-cake"></i> <%= key.personalDetails.DOB %> , <%= key.personalDetails.Age %> Yrs
+													</h5>
 													<% } %>
-													<% } %>
-												</ul>
-											</div>
-											<!-- /Day Slot -->
-											
-										</div>
-									</div>
-								</div>
-								<!-- /Schedule Header -->
-								
-								<!-- Schedule Content -->
-								<div class="schedule-cont">
-									<div class="row">
-										<div class="col-md-12">
-										
-											<!-- Time Slot -->
-											<div class="time-slot">
-												<ul class="clearfix">
-
-													<% for(const oneTimeslot of keys.available)  { %>
-														<% if (oneTimeslot.time !== '') { %>
-													<li>
-														<a class="timing" data-date="<%= oneTimeslot.date %>" data-time="<%= oneTimeslot.time %>">
-															<span><%= oneTimeslot.time %></span>
-														</a>
-														
-													</li>
-													<% } %>
+							
+													<% if(address) { %>
+													<h5 class="mb-0"> 
+													  <i class="fas fa-map-marker-alt"></i><%= key.address.addressFull %> 
+													</h5>
 													<% } %>
 													
-												</ul>
 											</div>
-											<!-- /Time Slot -->
-											
 										</div>
 									</div>
 								</div>
-								<!-- /Schedule Content -->
+								<div class="dashboard-widget">
+									<nav class="dashboard-menu">
+										<ul>
+											<li>
+												<a href="/patient/<%= key.userID %>">
+												  <i class="fas fa-columns"></i>
+												  <span>Dashboard</span>
+												</a>
+											  </li>
+											  <li>
+												<a href="/patient/appointment/<%= key.userID %>">
+												  <i class="fas fa-columns"></i>
+												  <span>Appointment</span>
+												</a>
+											  </li>
+											  <li>
+												<a href="/patient/favorites/<%= key.userID %>">
+												  <i class="fas fa-bookmark"></i>
+												  <span>Favorites</span>
+												</a>
+											  </li>
+											  <li 	class="active">
+												<a href="/patient/systemFeedbacks/<%= key.userID %>">
+												  <i class="fas fa-comments"></i>
+												  <span>System Feedback</span>
+												</a>
+											  </li>
+											  <li>
+												<a href="/patient/profile/<%= key.userID %>">
+												  <i class="fas fa-user-cog"></i>
+												  <span>Profile Settings</span>
+												</a>
+											  </li>
+											  <li>
+												<a href="/patient/changePassword/<%= key.userID %>">
+												  <i class="fas fa-lock"></i>
+												  <span>Change Password</span>
+												</a>
+											  </li>
+											  <li>
+												<a href="/login">
+												  <i class="fas fa-sign-out-alt"></i>
+												  <span>Logout</span>
+												</a>
+											  </li>
+										</ul>
+									</nav>
+								</div>
+
+							</div>
+						</div>
+
+				<% for(const keys of currentPatient)  { %>
+
+				<div class="col-md-7 col-lg-8 col-xl-9">
+
+				
+					<!-- Doctor Details Tab -->
+					<div class="card">
+						<div class="card-body pt-0">
+						
+							<!-- Tab Menu -->
+							<nav class="user-tabs mb-4">
+								<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+
+									<li class="nav-item">
+										<a class="nav-link active" href="#doc_reviews" data-toggle="tab">System Reviews</a>
+									</li>
+
+								</ul>
+							</nav>
+							<!-- /Tab Menu -->
+							
+							<!-- Tab Content -->
+							<div class="tab-content pt-0">
+							
+
+								
+								
+								<!-- Reviews Content -->
+								<div role="tabpanel" id="doc_reviews" class="tab-pane fade show active">
+								
+									<!-- Review Listing -->
+									<div class="widget review-listing">
+										<ul class="comments-list" id="reviewList">
+										
+											<!-- Comment List -->
+											<% for(const oneReview of allReviews)  { %>
+
+											<li>
+												<div class="comment">
+													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%= oneReview.profilePicture %>">
+													<div class="comment-body">
+														<div class="meta-data">
+															<span class="comment-author"><%= oneReview.authorname %></span>
+															<span class="comment-date">Reviewed | <%= oneReview.date %></span>
+														
+														</div>
+														
+															<p class="comment-content"><%= oneReview.comment %></p>
+
+													</div>
+												</div>
+											</li>
+
+											<% } %>
+											<!-- /Comment List -->	
+										</ul>
+										
+									</div>
+									<!-- /Review Listing -->
+								
+									<!-- Write Review -->
+									<div class="write-review">
+										<h4>Write a review for <strong>MediMate System</strong></h4>
+										
+										<!-- Write Review Form -->
+										<form id="reviewComment">
+											
+											<div class="form-group">
+												<label>Title of your review</label>
+												<input class="form-control" type="text" name="title" placeholder="If you could say it in one sentence, what would you say?">
+											</div>
+											<div class="form-group">
+												<label>Your review</label>
+												<textarea id="review_desc" maxlength="100" class="form-control" name="comment"></textarea>
+											  
+											  <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
+											</div>
+											<hr>
+											<div class="submit-section">
+												<button type="submit" class="btn btn-primary submit-btn">Add Review</button>
+											</div>
+										</form>
+										<!-- /Write Review Form -->
+										
+									</div>
+									<!-- /Write Review -->
+						
+								</div>
+								<!-- /Reviews Content -->
+								
+
 								
 							</div>
-							<!-- /Schedule Widget -->
-							
-							<!-- Submit Section -->
-							<div class="submit-section proceed-btn text-right">
-								<a class="btn btn-primary submit-btn" id="bookNowBtn">Book Now</a>
-							</div>
-							<!-- /Submit Section -->
-							
 						</div>
 					</div>
-                        
-					</div>
-				</div>
+					<!-- /Doctor Details Tab -->
 
-			</div>
-			<div id="docID" style="display: none"><%= keys.userID %></div>	
-		<% } %>	
+						</div>
+					</div>
+					<div id="docID" style="display: none"><%= keys.userID %></div>
+				</div>
+				<% } %>
+
+			</div>		
 			<!-- /Page Content -->
 
 
@@ -278,4 +368,3 @@
   </body>
 
 </html>
-

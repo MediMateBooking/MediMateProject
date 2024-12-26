@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const crypto = require("crypto");
 
 const db = require("../../database/database");
+const dateFormate = require('../../Extra/Date')
 
-router.get("/patient/view/:id", async (req, res) => {
+router.get("/patient/book/:id", async (req, res) => {
   try {
   
     const userID = req.params.id;
@@ -39,14 +41,14 @@ router.get("/patient/view/:id", async (req, res) => {
     if(currentPatient[0].address.addressFull === '') address = false
     else address = true 
 
-    res.render("Patient/patientToDocProfile", { currentPatient: currentPatient, currentDoctor: currentDoctor, allReviews: allReviews,totalReviews : allReviews.length,DOB : DOB, address:address}); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
+    res.render("Patient/bookingDoctor", { currentPatient: currentPatient, currentDoctor: currentDoctor, totalReviews : allReviews.length}); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
 });
 
 
-router.post("/patient/review/:userID/:docID", async (req, res) => {
+router.post("/patient/appoitment/:userID/:docID", async (req, res) => {
     try {
 
         const today = new Date();
@@ -54,7 +56,7 @@ router.post("/patient/review/:userID/:docID", async (req, res) => {
        const userID = req.params.userID;
        const docID = req.params.docID;
 
-       const { title, comment} = req.body
+       const { date, time} = req.body
 
           const currentPatient = await db
                 .DbConn()
@@ -69,29 +71,30 @@ router.post("/patient/review/:userID/:docID", async (req, res) => {
             if (!currentPatient) throw new Error("cannot find User");
             if (!currentDoctor) throw new Error("cannot find Doctor");
 
-            const addComment = {
+            const appoitmentID = crypto.randomBytes(32).toString("hex")
 
+            const newAppointment = {
+
+                appoitmentID : appoitmentID,
                 docID : currentDoctor.userID,
-                patientID : currentPatient.userID,
-                title : title,
-                comment : comment,
-                authorname : currentPatient.name,
-                profilePicture : currentPatient.profilePicture,
-                date : today.toDateString()
+                patinetID : currentPatient.userID,
+                appoitmentDate : date,
+                appoitmentTime : time,
+                status : 'Pending',
+                patientName : currentPatient.name,
+                patinetDP : currentPatient.profilePicture,
+                doctorName : currentDoctor.name,
+                doctorDP : currentDoctor.profilePicture,
+                applyDate : dateFormate.formatDateTime().date,
+                applyTime : dateFormate.formatDateTime().time
             }
 
-            const newComment = await db
+            const newAppointmentResult = await db
                 .DbConn()
-                .collection("reviews")
-                .insertOne(addComment);
+                .collection("appointments")
+                .insertOne(newAppointment);
 
-            const allReviews = await db
-                .DbConn()
-                .collection("reviews")
-                .find({ docID: docID })
-                .toArray();
-  
-              res.json({ success: true, allReviews:allReviews,message: "Comment sent" });
+              res.json({ success: true, appoitmentID:appoitmentID,message: "Appointment Send" });
     } catch (error) {
       res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
     }

@@ -41,16 +41,24 @@ const ObjectId = mongodb.ObjectId;
 const db = require("./database/database");
 
 app.use(express.static("public"));
+
 app.use("/patient/images", express.static("images"));
 app.use("/patient/profile/images", express.static("images"));
 app.use("/patient/changePassword/images", express.static("images"));
 app.use("/patient/appointment/images", express.static("images"));
+app.use("/patient/systemFeedbacks/images", express.static("images"));
 app.use("/patient/favorites/images", express.static("images"));
 app.use("/patient/view/images", express.static("images"));
+app.use("/patient/book/images", express.static("images"));
+app.use("/appointment/images", express.static("images"));
+
 app.use("/doctor/images", express.static("images"));
 app.use("/doctor/profile/images", express.static("images"));
 app.use("/doctor/password/images", express.static("images"));
+
 app.use("/admin/doctors/images", express.static("images"));
+app.use("/doctor/docAppointments/images", express.static("images"));
+app.use("/doctor/docReviews/images", express.static("images"));
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 
 app.use(express.urlencoded({ extended: false }));

@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Booking Doctor</title>
+	<% for(const keys of currentDoctor)  { %>
+    <title>Dr. <%= keys.name %> Profile</title>
+	<% } %>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
@@ -179,9 +181,9 @@
 												</a>
 											  </li>
 											  <li>
-												<a href="/patient/feedback/<%= key.userID %>">
+												<a href="/patient/systemFeedbacks/<%= key.userID %>">
 												  <i class="fas fa-comments"></i>
-												  <span>Feedback</span>
+												  <span>System Feedback</span>
 												</a>
 											  </li>
 											  <li>
