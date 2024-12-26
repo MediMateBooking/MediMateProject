@@ -14,7 +14,7 @@ const upload  = multer({storage:configStatus });
 
 const db = require("../../database/database");
 
-router.get("/doctor/docProfileSettings/:userID", async (req, res) => {
+router.get("/doctor/profile/:userID", async (req, res) => {
   try {
     
     const userID = req.params.userID;

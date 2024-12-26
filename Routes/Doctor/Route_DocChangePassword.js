@@ -4,7 +4,7 @@ const bcryptjs = require("bcryptjs");
 
 const db = require("../../database/database");
 
-router.get("/doctor/docChangePassword/:userID", async (req, res) => {
+router.get("/doctor/password/:userID", async (req, res) => {
   try {
 
      const userID = req.params.userID;
