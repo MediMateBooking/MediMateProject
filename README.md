@@ -17,7 +17,6 @@ MediMate is a cutting-edge web application designed to revolutionize the way you
 - **User-Friendly Interface:** Intuitive design for seamless navigation and hassle-free booking.
 - **Instant Appointment Booking:** Browse available time slots and book appointments in real time.
 - **Efficient Appointment Management:** Healthcare providers can manage their schedules effortlessly, reducing no-shows and optimizing patient care.
-- **Personalized Notifications:** Receive automated reminders and updates for your upcoming appointments.
 - **Search and Filter Options:** Find healthcare providers based on speciality, location, and availability.
 - **Secure User Profiles:** Safely manage your personal information and preferences with robust authentication measures.
 
@@ -32,7 +31,6 @@ MediMate is a cutting-edge web application designed to revolutionize the way you
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248.svg)
 ![JWT](https://img.shields.io/badge/JSON%20Web%20Tokens-black.svg)
 ![NodeMailer](https://img.shields.io/badge/NodeMailer-34495e.svg)
-![Twilio](https://img.shields.io/badge/Twilio-FFAA00.svg)
 
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap
 
@@ -40,7 +38,7 @@ MediMate is a cutting-edge web application designed to revolutionize the way you
 
 - **Authentication:** JSON Web Tokens (JWT)
 
-- **Notification Service:** NodeMailer 📧 (for email notifications), Twilio 📱 (for SMS notifications)
+- **Notification Service:** NodeMailer 📧 (for email notifications)
 
 ## 📦 Installation
 
