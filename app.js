@@ -23,6 +23,8 @@ dotenv.config();
 const port = process.env.PORT || 4000;
 console.log(port);
 
+// Session Configuration
+
 const secret = crypto.randomBytes(32).toString("hex");
 
 app.use(
@@ -38,9 +40,9 @@ const upload  = multer({storage:configStatus });
 
 const ObjectId = mongodb.ObjectId;
 
-const db = require("./database/database");
+const db = require("./database/database"); // Database Connection
 
-app.use(express.static("public"));
+app.use(express.static("public")); // Static Files Middleware
 
 app.use("/patient/images", express.static("images"));
 app.use("/patient/profile/images", express.static("images"));
@@ -59,14 +61,19 @@ app.use("/doctor/password/images", express.static("images"));
 app.use("/admin/doctors/images", express.static("images"));
 app.use("/doctor/docAppointments/images", express.static("images"));
 app.use("/doctor/docReviews/images", express.static("images"));
-app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
+app.use("/node_modules", express.static(path.join(__dirname, "node_modules"))); // Serving Node Modules
 
+
+// Middleware for Parsing Request Bodies
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//  Setting Up the View Engine
 app.set("views", path.join(__dirname, "Views")); 
 app.set("view engine", "ejs"); // set the view engine to ejs for rendering the files in views folder with .ejs extension, 
 
+
+// Automatically Loading Routes automatically from the Routes folder
 const routes = requireDirectory(module, './Routes');
 Object.keys(routes).forEach((key) => loadRoutes(routes[key]));
 
@@ -80,16 +87,17 @@ function loadRoutes(routeModule) {
 }
 
 
-//index
+// Defining the Home Route
 app.get("/", function (req, res) {
   res.render("Common/index");
 });
 
-//404
+// Handling 404 Errors
 app.use(function (req, res) {
   res.status(404).render("Common/404");
 });
 
+// Connecting to the Database and Starting the Server
 db.connectTo()
   .then(() => {
     app.listen(port, () => {
