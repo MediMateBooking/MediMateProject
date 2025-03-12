@@ -20,22 +20,19 @@
       href="/assets/plugins/fontawesome/css/fontawesome.min.css"
     />
     <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
-    
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/styles/patientDashboard.css" />
 
-    	<!-- JS -->
-	  <script src="/scripts/Patient/bookSuccess.js" defer></script>
-    
+    <!-- JS -->
+    <script src="/scripts/Patient/bookSuccess.js" defer></script>
   </head>
   <body>
     <!-- Main Wrapper -->
 
-    
     <div class="main-wrapper">
-
-      <% for(const key of currentAppointment)  { %>
+      <% for(const key of currentAppointment) { %>
 
       <!-- Header -->
       <header class="header" id="header">
@@ -61,53 +58,50 @@
                 <i class="fas fa-times"></i>
               </a>
             </div>
-            <ul class="main-nav">
-              <li class="login-link">
-                <a href="login.html">Login / Signup</a>
-              </li>
-            </ul>
           </div>
           <ul class="nav header-navbar-rht">
-            <li class="nav-item contact-item">
-              
-            </li>
-
             <!-- User Menu -->
             <li class="nav-item dropdown has-arrow logged-item">
-                <a
-                  href="#"
-                  class="dropdown-toggle nav-link"
-                  data-toggle="dropdown"
-                >
-                  <span class="user-img">
+              <a
+                href="#"
+                class="dropdown-toggle nav-link"
+                data-toggle="dropdown"
+              >
+                <span class="user-img">
+                  <img
+                    class="rounded-circle"
+                    src="<%= key.patinetDP %>"
+                    width="31"
+                    alt="<%= key.patientName %>"
+                  />
+                </span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="user-header">
+                  <div class="avatar avatar-sm">
                     <img
-                      class="rounded-circle"
                       src="<%= key.patinetDP %>"
-                      width="31"
                       alt="<%= key.patientName %>"
+                      class="avatar-img rounded-circle"
                     />
-                  </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <div class="user-header">
-                    <div class="avatar avatar-sm">
-                      <img
-                        src="<%= key.patinetDP %>"
-                        alt="<%= key.patientName %>"
-                        class="avatar-img rounded-circle"
-                      />
-                    </div>
-                    <div class="user-text">
-                      <h6><%= key.patientName %></h6>
-                      <p class="text-muted mb-0">Patient</p>
-                    </div>
                   </div>
-                  <a class="dropdown-item" href="/patient/<%= key.patinetID %>">Dashboard</a>
-                  <a class="dropdown-item" href="/patient/profile/<%= key.patinetID %>">Profile Settings</a>
-                  <a class="dropdown-item" href="/login">Logout</a>
+                  <div class="user-text">
+                    <h6><%= key.patientName %></h6>
+                    <p class="text-muted mb-0">Patient</p>
+                  </div>
                 </div>
-              </li>
-              <!-- /User Menu -->
+                <a class="dropdown-item" href="/patient/<%= key.patinetID %>"
+                  >Dashboard</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="/patient/profile/<%= key.patinetID %>"
+                  >Profile Settings</a
+                >
+                <a class="dropdown-item" href="/login">Logout</a>
+              </div>
+            </li>
+            <!-- /User Menu -->
           </ul>
 
           <div id="progress-bar"></div>
@@ -116,28 +110,34 @@
       <!-- /Header -->
 
       <!-- Page Content -->
-			<div class="content">
-				<div class="container-fluid">
-                                            							<!-- Success Card -->
-							<div class="card success-card">
-								<div class="card-body">
-									<div class="success-cont">
-										<i class="fas fa-check"></i>
-										<h3>Appointment booked Successfully!</h3>
-										<p>Appointment booked with <strong>Dr. <%= key.doctorName %></strong><br> on <strong><%= key.appoitmentDate %></strong> at <strong><%= key.appoitmentTime %></strong></p>
-										<a href="/patient/<%= key.patinetID %>" class="btn btn-primary view-inv-btn">Back to Dashboard</a>
-                    <p></p>
-                    <p>You will automatically redirect to Dashboard shortly..</p>
-									</div>
-								</div>
-							</div>
-							<!-- /Success Card -->
-
-				</div>
-
-			</div>		
-			<!-- /Page Content -->
-
+      <div class="content">
+        <div class="container-fluid">
+          <!-- Success Card -->
+          <div class="card success-card">
+            <div class="card-body">
+              <div class="success-cont">
+                <i class="fas fa-check"></i>
+                <h3>Appointment booked Successfully!</h3>
+                <p>
+                  Appointment booked with
+                  <strong>Dr. <%= key.doctorName %></strong><br />
+                  on <strong><%= key.appoitmentDate %></strong> at
+                  <strong><%= key.appoitmentTime %></strong>
+                </p>
+                <a
+                  href="/patient/<%= key.patinetID %>"
+                  class="btn btn-primary view-inv-btn"
+                  >Back to Dashboard</a
+                >
+                <p></p>
+                <p>You will automatically redirect to Dashboard shortly..</p>
+              </div>
+            </div>
+          </div>
+          <!-- /Success Card -->
+        </div>
+      </div>
+      <!-- /Page Content -->
 
       <footer class="footer">
         <!-- Footer Bottom -->
@@ -171,7 +171,6 @@
       <div id="docID" style="display: none"><%= key.docID %></div>
       <div id="userID" style="display: none"><%= key.patinetID %></div>
       <% } %>
-
     </div>
     <!-- /Main Wrapper -->
 
@@ -189,6 +188,4 @@
     <!-- Custom JS -->
     <script src="/assets/js/script.js"></script>
   </body>
-
 </html>
-
