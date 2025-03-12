@@ -6,7 +6,6 @@
 // const mailer = require("../../mail/mailer");
 // const randomPassword = require('../../Extra/RandomPassword');
 
-
 // router.post("/admin/doctors/approve/:docID", async(req, res) => {
 //   try {
 
@@ -26,7 +25,6 @@
 
 //           await mailer.emailFuntion.doctorAccoutApprove(currentDoctor.email, currentDoctor.name, ranPassword);
 
-
 //     res.json({ message : `Dr.${currentDoctor.name} Account Approved` });
 //   } catch (error) {
 //     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
@@ -35,20 +33,16 @@
 
 // module.exports = router;
 
-
 const express = require("express");
 const router = express.Router();
 const bcryptjs = require("bcryptjs");
 
-
 const db = require("../../database/database");
 const mailer = require("../../mail/mailer");
-const randomPassword = require('../../Extra/RandomPassword');
+const randomPassword = require("../../Extra/RandomPassword");
 
 router.post("/admin/doctors/approve/:docID", async (req, res) => {
-
   try {
-
     const docID = req.params.docID;
     console.log(`Received request to approve doctor with ID: ${docID}`);
 
@@ -57,7 +51,6 @@ router.post("/admin/doctors/approve/:docID", async (req, res) => {
 
     const hashedpass = await bcryptjs.hash(ranPassword, 12);
     // console.log(`Hashed password successfully`);
-
 
     const currentDoctor = await db
       .DbConn()
@@ -90,7 +83,7 @@ router.post("/admin/doctors/approve/:docID", async (req, res) => {
     res.json({ message: `Dr.${currentDoctor.name} Account Approved` });
     console.log(`Approval completed for Doctor ID: ${docID}`);
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
     console.error("Error during approval process", error);
   }
 });
