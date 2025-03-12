@@ -15,6 +15,8 @@ router.get("/doctor/docReviews/:userID", async (req, res) => {
           .toArray();
     
         if (currentDoctor.length === 0) throw new Error("cannot find User");
+
+        if(!currentDoctor[0].mandotaryFieldFill) return res.redirect(`/doctor/profile/${userID}`);
         
     res.render("Doctor/docReviews", { key: currentDoctor[0] });
   } catch (error) {

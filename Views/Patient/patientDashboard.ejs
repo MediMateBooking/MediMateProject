@@ -247,7 +247,7 @@
                         </span>
                         <div class="dash-count">
                           <img src="/image/PatientDashboard/doctor.png" class="img-fluid" alt="totalDoctors" id="totalDoctors"/>
-                          <h3>120</h3>
+                          <h3><%= totalDoctors %></h3>
                         </div>
                       </div>
                       <div class="dash-widget-info">
@@ -318,9 +318,9 @@
                       <li class="nav-item">
                         <a
                           class="nav-link"
-                          href="#pat_prescriptions"
+                          href="#pat_reviews"
                           data-toggle="tab"
-                          >Prescriptions</a
+                          >Reviews</a
                         >
                       </li>
                       <li class="nav-item">
@@ -328,7 +328,7 @@
                           class="nav-link"
                           href="#pat_medical_records"
                           data-toggle="tab"
-                          ><span class="med-records">Medical Records</span></a
+                          ><span class="med-records">Feedbacks</span></a
                         >
                       </li>
                     </ul>
@@ -376,7 +376,7 @@
                                         />
                                       </a>
                                       <a href="/patient/view/<%= oneAppointment.patinetID %>?docID=<%= oneAppointment.docID %>"
-                                        >Dr. <%= oneAppointment.doctorName %> <span><%= oneAppointment.doctorName %></span></a
+                                        >Dr. <%= oneAppointment.doctorName %> <span><%= oneAppointment.doctorSpeciality %></span></a
                                       >
                                     </h2>
                                   </td>
@@ -426,11 +426,15 @@
                             </table>
                             <% } else { %>
 
-                              <h4>No Appointments</h4>
+                              <a href="/patient/appointment/<%= key.userID %>">
+                                <div class="noAppointments">
+
+                                  <img src="/image/PatientDashboard/add.png" alt="addApointments" id="addApointments"/>
+                                  <h4 id="noAppointments">Add Appointments</h4>
+
+                                </div>
+                              </a>
                               <% } %>
-
-                            
-
                           </div>
                         </div>
                       </div>
@@ -438,116 +442,63 @@
                     <!-- /Appointment Tab -->
 
                     <!-- Prescription Tab -->
-                    <div class="tab-pane fade" id="pat_prescriptions">
+                    <div class="tab-pane fade" id="pat_reviews">
                       <div class="card card-table mb-0">
                         <div class="card-body">
                           <div class="table-responsive">
+
+                            <% if(totalReviewsList.length > 0) { %>
+
                             <table class="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
-                                  <th>Date</th>
-                                  <th>Name</th>
-                                  <th>Created by</th>
-                                  <th></th>
+                                  <th>Reviewd Date</th>
+                                  <th>Comment</th>
+                                  <th>Review for</th>
+                                
                                 </tr>
                               </thead>
                               <tbody>
+
+                                <% for(const oneReview of totalReviewsList)  { %>
+
                                 <tr>
-                                  <td>14 Nov 2019</td>
-                                  <td>Prescription 1</td>
+                                  <td><%= oneReview.date %></td>
+                                  <td><%= oneReview.comment %></td>
                                   <td>
                                     <h2 class="table-avatar">
                                       <a
-                                        href="doctor-profile.html"
+                                        href="/patient/view/<%= oneReview.patientID %>?docID=<%= oneReview.docID %>"
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
+                                          src="<%= oneReview.doctorProfilePicture %>"
                                           alt="User Image"
                                         />
                                       </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Ruby Perrin <span>Dental</span></a
+                                      <a href="/patient/view/<%= oneReview.patientID %>?docID=<%= oneReview.docID %>"
+                                        >Dr. <%= oneReview.doctorname %> <span><%= oneReview.doctorSpecialization %></span></a
                                       >
                                     </h2>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
                                 </tr>
-                                <tr>
-                                  <td>13 Nov 2019</td>
-                                  <td>Prescription 2</td>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="/assets/img/doctors/doctor-thumb-02.jpg"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Darren Elder <span>Dental</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>12 Nov 2019</td>
-                                  <td>Prescription 3</td>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="/assets/img/doctors/doctor-thumb-03.jpg"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Deborah Angel
-                                        <span>Cardiology</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
+
+                              <% } %>
                               </tbody>
                             </table>
+
+                            <% } else { %>
+
+                              <a href="/patient/appointment/<%= key.userID %>">
+                                <div class="noAppointments">
+
+                                  <img src="/image/PatientDashboard/star.png" alt="addApointments" id="addApointments"/>
+                                  <h4 id="noAppointments">Add Reviews</h4>
+
+                                </div>
+                              </a>
+                              <% } %>
                           </div>
                         </div>
                       </div>
@@ -559,126 +510,61 @@
                       <div class="card card-table mb-0">
                         <div class="card-body">
                           <div class="table-responsive">
+
+                            <% if(totalFeedbacks.length > 0) { %>
+
                             <table class="table table-hover table-center mb-0">
                               <thead>
                                 <tr>
-                                  <th>ID</th>
                                   <th>Date</th>
-                                  <th>Description</th>
-                                  <th>Attachment</th>
+                                  <th>Title</th>
+                                  <th>Feedback</th>
                                   <th>Created</th>
-                                  <th></th>
                                 </tr>
                               </thead>
                               <tbody>
+
+                                <% for(const oneFeedback of totalFeedbacks)  { %>
                                 <tr>
-                                  <td>
-                                    <a href="javascript:void(0);">#MR-0010</a>
-                                  </td>
-                                  <td>14 Nov 2019</td>
-                                  <td>Dental Filling</td>
-                                  <td><a href="#">dental-test.pdf</a></td>
+                                  <td><%= oneFeedback.date %></td>
+                                  <td><%= oneFeedback.title %></td>
+                                  <td><%= oneFeedback.comment %></td>
                                   <td>
                                     <h2 class="table-avatar">
                                       <a
-                                        href="doctor-profile.html"
+                                    
                                         class="avatar avatar-sm mr-2"
                                       >
                                         <img
                                           class="avatar-img rounded-circle"
-                                          src="/assets/img/doctors/doctor-thumb-01.jpg"
+                                          src="<%= oneFeedback.profilePicture %>"
                                           alt="User Image"
                                         />
                                       </a>
                                       <a href="doctor-profile.html"
-                                        >Dr. Ruby Perrin <span>Dental</span></a
+                                        ><%= oneFeedback.authorname %></a
                                       >
                                     </h2>
                                   </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
+                                 
                                 </tr>
-                                <tr>
-                                  <td>
-                                    <a href="javascript:void(0);">#MR-0009</a>
-                                  </td>
-                                  <td>13 Nov 2019</td>
-                                  <td>Teeth Cleaning</td>
-                                  <td><a href="#">dental-test.pdf</a></td>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="/assets/img/doctors/doctor-thumb-02.jpg"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Darren Elder <span>Dental</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <a href="javascript:void(0);">#MR-0008</a>
-                                  </td>
-                                  <td>12 Nov 2019</td>
-                                  <td>General Checkup</td>
-                                  <td><a href="#">cardio-test.pdf</a></td>
-                                  <td>
-                                    <h2 class="table-avatar">
-                                      <a
-                                        href="doctor-profile.html"
-                                        class="avatar avatar-sm mr-2"
-                                      >
-                                        <img
-                                          class="avatar-img rounded-circle"
-                                          src="/assets/img/doctors/doctor-thumb-03.jpg"
-                                          alt="User Image"
-                                        />
-                                      </a>
-                                      <a href="doctor-profile.html"
-                                        >Dr. Deborah Angel
-                                        <span>Cardiology</span></a
-                                      >
-                                    </h2>
-                                  </td>
-                                  <td class="text-right">
-                                    <div class="table-action">
-                                      <a
-                                        href="javascript:void(0);"
-                                        class="btn btn-sm bg-info-light"
-                                      >
-                                        <i class="far fa-eye"></i> View
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
+                                <% } %>
+                                
                               </tbody>
                             </table>
+
+                            <% } else { %>
+
+                              <a href="/patient/systemFeedbacks/<%= key.userID %>">
+                                <div class="noAppointments">
+
+                                  <img src="/image/PatientDashboard/feedback.png" alt="addApointments" id="addApointments"/>
+                                  <h4 id="noAppointments">Add Feedback</h4>
+
+                                </div>
+                              </a>
+                              <% } %>
+
                           </div>
                         </div>
                       </div>
@@ -689,8 +575,6 @@
                   <!-- Tab Content -->
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>

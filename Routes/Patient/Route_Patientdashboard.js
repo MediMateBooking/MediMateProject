@@ -20,12 +20,36 @@ router.get("/patient/:id", async (req, res) => {
       .DbConn()
       .collection("appointments")
       .find({ patinetID: userID })
+      .sort({ onTime: -1 }) 
+      .limit(4)
       .toArray();
 
-    const totalReviews = await db
+      const totalReviews = await db
+      .DbConn()
+      .collection("reviews")
+      .find({ patientID: userID })
+      .sort({ onTime: -1 })
+      .limit(4)
+      .toArray();
+
+    const totalReviewsCount = await db
+      .DbConn()
+      .collection("reviews")
+      .find({ patientID: userID })
+      .toArray();
+
+      const totalFeedbacks = await db
+      .DbConn()
+      .collection("feedback")
+      .find()
+      .sort({ onTime: -1 })
+      .limit(4)
+      .toArray();
+
+    const totalDoctors = await db
     .DbConn()
-    .collection("reviews")
-    .find({ patientID: userID })
+    .collection("doctors")
+    .find()
     .toArray();
 
     let DOB = false
@@ -48,7 +72,7 @@ router.get("/patient/:id", async (req, res) => {
        userBMI = BMI.BMICalculator(currentPatient[0].personalDetails.height,currentPatient[0].personalDetails.weight)
     }else bmi = false 
 
-    res.render("Patient/patientDashboard", { currentPatient: currentPatient,DOB : DOB, address:address , bloodPressure:bloodPressure, bmi:bmi, userBMI:userBMI,totalAppointments:totalAppointments,totalAppointmentsCount: totalAppointments.length,totalReviews:totalReviews.length}); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
+    res.render("Patient/patientDashboard", { currentPatient: currentPatient,DOB : DOB, address:address , bloodPressure:bloodPressure, bmi:bmi, userBMI:userBMI,totalAppointments:totalAppointments,totalAppointmentsCount: totalAppointments.length,totalReviewsList:totalReviews,totalReviews:totalReviewsCount.length,totalFeedbacks:totalFeedbacks,totalDoctors:totalDoctors.length}); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
