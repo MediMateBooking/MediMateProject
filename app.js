@@ -1,3 +1,4 @@
+// Importing Required Modules
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
@@ -8,6 +9,7 @@ const session = require("express-session");
 const multer = require("multer");
 const requireDirectory = require('require-directory');
 
+// Multer Configuration for File Uploads
 const configStatus = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "images");
@@ -17,6 +19,7 @@ const configStatus = multer.diskStorage({
   },
 });
 
+// Setting Up the Express App and Environment Variables
 const app = express();
 
 dotenv.config();
@@ -24,7 +27,6 @@ const port = process.env.PORT || 4000;
 console.log(port);
 
 // Session Configuration
-
 const secret = crypto.randomBytes(32).toString("hex");
 
 app.use(
@@ -36,8 +38,8 @@ app.use(
   })
 );
 
+// Multer Configuration for File Uploads and MongoDB ObjectId
 const upload  = multer({storage:configStatus });
-
 const ObjectId = mongodb.ObjectId;
 
 const db = require("./database/database"); // Database Connection
@@ -61,6 +63,7 @@ app.use("/doctor/password/images", express.static("images"));
 app.use("/admin/doctors/images", express.static("images"));
 app.use("/doctor/docAppointments/images", express.static("images"));
 app.use("/doctor/docReviews/images", express.static("images"));
+
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules"))); // Serving Node Modules
 
 
