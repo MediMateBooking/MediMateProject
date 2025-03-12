@@ -9,6 +9,21 @@ reviewComment.addEventListener("submit", async (e) => {
   const title = formData.get("title");
   const comment = formData.get("comment");
 
+  if(title.trim().length === 0 && comment.trim().length === 0){
+    alert('Please fill out all fields')
+    return
+  }
+
+  if(title.trim().length === 0){
+    alert('Title cannot be empty')
+    return
+  }
+
+  if(comment.trim().length === 0){
+    alert('Comment cannot be empty')
+    return
+  }
+
   const commentBody = {
     title : title.trim(),
     comment : comment.trim()
@@ -50,7 +65,7 @@ function createReviewList(allReviews){
         li.innerHTML =  `
         
         <div class="comment">
-        <img class="avatar avatar-sm rounded-circle" alt="User Image" src="${oneReview.profilePicture}">
+        <img class="avatar avatar-sm rounded-circle" alt="User Image" src="${oneReview.authorProfilePicture}">
         <div class="comment-body">
             <div class="meta-data">
                 <span class="comment-author">${oneReview.authorname}</span>

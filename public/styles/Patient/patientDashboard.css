@@ -60,3 +60,20 @@
   width: 5.3rem;
   height: 5.3rem;
 }
+
+.noAppointments{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.9rem;
+  cursor: pointer;
+}
+
+#addApointments{
+  width: 2.5rem;
+}
+
+#noAppointments{
+  margin: 0;
+  margin-left: 1rem;
+}

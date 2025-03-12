@@ -25,6 +25,7 @@ router.get("/patient/view/:id", async (req, res) => {
       .DbConn()
       .collection("reviews")
       .find({ docID: docID })
+      .sort({ onTime: -1 })
       .toArray();
 
     if (currentPatient.length === 0) throw new Error("cannot find User");
@@ -76,8 +77,12 @@ router.post("/patient/review/:userID/:docID", async (req, res) => {
                 title : title,
                 comment : comment,
                 authorname : currentPatient.name,
-                profilePicture : currentPatient.profilePicture,
-                date : today.toDateString()
+                authorProfilePicture : currentPatient.profilePicture,
+                doctorname : currentDoctor.name,
+                doctorProfilePicture : currentDoctor.profilePicture,
+                doctorSpecialization : currentDoctor.specialization.specialist,
+                date : today.toDateString(),
+                onTime : Date.now()
             }
 
             const newComment = await db
@@ -89,6 +94,7 @@ router.post("/patient/review/:userID/:docID", async (req, res) => {
                 .DbConn()
                 .collection("reviews")
                 .find({ docID: docID })
+                .sort({ onTime: -1 })
                 .toArray();
   
               res.json({ success: true, allReviews:allReviews,message: "Comment sent" });
