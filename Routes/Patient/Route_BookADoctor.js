@@ -51,8 +51,6 @@ router.get("/patient/book/:id", async (req, res) => {
 router.post("/patient/appoitment/:userID/:docID", async (req, res) => {
     try {
 
-        const today = new Date();
-
        const userID = req.params.userID;
        const docID = req.params.docID;
 
@@ -85,8 +83,10 @@ router.post("/patient/appoitment/:userID/:docID", async (req, res) => {
                 patinetDP : currentPatient.profilePicture,
                 doctorName : currentDoctor.name,
                 doctorDP : currentDoctor.profilePicture,
+                doctorSpeciality : currentDoctor.specialization.specialist,
                 applyDate : dateFormate.formatDateTime().date,
-                applyTime : dateFormate.formatDateTime().time
+                applyTime : dateFormate.formatDateTime().time,
+                onTime : Date.now()
             }
 
             const newAppointmentResult = await db

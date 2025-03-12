@@ -16,11 +16,6 @@ router.get("/appointment/:appID", async (req, res) => {
 
       if (currentAppointment.length === 0) throw new Error("Cannot find Appointment");
 
-
-
-
-
-
     res.render("Patient/bookingSuccess",{currentAppointment : currentAppointment});
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);

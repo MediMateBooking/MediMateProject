@@ -3347,9 +3347,14 @@ html.menu-opened body {
   color: #272b41;
 }
 .review-listing {
+
+  width: 100%;
+  height: 32rem;
   border-bottom: 1px solid #f5f7fc;
   margin-top: 20px;
   padding-bottom: 30px;
+  overflow-y: scroll;
+
 }
 .review-listing > ul {
   padding: 0;
@@ -3357,7 +3362,7 @@ html.menu-opened body {
   list-style: none;
 }
 .review-listing > ul li + li {
-  margin-top: 20px;
+  margin-top: 5px;
   border-top: 1px dashed #f0f0f0;
   padding-top: 20px;
 }

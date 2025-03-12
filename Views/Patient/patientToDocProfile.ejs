@@ -245,7 +245,7 @@
 									</div>
 
 									<div class="clinic-booking">
-										<a class="apt-btn" href="#">Book Appointment</a>
+										<a class="apt-btn" href="/patient/book/<%= key.userID %>?docID=<%= keys.userID %>">Book Appointment</a>
 									</div>
 								</div>
 							</div>
@@ -267,7 +267,7 @@
 										<a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
+										<a class="nav-link" href="#doc_business_hours" data-toggle="tab">Available Time</a>
 									</li>
 								</ul>
 							</nav>
@@ -361,35 +361,7 @@
 								<!-- Reviews Content -->
 								<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
 								
-									<!-- Review Listing -->
-									<div class="widget review-listing">
-										<ul class="comments-list" id="reviewList">
-										
-											<!-- Comment List -->
-											<% for(const oneReview of allReviews)  { %>
-
-											<li>
-												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%= oneReview.profilePicture %>">
-													<div class="comment-body">
-														<div class="meta-data">
-															<span class="comment-author"><%= oneReview.authorname %></span>
-															<span class="comment-date">Reviewed | <%= oneReview.date %></span>
-														
-														</div>
-														
-															<p class="comment-content"><%= oneReview.comment %></p>
-
-													</div>
-												</div>
-											</li>
-
-											<% } %>
-											<!-- /Comment List -->	
-										</ul>
-										
-									</div>
-									<!-- /Review Listing -->
+									
 								
 									<!-- Write Review -->
 									<div class="write-review">
@@ -417,6 +389,36 @@
 										
 									</div>
 									<!-- /Write Review -->
+
+									<!-- Review Listing -->
+									<div class="widget review-listing">
+										<ul class="comments-list" id="reviewList">
+										
+											<!-- Comment List -->
+											<% for(const oneReview of allReviews)  { %>
+
+											<li>
+												<div class="comment">
+													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%= oneReview.authorProfilePicture %>">
+													<div class="comment-body">
+														<div class="meta-data">
+															<span class="comment-author"><%= oneReview.authorname %></span>
+															<span class="comment-date">Reviewed | <%= oneReview.date %></span>
+														
+														</div>
+														
+															<p class="comment-content"><%= oneReview.comment %></p>
+
+													</div>
+												</div>
+											</li>
+
+											<% } %>
+											<!-- /Comment List -->	
+										</ul>
+										
+									</div>
+									<!-- /Review Listing -->
 						
 								</div>
 								<!-- /Reviews Content -->

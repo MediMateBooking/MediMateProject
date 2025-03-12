@@ -115,11 +115,11 @@ router.post("/login", async (req, res) => {
         return res.redirect(`/login?token=${incorrectPassword}`);
       }
 
-      return res.redirect(`/doctor/${doctorAccount.userID}`);
+      return res.redirect(`/doctor/${doctorAccount.userID}`); 
     }
 
     if (admin) {
-      const passEqual = admin.password === password;
+      const passEqual = admin.password === password ;
       if (!passEqual) {
         const incorrectPassword = crypto.randomBytes(32).toString("hex");
         req.session.incorrectPassword = incorrectPassword;
@@ -127,15 +127,15 @@ router.post("/login", async (req, res) => {
       }
 
       const dynamicRouterCode = crypto.randomBytes(32).toString("hex");
-      const updateDynamicRouteCode = {
-        dynamicRouteCode: dynamicRouterCode
+      const updateDynamicRouteCode ={
+        dynamicRouteCode : dynamicRouterCode
       }
-      const adminResult = await db
-        .DbConn()
-        .collection("admin")
-        .updateOne({ email: email, }, { $set: updateDynamicRouteCode });
+          const adminResult = await db
+            .DbConn()
+            .collection("admin")
+            .updateOne({email : email,}, {$set : updateDynamicRouteCode});
 
-      return res.redirect(`/admin/${dynamicRouterCode}`);
+      return res.redirect(`/admin/${dynamicRouterCode}`); 
     }
 
 
