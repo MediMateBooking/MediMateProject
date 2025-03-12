@@ -22,7 +22,7 @@ router.get("/doctor/docAppointments/:userID", async (req, res) => {
     // Pass the first doctor record as "key" to match the EJS template
     res.render("Doctor/docAppointments", { key: currentDoctor[0] });
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
   }
 });
 

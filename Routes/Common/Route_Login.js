@@ -29,8 +29,7 @@ router.get("/login", (req, res) => {
         validation: false,
         successfulValidation: true,
         validationMsg1: "Email Successfully Validated",
-        validationMsg2:
-          "Your Account is under approving process.",
+        validationMsg2: "Your Account is under approving process.",
       });
     } else if (token && token === req.session.alreadyActivated) {
       req.session.alreadyActivated = null;
@@ -44,7 +43,8 @@ router.get("/login", (req, res) => {
       res.render("Common/login", {
         validation: true,
         successfulValidation: false,
-        validationMsg: "Cannot Find User Under Entered Email Address. Check Your Email Address Again.",
+        validationMsg:
+          "Cannot Find User Under Entered Email Address. Check Your Email Address Again.",
       });
     } else if (token && token === req.session.incorrectPassword) {
       req.session.incorrectPassword = null;
@@ -61,10 +61,13 @@ router.get("/login", (req, res) => {
         validationMsg: "Your Account is still under approving process.",
       });
     } else {
-      res.render("Common/login", { validation: false, successfulValidation: false });
+      res.render("Common/login", {
+        validation: false,
+        successfulValidation: false,
+      });
     }
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
   }
 });
 
@@ -115,11 +118,11 @@ router.post("/login", async (req, res) => {
         return res.redirect(`/login?token=${incorrectPassword}`);
       }
 
-      return res.redirect(`/doctor/${doctorAccount.userID}`); 
+      return res.redirect(`/doctor/${doctorAccount.userID}`);
     }
 
     if (admin) {
-      const passEqual = admin.password === password ;
+      const passEqual = admin.password === password;
       if (!passEqual) {
         const incorrectPassword = crypto.randomBytes(32).toString("hex");
         req.session.incorrectPassword = incorrectPassword;
@@ -127,24 +130,19 @@ router.post("/login", async (req, res) => {
       }
 
       const dynamicRouterCode = crypto.randomBytes(32).toString("hex");
-      const updateDynamicRouteCode ={
-        dynamicRouteCode : dynamicRouterCode
-      }
-          const adminResult = await db
-            .DbConn()
-            .collection("admin")
-            .updateOne({email : email,}, {$set : updateDynamicRouteCode});
+      const updateDynamicRouteCode = {
+        dynamicRouteCode: dynamicRouterCode,
+      };
+      const adminResult = await db
+        .DbConn()
+        .collection("admin")
+        .updateOne({ email: email }, { $set: updateDynamicRouteCode });
 
-      return res.redirect(`/admin/${dynamicRouterCode}`); 
+      return res.redirect(`/admin/${dynamicRouterCode}`);
     }
-
-
-
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
   }
 });
 
 module.exports = router;
-
-
