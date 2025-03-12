@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
-    <title>Admin Dashboard</title>
+    <title>Reviews</title>
 
     <!-- Favicon -->
     <link
@@ -38,6 +38,7 @@
       <% for(const key of activeAdmin) { %>
       <!-- Header -->
       <div class="header">
+
         <!-- Logo -->
         <div class="header-left">
           <a href="/" class="logo">
@@ -64,7 +65,7 @@
         </a>
         <!-- /Mobile Menu Toggle -->
 
-        <!-- Header Right Menu -->
+        <!-- Header Right Menu (myprofile) -->
         <ul class="nav user-menu">
           <!-- User Menu -->
           <li class="nav-item dropdown has-arrow">
@@ -101,7 +102,7 @@
       </div>
       <!-- /Header -->
 
-      <!-- Sidebar -->
+      <!-- left Sidebar - main(blue) -->
       <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
           <div id="sidebar-menu" class="sidebar-menu">
@@ -158,7 +159,8 @@
       <!-- Page Wrapper -->
       <div class="page-wrapper">
         <div class="content container-fluid">
-          <!-- Page Header -->
+
+          <!-- Page Header (breadcrumb) -->
           <div class="page-header">
             <div class="row">
               <div class="col-sm-12">
@@ -174,6 +176,7 @@
           </div>
           <!-- /Page Header -->
 
+          <!-- reviews table -->
           <div class="row">
             <div class="col-sm-12">
               <div class="card">
@@ -235,269 +238,6 @@
                           <td>3 Nov 2019 <br /><small>09.59 AM</small></td>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient2.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Travis Trimble </a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-02.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Darren Elder</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-
-                          <td>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit
-                          </td>
-                          <td>
-                            2 Nov 2019<br />
-                            <small>08.50 AM</small>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient3.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Carl Kelly</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-03.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Deborah Angel</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-
-                          <td>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit
-                          </td>
-                          <td>
-                            1 Nov 2019<br />
-                            <small>02.59 PM</small>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient4.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html"> Michelle Fairfax</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-04.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Sofia Brient</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-
-                          <td>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit
-                          </td>
-                          <td>27 Sep 2019 <br /><small>03.40 PM</small></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient5.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Gina Moore</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-05.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Marvin Campbell</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-
-                          <td>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit
-                          </td>
-                          <td>24 Sep 2019 <br /><small>04.38 PM</small></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient6.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Elsie Gilley</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-06.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Katharine Berthold</a>
-                            </h2>
-                          </td>
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-
-                          <td>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit
-                          </td>
-                          <td>22 Aug 2019 <br /><small>01.50 PM</small></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/patient7.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Joan Gardner</a>
-                            </h2>
-                          </td>
-                          <td>
-                            <h2 class="table-avatar">
-                              <a
-                                href="profile.html"
-                                class="avatar avatar-sm mr-2"
-                                ><img
-                                  class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/doctor-thumb-07.jpg"
-                                  alt="User Image"
-                              /></a>
-                              <a href="profile.html">Dr. Linda Tobin</a>
-                            </h2>
-                          </td>
-
-                          <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
-                          </td>
-
-                          <td>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit
-                          </td>
-                          <td>21 Jul 2019 <br /><small>05.50 PM</small></td>
-                        </tr>
-                        <tr>
                       </tbody>
                     </table>
                   </div>
@@ -505,6 +245,7 @@
               </div>
             </div>
           </div>
+          <!-- /reviews table -->
         </div>
       </div>
 
