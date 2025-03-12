@@ -7,8 +7,8 @@ const crypto = require("crypto");
 
 const db = require("../../database/database");
 const mailer = require("../../mail/mailer");
-const dateFormate = require('../../Extra/Date')
-const DoctorID = require('../../Extra/DoctorID')
+const dateFormate = require("../../Extra/Date");
+const DoctorID = require("../../Extra/DoctorID");
 
 router.get("/signup", (req, res) => {
   try {
@@ -16,7 +16,7 @@ router.get("/signup", (req, res) => {
 
     res.render("Common/signup", { emailstatus: emailstatus });
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
   }
 });
 
@@ -40,10 +40,10 @@ router.post("/signup/doctors", async (req, res) => {
     });
   }
 
-  const [patientEmail, doctorEmail , admin ] = await Promise.all([
+  const [patientEmail, doctorEmail, admin] = await Promise.all([
     db.DbConn().collection("patients").findOne({ email: email }),
     db.DbConn().collection("doctors").findOne({ email: email }),
-    db.DbConn().collection("admin").findOne({ email: email })
+    db.DbConn().collection("admin").findOne({ email: email }),
   ]);
 
   if (patientEmail || doctorEmail || admin) {
@@ -55,8 +55,7 @@ router.post("/signup/doctors", async (req, res) => {
   const emailValidationToken = crypto.randomBytes(32).toString("hex");
 
   const newUser = {
-
-    doctorID : `D${DoctorID.generateRandomNumberString()}`,
+    doctorID: `D${DoctorID.generateRandomNumberString()}`,
     name: userName,
     email: email,
     userID: userIdURL,
@@ -65,50 +64,49 @@ router.post("/signup/doctors", async (req, res) => {
     role: role,
     emailValid: false,
     profilePicture: `images/DefaultProfilePic/doctordefault.png`,
-    applyDate : dateFormate.formatDateTime().date,
-    applyTime : dateFormate.formatDateTime().time,
+    applyDate: dateFormate.formatDateTime().date,
+    applyTime: dateFormate.formatDateTime().time,
     emailValidationToken: emailValidationToken,
     profileApprove: false,
-    rejected : false,
-    mandotaryFieldFill : false,
+    rejected: false,
+    mandotaryFieldFill: false,
     linkExpire: expires,
-    personalDetails : {
-
-        firstName : '',
-        lastName : '',
-        phoneNumber : '',
-        gender : '',
-        DOB : '',
-        bio : ''
+    personalDetails: {
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      gender: "",
+      DOB: "",
+      bio: "",
     },
-    address : {
-        adressLine1 : '',
-        adressLine2 : '',
-        city : '',
-        province : '',
-        country: '',
-        postalCode : ''
+    address: {
+      adressLine1: "",
+      adressLine2: "",
+      city: "",
+      province: "",
+      country: "",
+      postalCode: "",
     },
-    specialization : {
-        specialist : ''
+    specialization: {
+      specialist: "",
     },
-    education : {
-        degree : '',
-        institute : '',
-        startYear : '',
-        endYear : ''
+    education: {
+      degree: "",
+      institute: "",
+      startYear: "",
+      endYear: "",
     },
-    experience : {
-        hospitalName : '',
-        from : '',
-        to : '',
-        designation : ''
+    experience: {
+      hospitalName: "",
+      from: "",
+      to: "",
+      designation: "",
     },
-    available : [
-      {id : 1, date : '', time : ''},
-      {id : 2,date : '', time : ''},
-      {id : 3,date : '', time : ''}
-    ]
+    available: [
+      { id: 1, date: "", time: "" },
+      { id: 2, date: "", time: "" },
+      { id: 3, date: "", time: "" },
+    ],
   };
 
   try {
@@ -174,7 +172,7 @@ router.post("/signup/patients", async (req, res) => {
   const [patientEmail, doctorEmail, admin] = await Promise.all([
     db.DbConn().collection("patients").findOne({ email: email }),
     db.DbConn().collection("doctors").findOne({ email: email }),
-    db.DbConn().collection("admin").findOne({ email: email })
+    db.DbConn().collection("admin").findOne({ email: email }),
   ]);
 
   if (patientEmail || doctorEmail || admin) {
@@ -197,25 +195,24 @@ router.post("/signup/patients", async (req, res) => {
     role: role,
     profileActive: false,
     linkExpire: expires,
-    saved : [],
-    personalDetails : {
-
-      phoneNumber : '',
-      gender : '',
-      DOB : '',
-      Age : 0,
-      height : '',
-      weight : '',
-      bloodPressure : '',
-      bloodGrp : '',
-  },
-  address : {
-    addressFull : '',
-    city : '',
-    state : '',
-    country: '',
-    zipcode : ''
-  }
+    saved: [],
+    personalDetails: {
+      phoneNumber: "",
+      gender: "",
+      DOB: "",
+      Age: 0,
+      height: "",
+      weight: "",
+      bloodPressure: "",
+      bloodGrp: "",
+    },
+    address: {
+      addressFull: "",
+      city: "",
+      state: "",
+      country: "",
+      zipcode: "",
+    },
   };
 
   try {

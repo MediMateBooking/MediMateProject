@@ -66,7 +66,7 @@ router.post("/admin/doctors/reject/:docID", async (req, res) => {
     // Respond to client
     res.json({ message: `${currentDoctor.name} User Account Rejected` });
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
   }
 });
 
