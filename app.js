@@ -100,6 +100,8 @@ app.use(function (req, res) {
   res.status(404).render("Common/404");
 });
 
+
+
 // Connecting to the Database and Starting the Server
 db.connectTo()
   .then(() => {
