@@ -7,7 +7,7 @@ router.get("/docToPatientProfile", (req, res) => {
   try {
     res.render("Doctor/docToPatientProfile");
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
   }
 });
 

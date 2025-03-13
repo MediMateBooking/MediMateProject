@@ -1,13 +1,14 @@
+// Import Dependencies
 const express = require("express");
 const router = express.Router();
-const crypto = require("crypto");
-
-const db = require("../../database/database");
+const crypto = require("crypto"); // crypto module for generating random tokens
+const db = require("../../database/database"); 
 
 router.get("/checkpoint/api", async (req, res) => {
   try {
     const { token } = req.query;
 
+    // Checking if the Token Exists in Database
     const [patientAccount, doctorAccount] = await Promise.all([
       db
         .DbConn()
@@ -25,12 +26,14 @@ router.get("/checkpoint/api", async (req, res) => {
         }),
     ]);
 
+    // Handle Invalid or Expired Token
     if (!patientAccount && !doctorAccount) {
       const invalidLinkToken = crypto.randomBytes(32).toString("hex"); // 32 bytes of random data converted to hex
       req.session.invalidLinkToken = invalidLinkToken; // store the token in the session
       return res.redirect(`/login?token=${invalidLinkToken}`); // redirect to login page with the
     }
 
+    // Activate the patient's account
     if (patientAccount) {
       if (patientAccount.profileActive) {
         const alreadyActivated = crypto.randomBytes(32).toString("hex");
@@ -54,6 +57,7 @@ router.get("/checkpoint/api", async (req, res) => {
       return res.redirect(`/patient/${patientAccount.userID}`);
     }
 
+    // Activate the doctor's account
     if (doctorAccount) {
       console.log("doctorAccount");
 
@@ -80,7 +84,7 @@ router.get("/checkpoint/api", async (req, res) => {
       return res.redirect(`/login?token=${successEmailValidation}`);
     }
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500");
   }
 });
 

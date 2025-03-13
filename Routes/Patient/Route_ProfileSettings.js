@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const multer = require('multer');
+const multer = require("multer");
 const configStatus = multer.diskStorage({
-    destination : function(req,file,cb){
-        cb(null,'images')
-    },
-    filename : function(req,file,cb){
-        cb(null,Date.now()+'-'+ file.originalname)
-    }
-})
+  destination: function (req, file, cb) {
+    cb(null, "images");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 
-const upload  = multer({storage:configStatus });
+const upload = multer({ storage: configStatus });
 
 const db = require("../../database/database");
-const ageCount = require('../../Extra/AgeCount');
+const ageCount = require("../../Extra/AgeCount");
 
 router.get("/patient/profile/:id", async (req, res) => {
   try {
@@ -27,25 +27,31 @@ router.get("/patient/profile/:id", async (req, res) => {
 
     if (currentPatient.length === 0) throw new Error("cannot find User");
 
-    let DOB = false
-    let address = false
+    let DOB = false;
+    let address = false;
 
-    if(currentPatient[0].personalDetails.DOB === '') DOB = false
-    else DOB = true 
+    if (currentPatient[0].personalDetails.DOB === "") DOB = false;
+    else DOB = true;
 
-    if(currentPatient[0].address.addressFull === '') address = false
-    else address = true 
+    if (currentPatient[0].address.addressFull === "") address = false;
+    else address = true;
 
-    res.render("Patient/profileSettings", { currentPatient: currentPatient, DOB : DOB, address:address }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
+    res.render("Patient/profileSettings", {
+      currentPatient: currentPatient,
+      DOB: DOB,
+      address: address,
+    }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
     res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
   }
 });
 
-router.post("/patient/profile/:userID", upload.single('image'),async (req, res) => {
-  try {
-    
-    const userID = req.params.userID;
+router.post(
+  "/patient/profile/:userID",
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const userID = req.params.userID;
 
       const {
         fullName,
@@ -61,53 +67,58 @@ router.post("/patient/profile/:userID", upload.single('image'),async (req, res) 
         state,
         zipcode,
         country,
-        } = req.body
+      } = req.body;
       const fileUpload = req.file;
 
-      const personalDetails ={
+      const personalDetails = {
+        phoneNumber: phoneNumber.trim(),
+        gender: gender,
+        DOB: dob,
+        height: height.trim(),
+        weight: weight.trim(),
+        bloodPressure: bloodPressure,
+        bloodGrp: bloodGrp,
+      };
 
-        phoneNumber : phoneNumber.trim(),
-        gender : gender,
-        DOB : dob,
-        height : height.trim(),
-        weight : weight.trim(),
-        bloodPressure : bloodPressure,
-        bloodGrp : bloodGrp,
-      }
+      if (dob !== "") personalDetails.Age = ageCount.calculateYearsSince(dob);
 
-      if(dob !== '') personalDetails.Age = ageCount.calculateYearsSince(dob)
-        
       const address = {
-        addressFull : fullAddress.trim(),
-        city : city.trim(),
-        state : state.trim(),
+        addressFull: fullAddress.trim(),
+        city: city.trim(),
+        state: state.trim(),
         country: country.trim(),
-        zipcode : zipcode.trim()
+        zipcode: zipcode.trim(),
+      };
+
+      if (fileUpload) {
+        await db
+          .DbConn()
+          .collection("patients")
+          .updateOne(
+            { userID: userID },
+            { $set: { profilePicture: fileUpload.path } }
+          );
       }
 
-      if(fileUpload){
-        await db
+      await db
         .DbConn()
         .collection("patients")
         .updateOne(
           { userID: userID },
-          { $set: { profilePicture: fileUpload.path}}
-        )
-      }
+          {
+            $set: {
+              name: fullName.trim(),
+              personalDetails: personalDetails,
+              address: address,
+            },
+          }
+        );
 
-      await db
-      .DbConn()
-      .collection("patients")
-      .updateOne(
-        { userID: userID },
-        { $set: {name: fullName.trim(), personalDetails : personalDetails,address:address}}
-      );
-
-    res.redirect(`/patient/${userID}`);
-  } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+      res.redirect(`/patient/${userID}`);
+    } catch (error) {
+      res.render("common/500");
+    }
   }
-});
-
+);
 
 module.exports = router;

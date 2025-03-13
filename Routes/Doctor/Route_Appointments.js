@@ -13,6 +13,13 @@ router.get("/doctor/docAppointments/:userID", async (req, res) => {
       .find({ userID: userID })
       .toArray();
 
+     const totalAppointments = await db
+      .DbConn()
+      .collection("appointments")
+      .find({ docID: userID })
+      .sort({ onTime: -1 })
+      .toArray();
+
     if (currentDoctor.length === 0) throw new Error("Cannot find User");
 
     if (!currentDoctor[0].mandotaryFieldFill) {
@@ -20,9 +27,9 @@ router.get("/doctor/docAppointments/:userID", async (req, res) => {
     }
 
     // Pass the first doctor record as "key" to match the EJS template
-    res.render("Doctor/docAppointments", { key: currentDoctor[0] });
+    res.render("Doctor/docAppointments", { key: currentDoctor[0] ,totalAppointments:totalAppointments});
   } catch (error) {
-    res.status(500).send(`<h1>Server Error</h1><p>${error.message}</p>`);
+    res.render("common/500" ,{error:error});
   }
 });
 
