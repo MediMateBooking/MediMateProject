@@ -364,7 +364,6 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                
                                 <% for(const oneAppointment of totalAppointments) { %>
 
                                 <tr>
@@ -401,25 +400,21 @@
                                   <td>
                                     <%= oneAppointment.applyDate %>
                                     <span class="d-block text-info"
-                                      ><%= oneAppointment.applyTime %></span
-                                    >
+                                      ><%= oneAppointment.applyTime %></span>
                                   </td>
                                   <td>
                                     <% if(oneAppointment.status === 'Pending') {
                                     %>
                                     <span class="badge badge-pill bg-warning"
-                                      ><%= oneAppointment.status %></span
-                                    >
+                                      ><%= oneAppointment.status %></span>
                                     <% } %> <% if(oneAppointment.status ===
                                     'Rejected') { %>
                                     <span class="badge badge-pill bg-danger"
-                                      ><%= oneAppointment.status %></span
-                                    >
+                                      ><%= oneAppointment.status %></span>
                                     <% } %> <% if(oneAppointment.status ===
-                                    'Success') { %>
+                                    'Accepted') { %>
                                     <span class="badge badge-pill bg-success"
-                                      ><%= oneAppointment.status %></span
-                                    >
+                                      ><%= oneAppointment.status %></span>
                                     <% } %>
                                   </td>
 

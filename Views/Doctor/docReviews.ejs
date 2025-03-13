@@ -187,140 +187,41 @@
                 <!-- Review Listing -->
                 <ul class="comments-list">
                   <!-- Comment List -->
+
+                  <% for(const oneReview of ralatedReviews) { %>
+
                   <li>
                     <div class="comment">
                       <img
                         class="avatar rounded-circle"
                         alt="User Image"
-                        src="/assets/img/patients/male.jpg"
+                        src="<%= oneReview.authorProfilePicture %>"
                       />
                       <div class="comment-body">
                         <div class="meta-data">
                           <span class="comment-author"
-                            >Tharindu Senanayake</span
+                            ><%= oneReview.authorname %></span
                           >
-                          <span class="comment-date">Reviewed 2 Days ago</span>
-                          <div class="review-count rating">
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star"></i>
-                          </div>
+                          <span class="comment-date">Reviewed <%= oneReview.date %></span>
+                        
                         </div>
+
+                        <h4 class="comment-content">
+                          <%= oneReview.title %>
+                        </h4>
                         <p class="comment-content">
-                          I had a very positive experience during my visit. From the moment I walked in, the staff was welcoming and
-                          efficient. The consultation was detailed, and my concerns were addressed with patience and professionalism.
-                          The advice given was practical and easy to follow, which really helped with my recovery.
-                          I truly appreciate the high level of care and attention provided.
+                          <%= oneReview.comment %>
                         </p>
-                        <div class="comment-reply">
-                          <a class="comment-btn" href="#">
-                            <i class="fas fa-reply"></i> Reply
-                          </a>
-                          <p class="recommend-btn">
-                            <span>Recommend?</span>
-                            <a href="#" class="like-btn">
-                              <i class="far fa-thumbs-up"></i> Yes
-                            </a>
-                            <a href="#" class="dislike-btn">
-                              <i class="far fa-thumbs-down"></i> No
-                            </a>
-                          </p>
-                        </div>
+                   
                       </div>
                     </div>
                   </li>
                   <!-- /Comment List -->
 
-                  <!-- Comment List -->
-                  <li>
-                    <div class="comment">
-                      <img
-                        class="avatar rounded-circle"
-                        alt="User Image"
-                        src="/assets/img/patients/femel.jpg"
-                      />
-                      <div class="comment-body">
-                        <div class="meta-data">
-                          <span class="comment-author">Ishani Wickramasinghe</span>
-                          <span class="comment-date">Reviewed 4 Days ago</span>
-                          <div class="review-count rating">
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                          </div>
-                        </div>
-                        <p class="comment-content">
-                          The service was outstanding, and I felt comfortable throughout my visit. Everything was
-                          explained in a way that was easy to understand, which made me feel more confident about my treatment. 
-                          The environment was clean and well-organized, and I didn’t have to wait long for my appointment. Overall, 
-                          it was a smooth and stress-free experience. I would definitely recommend it to others
-                        </p>
-                        <div class="comment-reply">
-                          <a class="comment-btn" href="#">
-                            <i class="fas fa-reply"></i> Reply
-                          </a>
-                          <p class="recommend-btn">
-                            <span>Recommend?</span>
-                            <a href="#" class="like-btn">
-                              <i class="far fa-thumbs-up"></i> Yes
-                            </a>
-                            <a href="#" class="dislike-btn">
-                              <i class="far fa-thumbs-down"></i> No
-                            </a>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- /Comment List -->
+                  <% } %>
 
                   <!-- Comment List -->
-                  <li>
-                    <div class="comment">
-                      <img
-                        class="avatar rounded-circle"
-                        alt="User Image"
-                        src="/assets/img/patients/male.jpg"
-                      />
-                      <div class="comment-body">
-                        <div class="meta-data">
-                          <span class="comment-author">Kavindu Rathnayake</span>
-                          <span class="comment-date">Reviewed 5 Days ago</span>
-                          <div class="review-count rating">
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                          </div>
-                        </div>
-                        <p class="comment-content">
-                          I was really impressed with the level of care and professionalism. The consultation was thorough, 
-                          and all my questions were answered clearly. I noticed improvements soon after starting my treatment,
-                          which reassured me that I was in good hands. The staff was friendly and made sure I was 
-                          comfortable throughout the process. I highly appreciate the effort and dedication shown.
-                        </p>
-                        <div class="comment-reply">
-                          <a class="comment-btn" href="#">
-                            <i class="fas fa-reply"></i> Reply
-                          </a>
-                          <p class="recommend-btn">
-                            <span>Recommend?</span>
-                            <a href="#" class="like-btn">
-                              <i class="far fa-thumbs-up"></i> Yes
-                            </a>
-                            <a href="#" class="dislike-btn">
-                              <i class="far fa-thumbs-down"></i> No
-                            </a>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  
                   <!-- /Comment List -->
                 </ul>
                 <!-- /Comment List -->

@@ -23,6 +23,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/styles/Doctor/doctorDashboard.css" />
   </head>
 
   <body>
@@ -180,7 +181,7 @@
                         <div class="col-md-12 col-lg-4">
                           <div class="dash-widget dct-border-rht">
                             <div class="circle-bar circle-bar1">
-                              <div class="circle-graph1" data-percent="<%= patinetCountPercentage %>">
+                              <div class="circle-graph1" data-percent="<%= isNaN(patinetCountPercentage) ? 0 : patinetCountPercentage %>">
                                 <img
                                   src="/image/DoctorDashboard/patients.png"
                                   style="width: 3.2rem;"
@@ -200,7 +201,8 @@
                         <div class="col-md-12 col-lg-4">
                           <div class="dash-widget dct-border-rht">
                             <div class="circle-bar circle-bar2">
-                              <div class="circle-graph2" data-percent="<%=appointmentsCountPercentage %>">
+                              <div class="circle-graph2" 
+                              data-percent="<%= isNaN(appointmentsCountPercentage) ? 0 : appointmentsCountPercentage %>">
                                 <img
                                   src="/image/DoctorDashboard/appointments.png"
                                   style="width: 3.2rem;"
@@ -220,18 +222,19 @@
                         <div class="col-md-12 col-lg-4">
                           <div class="dash-widget">
                             <div class="circle-bar circle-bar3">
-                              <div class="circle-graph3" data-percent="50">
+                              <div class="circle-graph3" data-percent="<%= isNaN(reviewsCountPercentage) ? 0 : reviewsCountPercentage %>">
                                 <img
-                                  src="/assets/img/icon-03.png"
+                                  src="/image/DoctorDashboard/reviews.png"
+                                  style="width: 3.2rem;"
                                   class="img-fluid"
                                   alt="Patient"
                                 />
                               </div>
                             </div>
                             <div class="dash-widget-info">
-                              <h6>Appoinments</h6>
-                              <h3>85</h3>
-                              <p class="text-muted">06, Apr 2019</p>
+                              <h6>Reviews</h6>
+                              <h3><%= ralatedReviews %></h3>
+                              <p class="text-muted"><%= today %></p>
                             </div>
                           </div>
                         </div>
@@ -243,7 +246,7 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="mb-4">Patient Appoinment</h4>
+                  <h4 class="mb-4">Patient Appointments</h4>
                   <div class="appointment-tab">
                     <!-- Appointment Tab -->
                     <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
@@ -275,6 +278,8 @@
                         <div class="card card-table mb-0">
                           <div class="card-body">
                             <div class="table-responsive">
+
+                              <% if(matchingAppointmentsDetails.length > 0) { %>
                               <table
                                 class="table table-hover table-center mb-0"
                               >
@@ -282,99 +287,64 @@
                                   <tr>
                                     <th>Patient Name</th>
                                     <th>Appt Date</th>
-                                    <th>Gender</th>
+                                    <th>Status</th>
                                                                         <th></th>
                                   </tr>
                                 </thead>
                                 <tbody>
+                                  <% for(const oneAppointment of matchingAppointmentsDetails) { %>
                                   <tr>
                                     <td>
                                       <h2 class="table-avatar">
                                         <a
-                                          href="patient-profile.html"
+                                          
                                           class="avatar avatar-sm mr-2"
                                           ><img
                                             class="avatar-img rounded-circle"
-                                            src="/assets/img/patients/male.jpg"
+                                            src="<%= oneAppointment.patinetDP %>"
                                             alt="User Image"
                                         /></a>
-                                        <a href="patient-profile.html"
-                                          >Pathum Senevirathne
-                                          <span>#PT0002</span></a
+                                        <a href=""
+                                          ><%= oneAppointment.patientName %>
+                                          </a
                                         >
                                       </h2>
                                     </td>
                                     <td>
-                                      1 Nov 2019
+                                      <%= oneAppointment.appoitmentDate %>
                                       <span class="d-block text-info"
-                                        >1.00 PM</span
+                                        ><%= oneAppointment.appoitmentTime %></span
                                       >
                                     </td>
-                                    <td>Male</td>
-                                                                     
-                                    <td class="text-right">
-                                      <div class="table-action">
-                                               <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-success-light"
-                                        >
-                                          <i class="fas fa-check"></i> Accept
-                                        </a>
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-danger-light"
-                                        >
-                                          <i class="fas fa-times"></i> Cancel
-                                        </a>
-                                      </div>
+                                    <td>
+                                      <% if(oneAppointment.status === 'Pending') {
+                                        %>
+                                        <span class="badge badge-pill bg-warning"
+                                          ><%= oneAppointment.status %></span>
+                                        <% } %> <% if(oneAppointment.status ===
+                                        'Rejected') { %>
+                                        <span class="badge badge-pill bg-danger"
+                                          ><%= oneAppointment.status %></span>
+                                        <% } %> <% if(oneAppointment.status ===
+                                        'Accepted') { %>
+                                        <span class="badge badge-pill bg-success"
+                                          ><%= oneAppointment.status %></span>
+                                        <% } %>
                                     </td>
+                                                                    
                                   </tr>
-                                  <tr>
-                                    <td>
-                                      <h2 class="table-avatar">
-                                        <a
-                                          href="patient-profile.html"
-                                          class="avatar avatar-sm mr-2"
-                                          ><img
-                                            class="avatar-img rounded-circle"
-                                            src="/assets/img/patients/femel.jpg"
-                                            alt="User Image"
-                                        /></a>
-                                        <a href="patient-profile.html"
-                                          >Fathima Zeenath 
-                                          <span>#PT0004</span></a
-                                        >
-                                      </h2>
-                                    </td>
-                                    <td>
-                                      28 Oct 2019
-                                      <span class="d-block text-info"
-                                        >6.00 PM</span
-                                      >
-                                    </td>
-                                    <td>Female</td>
-                                 
-                                    
-                                    <td class="text-right">
-                                      <div class="table-action">
 
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-success-light"
-                                        >
-                                          <i class="fas fa-check"></i> Accept
-                                        </a>
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-danger-light"
-                                        >
-                                          <i class="fas fa-times"></i> Cancel
-                                        </a>
-                                      </div>
-                                    </td>
-                                  </tr>
+                                  <% } %>
+                                 
                                 </tbody>
                               </table>
+
+                              <% } else { %>
+                                  <div class="noAppointments">
+                                    <h4 id="noAppointments">No Appointments Today</h4>
+                                  </div>
+                                <% } %>
+
                             </div>
                           </div>
                         </div>
@@ -386,6 +356,8 @@
                         <div class="card card-table mb-0">
                           <div class="card-body">
                             <div class="table-responsive">
+
+                              <% if(upcomingAppointments.length > 0) { %>
                               <table
                                 class="table table-hover table-center mb-0"
                               >
@@ -393,99 +365,62 @@
                                   <tr>
                                     <th>Patient Name</th>
                                     <th>Appt Date</th>
-                                    <th>Gender</th>
+                                    <th>Status</th>
                                                                         <th></th>
                                   </tr>
                                 </thead>
                                 <tbody>
+                                  <% for(const oneAppointment of upcomingAppointments) { %>
                                   <tr>
                                     <td>
                                       <h2 class="table-avatar">
                                         <a
-                                          href="patient-profile.html"
+                                          
                                           class="avatar avatar-sm mr-2"
                                           ><img
                                             class="avatar-img rounded-circle"
-                                            src="/assets/img/patients/male.jpg"
+                                            src="<%= oneAppointment.patinetDP %>"
                                             alt="User Image"
                                         /></a>
-                                        <a href="patient-profile.html"
-                                          >Mohomed Niyas
-                                          <span>#PT0002</span></a
+                                        <a href=""
+                                          ><%= oneAppointment.patientName %>
+                                          </a
                                         >
                                       </h2>
                                     </td>
                                     <td>
-                                      1 Nov 2022
+                                      <%= oneAppointment.appoitmentDate %>
                                       <span class="d-block text-info"
-                                        >1.00 PM</span
+                                        ><%= oneAppointment.appoitmentTime %></span
                                       >
                                     </td>
-                                    <td>Male</td>
+                                    <td>
+                                      <% if(oneAppointment.status === 'Pending') {
+                                        %>
+                                        <span class="badge badge-pill bg-warning"
+                                          ><%= oneAppointment.status %></span>
+                                        <% } %> <% if(oneAppointment.status ===
+                                        'Rejected') { %>
+                                        <span class="badge badge-pill bg-danger"
+                                          ><%= oneAppointment.status %></span>
+                                        <% } %> <% if(oneAppointment.status ===
+                                        'Accepted') { %>
+                                        <span class="badge badge-pill bg-success"
+                                          ><%= oneAppointment.status %></span>
+                                        <% } %>
+                                    </td>
                                                                      
-                                    <td class="text-right">
-                                      <div class="table-action">
-                                               <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-success-light"
-                                        >
-                                          <i class="fas fa-check"></i> Accept
-                                        </a>
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-danger-light"
-                                        >
-                                          <i class="fas fa-times"></i> Cancel
-                                        </a>
-                                      </div>
-                                    </td>
                                   </tr>
-                                  <tr>
-                                    <td>
-                                      <h2 class="table-avatar">
-                                        <a
-                                          href="patient-profile.html"
-                                          class="avatar avatar-sm mr-2"
-                                          ><img
-                                            class="avatar-img rounded-circle"
-                                            src="/assets/img/patients/male.jpg"
-                                            alt="User Image"
-                                        /></a>
-                                        <a href="patient-profile.html"
-                                          >Ajantha Perera
-                                          <span>#PT0004</span></a
-                                        >
-                                      </h2>
-                                    </td>
-                                    <td>
-                                      28 Oct 2024
-                                      <span class="d-block text-info"
-                                        >6.00 PM</span
-                                      >
-                                    </td>
-                                    <td>Female</td>
-                                 
-                                    
-                                    <td class="text-right">
-                                      <div class="table-action">
 
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-success-light"
-                                        >
-                                          <i class="fas fa-check"></i> Accept
-                                        </a>
-                                        <a
-                                          href="javascript:void(0);"
-                                          class="btn btn-sm bg-danger-light"
-                                        >
-                                          <i class="fas fa-times"></i> Cancel
-                                        </a>
-                                      </div>
-                                    </td>
-                                  </tr>
+                                  <% } %>
+                                  
                                 </tbody>
                               </table>
+                              <% } else { %>
+                                <div class="noAppointments">
+                                  <h4 id="noAppointments">No Upcoming Appointments</h4>
+                                </div>
+                              <% } %>
                             </div>
                           </div>
                         </div>

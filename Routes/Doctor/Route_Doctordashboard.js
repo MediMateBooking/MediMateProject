@@ -37,13 +37,35 @@ router.get("/doctor/:userID", async (req, res) => {
     const matchingAppointments = await db
       .DbConn()
       .collection("appointments")
-      .find({ docID: userID, applyDate: today })
+      .find({ docID: userID, appoitmentDate: formateDate.getDateFormateYYYYMMDD() })
+      .toArray();
+
+    const upcomingAppointments = await db
+      .DbConn()
+      .collection("appointments")
+      .find({ docID: userID, appoitmentDate: { $gt: formateDate.getDateFormateYYYYMMDD() } })
+      .toArray();
+      
+    const totalReviews= await db
+      .DbConn()
+      .collection("reviews")
+      .find()
+      .toArray();
+
+    const ralatedReviews= await db
+      .DbConn()
+      .collection("reviews")
+      .find({ docID: userID })
       .toArray();
 
     const patinetCountPercentage =
       (totalPatient.length / (totalPatient.length + totalDoctors.length)) * 100;
+
     const appointmentsCountPercentage =
       (matchingAppointments.length / totalAppointments.length) * 100;
+
+      const reviewsCountPercentage =
+      (ralatedReviews.length / totalReviews.length) * 100;
 
     if (currentDoctor.length === 0) throw new Error("cannot find User");
 
@@ -56,11 +78,15 @@ router.get("/doctor/:userID", async (req, res) => {
       patinetCountPercentage: patinetCountPercentage,
       appointmentsCountPercentage: appointmentsCountPercentage,
       matchingAppointments: matchingAppointments.length,
+      matchingAppointmentsDetails: matchingAppointments,
+      upcomingAppointments:upcomingAppointments,
       totalAppointments: totalAppointments.length,
+      ralatedReviews : ralatedReviews.length,
+      reviewsCountPercentage: reviewsCountPercentage,
       today: today,
     });
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 
