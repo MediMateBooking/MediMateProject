@@ -47,7 +47,7 @@ router.get("/patient/:id", async (req, res) => {
     const totalFeedbacks = await db
       .DbConn()
       .collection("feedback")
-      .find()
+      .find({ reviewID: userID })
       .sort({ onTime: -1 })
       .limit(4)
       .toArray();
@@ -100,7 +100,7 @@ router.get("/patient/:id", async (req, res) => {
       totalDoctors: totalDoctors.length,
     }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 

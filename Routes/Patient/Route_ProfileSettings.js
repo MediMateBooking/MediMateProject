@@ -116,7 +116,7 @@ router.post(
 
       res.redirect(`/patient/${userID}`);
     } catch (error) {
-      res.render("common/500");
+      res.render("common/500",{error:error});
     }
   }
 );
