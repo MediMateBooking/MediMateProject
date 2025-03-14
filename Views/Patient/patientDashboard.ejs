@@ -29,6 +29,10 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/styles/Patient/patientDashboard.css" />
+
+    <!-- Main Js-->
+     <script src="/scripts/Patient/deleteFeedback.js" defer></script>
+    
   </head>
   <body>
     <!-- Main Wrapper -->
@@ -524,6 +528,7 @@
                                   <th>Title</th>
                                   <th>Feedback</th>
                                   <th>Creator</th>
+                                  <th></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -545,6 +550,11 @@
                                         ><%= oneFeedback.authorname %></a
                                       >
                                     </h2>
+                                  </td>
+                                  <td>
+                                
+                                    <span data-feedbackid="<%= oneFeedback._id %>" class="badge badge-pill bg-danger delete" style="color: aliceblue; padding: 0.5rem; cursor: pointer;">Delete</span>
+                                    
                                   </td>
                                 </tr>
                                 <% } %>
