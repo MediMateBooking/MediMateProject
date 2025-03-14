@@ -168,7 +168,7 @@
                       />
                     </span>
                     <div class="dash-count">
-                      <h3>26</h3>
+                      <h3><%= totalDoctorsCount %></h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
@@ -192,7 +192,7 @@
                       />
                     </span>
                     <div class="dash-count">
-                      <h3>120</h3>
+                      <h3><%= totalPatientCount %></h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
@@ -216,7 +216,7 @@
                       />
                     </span>
                     <div class="dash-count">
-                      <h3>45</h3>
+                      <h3><%= totalAppointmentsCount %></h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
@@ -240,7 +240,7 @@
                       />
                     </span>
                     <div class="dash-count">
-                      <h3>13</h3>
+                      <h3><%= totalReviewsCount %></h3>
                     </div>
                   </div>
                   <div class="dash-widget-info">
@@ -269,41 +269,34 @@
                         <tr>
                           <th>Doctor Name</th>
                           <th>Speciality</th>
-                          <th>Reviews</th>
+                          <th>SLMC Number</th>
                         </tr>
                       </thead>
                       <tbody>
+
+                        <% for(const oneDoctor of totalDoctors) { %>
                         <tr>
                           <td>
                             <h2 class="table-avatar">
                               <a
-                                href="profile.html"
+                                
                                 class="avatar avatar-sm mr-2"
                                 ><img
                                   class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/female.jpg"
+                                  src="<%= oneDoctor.profilePicture %>"
                                   alt="User Image"
                               /></a>
-                              <a href="profile.html">Dr. Isuri Perera</a>
+                              <a ><%= oneDoctor.name %></a>
                             </h2>
                           </td>
-                          <td>Urology</td>
+                          <td><%= oneDoctor.specialization.specialist %></td>
                           <td>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star text-warning"></i>
-                            <i class="fe fe-star-o text-secondary"></i>
+                            <%= oneDoctor.slmcregi %>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            <a
-                              href="/admin/doctorList/<%= key.dynamicRouteCode %>"
-                            >
-                            </a>
-                          </td>
-                        </tr>
+
+                        <% } %>
+                    
                       </tbody>
                     </table>
                   </div>
@@ -324,37 +317,30 @@
                       <thead>
                         <tr>
                           <th>Patient Name</th>
-                          <th>Phone</th>
-                          <th>Last Visit</th>
+                          <th>Email</th>
+                          <th>Profule Active</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <% for(const onePatient of totalPatient) { %>
                         <tr>
                           <td>
                             <h2 class="table-avatar">
                               <a
-                                href="profile.html"
+                                
                                 class="avatar avatar-sm mr-2"
                                 ><img
                                   class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/male.jpg"
+                                  src="<%= onePatient.profilePicture %>"
                                   alt="User Image"
                               /></a>
-                              <a href="profile.html"> Pasindu Bandara</a>
+                              <a><%= onePatient.name %></a>
                             </h2>
                           </td>
-                          <td>+94 7623457--</td>
-                          <td>21 Sep 2025</td>
+                          <td><%= onePatient.email %></td>
+                          <td><%= onePatient.profileActive.toString() %></td>
                         </tr>
-                        <tr>
-                          <td>
-                            <a
-                              href="/admin/patientList/<%= key.dynamicRouteCode %>"
-                            >
-
-                            </a>
-                          </td>
-                        </tr>
+                        <% } %>
                       </tbody>
                     </table>
                   </div>
@@ -381,65 +367,47 @@
                           <th>Speciality</th>
                           <th>Patient Name</th>
                           <th>Apointment Time</th>
-                          <th>Status</th>
+                        
                         </tr>
                       </thead>
                       <tbody>
+                        <% for(const oneAppointment of totalAppointments) { %>
                         <tr>
                           <td>
                             <h2 class="table-avatar">
                               <a
-                                href="profile.html"
+                                
                                 class="avatar avatar-sm mr-2"
                                 ><img
                                   class="avatar-img rounded-circle"
-                                  src="/assets/img/doctors/female.jpg"
+                                  src="<%= oneAppointment.doctorDP %>"
                                   alt="User Image"
                               /></a>
-                              <a href="profile.html">Dr. Isuri Perera</a>
+                              <a >Dr. <%= oneAppointment.doctorName %></a>
                             </h2>
                           </td>
-                          <td>Urology</td>
+                          <td><%= oneAppointment.doctorSpeciality %></td>
                           <td>
                             <h2 class="table-avatar">
                               <a
-                                href="profile.html"
+                                
                                 class="avatar avatar-sm mr-2"
                                 ><img
                                   class="avatar-img rounded-circle"
-                                  src="/assets/img/patients/male.jpg"
+                                  src="<%= oneAppointment.patinetDP %>"
                                   alt="User Image"
                               /></a>
-                              <a href="profile.html"> Pasindu Bandara</a>
+                              <a ><%= oneAppointment.patientName %></a>
                             </h2>
                           </td>
                           <td>
-                            7 Nov 2025<span class="text-primary d-block"
-                              >1.00 PM - 1.20 PM</span
+                            <%= oneAppointment.appoitmentDate %><span class="text-primary d-block"
+                              ><%= oneAppointment.appoitmentTime %></span
                             >
                           </td>
-                          <td>
-                            <div class="status-toggle">
-                              <input
-                                type="checkbox"
-                                id="status_4"
-                                class="check"
-                                checked
-                              />
-                              <label for="status_4" class="checktoggle"
-                                >checkbox</label
-                              >
-                            </div>
-                          </td>
+                        
                         </tr>
-                        <tr>
-                          <td>
-                            <a
-                              href="/admin/appointments/<%= key.dynamicRouteCode %>"
-                            >
-
-                          </td>
-                        </tr>
+                        <% } %>
                       </tbody>
                     </table>
                   </div>

@@ -1,19 +1,19 @@
 function formatDateTime() {
     const date = new Date();
 
-    // Format day and year
-    const day = date.getDate(); // Get the day (1-31)
-    const year = date.getFullYear(); // Get the year (e.g., 2019)
+  
+    const day = date.getDate(); 
+    const year = date.getFullYear(); 
 
-    // Format month
+   
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const month = monthNames[date.getMonth()]; // Get month name
+    const month = monthNames[date.getMonth()]; 
 
-    // Format time
+   
     let hours = date.getHours();
-    const minutes = String(date.getMinutes()).padStart(2, '0'); // Ensure 2 digits for minutes
+    const minutes = String(date.getMinutes()).padStart(2, '0'); 
     const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12; // Convert 24-hour time to 12-hour format
+    hours = hours % 12 || 12; 
 
     const dateFormat = {
         date : `${day} ${month} ${year}`,
