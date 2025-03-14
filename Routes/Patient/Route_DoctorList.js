@@ -30,7 +30,7 @@ router.get("/patient/appointment/:id", async (req, res) => {
       address: address,
     });
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 
@@ -61,7 +61,7 @@ router.post("/patient/approveDocList/:id", async (req, res) => {
       savedList: currentPatient.saved,
     });
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 
@@ -93,7 +93,7 @@ router.post("/patient/add/saved/:saveid/:id", async (req, res) => {
       res.json({ status: true });
     }
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 

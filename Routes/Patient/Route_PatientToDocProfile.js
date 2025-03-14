@@ -48,7 +48,7 @@ router.get("/patient/view/:id", async (req, res) => {
       address: address,
     }); //render the patientDashboard.ejs file. render keyword is used to render the ejs file
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 
@@ -106,7 +106,7 @@ router.post("/patient/review/:userID/:docID", async (req, res) => {
       message: "Comment sent",
     });
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 

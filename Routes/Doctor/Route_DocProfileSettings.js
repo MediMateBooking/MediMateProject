@@ -28,7 +28,7 @@ router.get("/doctor/profile/:userID", async (req, res) => {
 
     res.render("Doctor/docProfileSettings", { currentDoctor: currentDoctor });
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 
@@ -143,7 +143,7 @@ router.post(
 
       res.redirect(`/doctor/${userID}`);
     } catch (error) {
-      res.render("common/500");
+      res.render("common/500",{error:error});
     }
   }
 );

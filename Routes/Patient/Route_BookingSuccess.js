@@ -20,7 +20,7 @@ router.get("/appointment/:appID", async (req, res) => {
       currentAppointment: currentAppointment,
     });
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 

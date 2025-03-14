@@ -21,7 +21,7 @@ router.get("/doctor/password/:userID", async (req, res) => {
 
     res.render("Doctor/docChangePassword", { currentDoctor: currentDoctor });
   } catch (error) {
-    res.render("Common/500");
+    res.render("Common/500",{error:error});
   }
 });
 
@@ -59,7 +59,7 @@ router.post("/doctor/password/:userID", async (req, res) => {
 
     res.json({ success: true, message: "Paasword Updated Successfully" });
   } catch (error) {
-    res.render("Common/500");
+    res.render("Common/500",{error:error});
   }
 });
 

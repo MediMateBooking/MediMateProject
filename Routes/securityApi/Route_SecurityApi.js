@@ -84,7 +84,7 @@ router.get("/checkpoint/api", async (req, res) => {
       return res.redirect(`/login?token=${successEmailValidation}`);
     }
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 

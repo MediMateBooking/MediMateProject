@@ -26,7 +26,7 @@ router.get("/doctor/docReviews/:userID", async (req, res) => {
 
     res.render("Doctor/docReviews", { key: currentDoctor[0] ,ralatedReviews:ralatedReviews});
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 

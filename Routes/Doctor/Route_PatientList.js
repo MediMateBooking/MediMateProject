@@ -7,7 +7,7 @@ router.get("/patientList", (req, res) => {
   try {
     res.render("Doctor/patientList");
   } catch (error) {
-    res.render("common/500");
+    res.render("common/500",{error:error});
   }
 });
 
