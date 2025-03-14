@@ -60,6 +60,7 @@ app.use("/doctor/images", express.static("images"));
 app.use("/doctor/profile/images", express.static("images"));
 app.use("/doctor/password/images", express.static("images"));
 
+app.use("/admin/images", express.static("images"));
 app.use("/admin/doctors/images", express.static("images"));
 app.use("/doctor/docAppointments/images", express.static("images"));
 app.use("/doctor/docReviews/images", express.static("images"));

@@ -21,7 +21,13 @@ router.get("/patient/:id", async (req, res) => {
       .collection("appointments")
       .find({ patinetID: userID })
       .sort({ onTime: -1 })
-      .limit(4)
+      .limit(5)
+      .toArray();
+
+      const totalAppointmentsFull = await db
+      .DbConn()
+      .collection("appointments")
+      .find({ patinetID: userID })
       .toArray();
 
     const totalReviews = await db
@@ -87,7 +93,7 @@ router.get("/patient/:id", async (req, res) => {
       bmi: bmi,
       userBMI: userBMI,
       totalAppointments: totalAppointments,
-      totalAppointmentsCount: totalAppointments.length,
+      totalAppointmentsCount: totalAppointmentsFull.length,
       totalReviewsList: totalReviews,
       totalReviews: totalReviewsCount.length,
       totalFeedbacks: totalFeedbacks,
